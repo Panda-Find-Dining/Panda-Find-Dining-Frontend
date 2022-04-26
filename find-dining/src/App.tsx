@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
@@ -34,7 +35,7 @@ const App = () => {
           what series to binge!
         </p>
       </div>
-      <Register setToken={setToken} setUser={setUser} />
+      <Login setToken={setToken} setUser={setUser} />
     </>
   );
 };
