@@ -1,7 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Person from './components/example-person';
+import MealStart from './components/MealStart';
 
 
 
@@ -11,13 +8,7 @@ const person = "ryan"
 
   return (
     <div className="App">
-      <header className="App-header">
-
-        <p>
-          Hey y'all 
-        </p>
-<Person person={ person }/>
-      </header>
+<MealStart/>
     </div>
   );
 }
