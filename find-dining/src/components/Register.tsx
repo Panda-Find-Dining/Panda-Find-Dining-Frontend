@@ -60,7 +60,7 @@ const Register = ({ setToken, setUser }) => {
           <h1>Register</h1>
         </div>
         <label>Username</label>
-        <input
+        <input required
           className="input"
           type="text"
           placeholder="username"
@@ -78,7 +78,7 @@ const Register = ({ setToken, setUser }) => {
           onChange={(event) => handleChange(event)}
         />
         <label>Password</label>
-        <input
+        <input required
           className="input"
           type="password"
           placeholder="password"
@@ -87,7 +87,7 @@ const Register = ({ setToken, setUser }) => {
           onChange={(event) => handleChange(event)}
         />
         <label>Confirm Password</label>
-        <input
+        <input required
           className="input"
           type="password"
           placeholder="confirm password"

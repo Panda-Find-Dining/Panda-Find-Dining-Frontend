@@ -5,6 +5,7 @@ import React, { useState } from "react";
 const Login = ({ setToken, setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ const Login = ({ setToken, setUser }) => {
   };
 
   const handleLogin = () => {
+      setError("")
     axios
       .post("https://find-dining-panda.herokuapp.com/api/auth/token/login/", {
         username: username,
@@ -26,10 +28,13 @@ const Login = ({ setToken, setUser }) => {
       })
       .then((response) => {
         setToken(response.data.auth_token);
-        setUser(username);
-      });
+        setUser(username)
+        
+          })
+          .catch((e) => setError(e.message))
+      
   };
-
+  console.log(error);
   return (
     <div className="box">
       <h1
@@ -39,8 +44,9 @@ const Login = ({ setToken, setUser }) => {
       >
         Login
       </h1>
+      <div className="error">{error}</div>
       <label>Username</label>
-      <input
+      <input required
         className="input"
         type="text"
         placeholder="username"
@@ -49,7 +55,7 @@ const Login = ({ setToken, setUser }) => {
         onChange={(event) => handleChange(event)}
       />
       <label>Password</label>
-      <input
+      <input required
         className="input"
         type="password"
         placeholder="password"
@@ -57,6 +63,7 @@ const Login = ({ setToken, setUser }) => {
         name="password"
         onChange={(event) => handleChange(event)}
       />
+      <div>
       <button
         style={{
           marginTop: 5,
@@ -66,6 +73,18 @@ const Login = ({ setToken, setUser }) => {
       >
         Login
       </button>
+      </div>
+      <div>
+      <button
+        style={{
+          marginTop: 5,
+        }}
+        className="button"
+        onClick={handleLogin}
+      >
+        Register
+      </button>
+    </div>
     </div>
   );
 };
