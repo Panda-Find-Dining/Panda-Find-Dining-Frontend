@@ -55,6 +55,7 @@ const Register = ({ setToken, setUser }) => {
 
   return (
     <div>
+         <div></div>
       <div className="form">
         <div>
           <h1>Register</h1>

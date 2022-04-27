@@ -37,6 +37,7 @@ const Login = ({ setToken, setUser }) => {
   console.log(error);
   return (
     <div className="box">
+        <div></div>
       <h1
         style={{
           marginBottom: 10,
