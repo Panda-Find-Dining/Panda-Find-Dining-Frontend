@@ -1,0 +1,23 @@
+.mealFriendSelect{
+    display: grid;
+    grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 100px [row-start] 100px [row-start] 50px;
+gap: 30px;
+}
+.select{
+    margin-bottom:10px;
+}
+.activeMeals{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px;
+    height: 60px;
+    align-content: center;
+}
+.searchButton{
+    margin-bottom: 10px;
+}
+.matchButton{
+    margin-top: 10px;
+    height:40px;
+}

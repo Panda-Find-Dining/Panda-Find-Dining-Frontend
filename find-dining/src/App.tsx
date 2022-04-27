@@ -1,6 +1,4 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
-import React from "react";
-import axios from "axios";
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -8,6 +6,7 @@ import MealStart from './components/MealStart';
 import MenuHeader from './components/MenuHeader';
 import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import MealFriendSelection from "./components/MealFriendSelection";
 
  
 const App = () => {
@@ -30,7 +29,7 @@ const App = () => {
                   <MenuHeader
                     token={token}
                   />
-                  <Login />
+                  <Login setUser={setUser} setToken={setToken}/>
                 </div>
               )}
               
@@ -46,6 +45,9 @@ const App = () => {
           <Route path="meal-start" element={<><MenuHeader
             token={token}
           /><MealStart /></>}/>
+          <Route path="meal-friend-selection" element={<><MenuHeader
+            token={token}
+          /><MealFriendSelection/></>} />
       </Routes>
       </BrowserRouter>
     </>
