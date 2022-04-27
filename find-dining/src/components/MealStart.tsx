@@ -1,13 +1,14 @@
 import React from 'react'
 import "./MealStart.css"
 import axios from "axios"
-import { useEffect, useState } from 'react'
-
+import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 const MealStart = () => {
 const [location, setLocation] = useState("")
 const [radius, setRadius] = useState("")
 const [error, setError] = useState("")
- 
+const navigate = useNavigate();
+
   function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("")
@@ -30,6 +31,7 @@ const [error, setError] = useState("")
     }).catch(function (error) {
       console.log(error)
     })
+    navigate("/home")
   }
   return (
       <div className='mealStartPage'>

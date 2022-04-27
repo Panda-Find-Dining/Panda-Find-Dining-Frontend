@@ -40,8 +40,12 @@ const App = () => {
           }
         />
                 <Route
-          path="home" element={<Welcome />}/>
-          <Route path="meal-start" element={<MealStart />}/>
+          path="home" element={<><MenuHeader
+            token={token}
+          /> <Welcome /></>}/>
+          <Route path="meal-start" element={<><MenuHeader
+            token={token}
+          /><MealStart /></>}/>
       </Routes>
       </BrowserRouter>
     </>

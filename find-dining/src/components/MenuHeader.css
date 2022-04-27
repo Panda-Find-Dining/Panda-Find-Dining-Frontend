@@ -1,16 +1,25 @@
 .menuHeader{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 10px;
     border-bottom: 1px solid;
 }
-
 .siteLogo{
     height: 60px;
     width: 60px;
     border-radius: 100%;
     margin-bottom: 10px;
 }
+.profilePic{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+.logoutProfile{
+    display: flex;
+}
 .logoutLink{
-    padding-top: 10px;
+    padding-top: 15px;
+    padding-left: 5px;
 }
