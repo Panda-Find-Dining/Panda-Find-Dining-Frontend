@@ -25,7 +25,7 @@ const navigate = useNavigate();
         radius: radius
       }
     }
-
+console.log(error)
     axios.request(options).then(function (response) {
       console.log(response.data)
     }).catch(function (error) {
