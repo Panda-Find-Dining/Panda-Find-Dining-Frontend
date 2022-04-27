@@ -41,6 +41,7 @@ const App = () => {
         />
                 <Route
           path="home" element={<Welcome />}/>
+          <Route path="meal-start" element={<MealStart />}/>
       </Routes>
       </BrowserRouter>
     </>

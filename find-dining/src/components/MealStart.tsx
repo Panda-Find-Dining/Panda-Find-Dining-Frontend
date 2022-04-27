@@ -8,7 +8,8 @@ const [location, setLocation] = useState("")
 const [radius, setRadius] = useState("")
 const [error, setError] = useState("")
  
-  function handleCreateMeal() {
+  function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setError("")
     const options = {
       method: 'POST',
@@ -32,7 +33,7 @@ const [error, setError] = useState("")
   }
   return (
       <div className='mealStartPage'>
-        <form>
+        <form onSubmit={handleCreateMeal}>
     <h2 className='mealWith'>Your Dinner with ______</h2>
     <div className='search'>
 <h3>Search Location</h3>
@@ -43,7 +44,7 @@ const [error, setError] = useState("")
 <input type="input" onChange={(e) => setRadius(e.target.value)} className="radiusInput" placeholder='Radius in miles'></input>
     </div>
     <div className="mealButtons">
-    <button onClick={() => handleCreateMeal()} className='chowDown'>Chow Down!</button>
+    <button className='chowDown'>Chow Down!</button>
     <button className='noThanks'>No Thanks</button>
     </div>
     </form>
