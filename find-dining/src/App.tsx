@@ -4,7 +4,11 @@ import axios from "axios";
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import MealStart from './components/MealStart';
+import MenuHeader from './components/MenuHeader';
 
+
+ 
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
@@ -12,6 +16,8 @@ const App = () => {
   return (
     <>
       <div id="greeting-container">
+        <MenuHeader />
+<MealStart/>
         <img
           style={{
             width: 500,
@@ -37,6 +43,7 @@ const App = () => {
       </div>
       <Login setToken={setToken} setUser={setUser} />
     </>
+
   );
 };
 

@@ -1,0 +1,16 @@
+.menuHeader{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-bottom: 1px solid;
+}
+
+.siteLogo{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+.logoutLink{
+    padding-top: 10px;
+}
