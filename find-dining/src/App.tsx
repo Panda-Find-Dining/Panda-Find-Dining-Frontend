@@ -3,7 +3,10 @@ import React from "react";
 import axios from "axios";
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
+import MealStart from './components/MealStart';
+import MenuHeader from './components/MenuHeader';
 
+ 
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
@@ -11,6 +14,8 @@ const App = () => {
   return (
     <>
       <div id="greeting-container">
+        <MenuHeader />
+<MealStart/>
         <img
           style={{
             width: 500,
@@ -36,6 +41,7 @@ const App = () => {
       </div>
       <Register setToken={setToken} setUser={setUser} />
     </>
+
   );
 };
 
