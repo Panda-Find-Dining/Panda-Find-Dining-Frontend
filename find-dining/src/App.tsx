@@ -3,8 +3,10 @@ import React from "react";
 import axios from "axios";
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import MealStart from './components/MealStart';
 import MenuHeader from './components/MenuHeader';
+
 
  
 const App = () => {
@@ -39,7 +41,7 @@ const App = () => {
           what series to binge!
         </p>
       </div>
-      <Register setToken={setToken} setUser={setUser} />
+      <Login setToken={setToken} setUser={setUser} />
     </>
 
   );
