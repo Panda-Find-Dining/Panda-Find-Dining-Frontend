@@ -1,6 +1,6 @@
 .mealFriendSelect{
     display: grid;
-    grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 100px [row-start] 100px [row-start] 50px;
+    grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 110px [row-start] 100px [row-start] 50px;
 gap: 30px;
 }
 .select{
@@ -20,4 +20,8 @@ gap: 30px;
 .matchButton{
     margin-top: 10px;
     height:40px;
+}
+.searchResults{
+    display:flex;
+    gap:20px;
 }

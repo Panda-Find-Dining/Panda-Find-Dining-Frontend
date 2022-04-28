@@ -7,13 +7,16 @@ import { useNavigate } from "react-router-dom"
 
 const MealFriendSelection = () => {
   const navigate = useNavigate()
+  const [results, setResults] = useState<any>([])
   const [friends, setFriends] = useState<any>([])
+  const [friendName, setFriendName] = useState("")
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+      setResults("")
         e.preventDefault();
         const options = {
             method: 'GET',
             url: 'https://find-dining-panda.herokuapp.com/api/search?=Desi',
-            params: {q: 'Desi'},
+            params: {q: friendName},
             headers: {
               'Content-Type': 'application/json',
               Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
@@ -22,12 +25,28 @@ const MealFriendSelection = () => {
           
           axios.request(options).then(function (response) {
             console.log(response.data);
+            setResults(response.data[0].id)
           }).catch(function (error) {
             console.error(error);
           });
 }
 
+const addFriend = () =>{
+const options = {
+  method: 'POST',
+  url: `https://find-dining-panda.herokuapp.com/api/follow/${results}/`,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+  }
+};
 
+axios.request(options).then(function (response) {
+  console.log(response.data);
+}).catch(function (error) {
+  console.error(error);
+});
+}
 const selectFriendOptions = [
         { value: "KE", label: "KE" },
         { value: "Ryan", label: "Ryan" },
@@ -41,9 +60,10 @@ console.log(friends)
     <div>Put that microwave dinner down, find some friends to eat with here:</div>
     <div className="searchFriends">
         <form onSubmit={handleSearch}>
-    <input type="input" placeholder="Search Friends"></input>
+    <input type="input" placeholder="Search Friends"onChange={(e) => setFriendName(e.target.value)}></input>
     <button className="searchButton">Search</button>
     </form>
+    <div className="searchResults" onClick={addFriend}>{results}<button>+</button></div>
     </div>
     <div className="selectFriend">
     <Select isMulti className="select" options={selectFriendOptions} onChange={(selection) => setFriends([selection])}/>
