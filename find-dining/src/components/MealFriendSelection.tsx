@@ -1,9 +1,13 @@
 import "./MealFriendSelection.css"
 import Select from 'react-select'
 import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 
 const MealFriendSelection = () => {
+  const navigate = useNavigate()
+  const [friends, setFriends] = useState<any>([])
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const options = {
@@ -30,6 +34,7 @@ const selectFriendOptions = [
         { value: "Tyler", label: "Tyler" },
         { value: "Paul", label: "Paul" },
       ];
+console.log(friends)
   return (
       <div className="mealFriendSelect">
           <h2>Welcome User</h2>
@@ -41,8 +46,8 @@ const selectFriendOptions = [
     </form>
     </div>
     <div className="selectFriend">
-    <Select className="select" options={selectFriendOptions} />
-    <button>Add Friends to Meal</button>
+    <Select isMulti className="select" options={selectFriendOptions} onChange={(selection) => setFriends([selection])}/>
+    <button onClick={() =>navigate(`/meal-start`)}>Add Friends to Meal</button>
     </div>
     <div className="activeMeals">
     <img
@@ -53,7 +58,7 @@ const selectFriendOptions = [
       
       
       <p>Tyler</p>
-      <button className="matchButton">See Match</button>
+      <button className="matchButton" >See Match</button>
       <button className="matchButton">X</button>
       </div>
       </div>
