@@ -22,7 +22,8 @@ const navigate = useNavigate();
       data: {
         creator: 1,
         location: location,
-        radius: radius
+        radius: radius,
+        invitee: [1,2,3]
       }
     }
 console.log(error)
