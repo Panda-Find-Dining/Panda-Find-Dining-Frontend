@@ -28,6 +28,8 @@ const App = () => {
                 <div className="mainPage">
                   <MenuHeader
                     token={token}
+                    setToken={setToken}
+                    setUser={setUser}
                   />
                   <Login setUser={setUser} setToken={setToken}/>
                 </div>
@@ -41,12 +43,18 @@ const App = () => {
                 <Route
           path="home" element={<><MenuHeader
             token={token}
+                    setToken={setToken}
+                    setUser={setUser}
           /> <Welcome /></>}/>
           <Route path="meal-start" element={<><MenuHeader
             token={token}
+            setToken={setToken}
+                    setUser={setUser}
           /><MealStart /></>}/>
           <Route path="meal-friend-selection" element={<><MenuHeader
             token={token}
+            setToken={setToken}
+                    setUser={setUser}
           /><MealFriendSelection/></>} />
       </Routes>
       </BrowserRouter>
