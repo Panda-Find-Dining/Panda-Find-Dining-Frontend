@@ -23,7 +23,7 @@ const App = () => {
           element={
             <header>
               {isLoggedIn ? (
-                <Navigate to="/home" />
+                <Navigate to="/meal-friend-selection" />
               ) : (
                 <div className="mainPage">
                   <MenuHeader
@@ -34,7 +34,7 @@ const App = () => {
               )}
               
               <h2 className="feed">Or:</h2>
-              <Register  element={ <Welcome />}/>
+              <Register setToken={setToken} setUser={setUser} element={ <Welcome />}/>
             </header>
           }
         />

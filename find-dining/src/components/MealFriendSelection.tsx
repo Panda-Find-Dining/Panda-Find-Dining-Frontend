@@ -10,7 +10,10 @@ const MealFriendSelection = () => {
   const [results, setResults] = useState<any>([])
   const [friends, setFriends] = useState<any>([])
   const [friendName, setFriendName] = useState("")
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const [addFriendError, setAddFriendError] = useState("")
+  const [addFriendSuccess, setAddFriendSuccess] = useState("")
+  const [searchError, setSearchError] = useState("")
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
       setResults("")
         e.preventDefault();
         const options = {
@@ -26,9 +29,10 @@ const MealFriendSelection = () => {
           axios.request(options).then(function (response) {
             console.log(response.data);
             setResults(response.data[0].id)
-          }).catch(function (error) {
-            console.error(error);
-          });
+            setSearchError("")
+          }).catch((e) =>  {
+            setSearchError(e.message)
+          })
 }
 
 const addFriend = () =>{
@@ -43,9 +47,11 @@ const options = {
 
 axios.request(options).then(function (response) {
   console.log(response.data);
-}).catch(function (error) {
-  console.error(error);
-});
+  setAddFriendSuccess("Friend Added")
+  setAddFriendError("")
+}).catch((e) =>  {
+  setAddFriendError(e.message)
+})
 }
 const selectFriendOptions = [
         { value: "KE", label: "KE" },
@@ -64,10 +70,13 @@ console.log(friends)
     <button className="searchButton">Search</button>
     </form>
     <div className="searchResults" onClick={addFriend}>{results}<button>+</button></div>
+    <div className="error">{addFriendError}</div>
+    <div className="success">{addFriendSuccess}</div>
     </div>
     <div className="selectFriend">
     <Select isMulti className="select" options={selectFriendOptions} onChange={(selection) => setFriends([selection])}/>
-    <button onClick={() =>navigate(`/meal-start`)}>Add Friends to Meal</button>
+    <button onClick={() =>addFriend()}>Add Friends to Meal</button>
+        <div className="error">{searchError}</div>
     </div>
     <div className="activeMeals">
     <img

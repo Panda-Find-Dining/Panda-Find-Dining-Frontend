@@ -7,6 +7,7 @@ const Login = ({ setToken, setUser }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
 
+
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -29,9 +30,8 @@ const Login = ({ setToken, setUser }) => {
       .then((response) => {
         setToken(response.data.auth_token);
         setUser(username)
-        
           })
-          .catch((e) => setError(e.message))
+          .catch((e) => setError("Login Unsuccessful please Try Again!"))
       
   };
   console.log(error);
@@ -75,17 +75,6 @@ const Login = ({ setToken, setUser }) => {
         Login
       </button>
       </div>
-      <div>
-      <button
-        style={{
-          marginTop: 5,
-        }}
-        className="button"
-        onClick={handleLogin}
-      >
-        Register
-      </button>
-    </div>
     </div>
   );
 };
