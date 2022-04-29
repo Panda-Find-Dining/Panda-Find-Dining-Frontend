@@ -7,6 +7,7 @@ const MealStart = () => {
 const [location, setLocation] = useState("")
 const [radius, setRadius] = useState("")
 const [error, setError] = useState("")
+const [success, setSuccess] = useState("")
 const navigate = useNavigate();
 
   function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
@@ -29,10 +30,13 @@ const navigate = useNavigate();
 console.log(error)
     axios.request(options).then(function (response) {
       console.log(response.data)
-    }).catch(function (error) {
-      console.log(error)
+      setSuccess("Meal Created!")
+    }).catch((e) =>  {
+      setError(e.message)
     })
-    navigate("/home")
+    setTimeout(() => {
+      navigate("/home");
+    }, 2000);
   }
   return (
       <div className='mealStartPage'>
@@ -47,6 +51,8 @@ console.log(error)
 <input type="input" onChange={(e) => setRadius(e.target.value)} className="radiusInput" placeholder='Radius in miles'></input>
     </div>
     <div className="mealButtons">
+    <div className="error">{error}</div>
+    <div className="success">{success}</div>
     <button className='chowDown'>Chow Down!</button>
     <button className='noThanks'>No Thanks</button>
     </div>

@@ -9,7 +9,8 @@ const Register = ({ setToken, setUser }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-
+  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("")
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -48,9 +49,9 @@ const Register = ({ setToken, setUser }) => {
           .then((response) => {
             setToken(response.data.auth_token);
             setUser(username);
-            // location.pathname = "/";
+            setSuccess("Registration Complete!")
           });
-      });
+      }).catch((e) => setError("Login Unsuccessful please Try Again!"))
   };
 
   return (
@@ -99,6 +100,8 @@ const Register = ({ setToken, setUser }) => {
         <div>
           <button onClick={handleRegister}>Register</button>
         </div>
+        <div className="error">{error}</div>
+        <div className="success">{success}</div>
       </div>
     </div>
   );
