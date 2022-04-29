@@ -2,11 +2,8 @@ import "./MealFriendSelection.css"
 import Select from 'react-select'
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
-
 
 const MealFriendSelection = () => {
-  const navigate = useNavigate()
   const [results, setResults] = useState<any>([])
   const [friends, setFriends] = useState<any>([])
   const [friendName, setFriendName] = useState("")
