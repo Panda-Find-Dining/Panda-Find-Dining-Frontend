@@ -18,6 +18,12 @@ const App = () => {
     <>
     <BrowserRouter>
     <Routes>
+    <Route
+          path="on-board" element={<><MenuHeader
+            token={token}
+                    setToken={setToken}
+                    setUser={setUser}
+          /> <Welcome /></>}/> 
     <Route path="/" element={<Navigate replace to="home" />} />
     <Route
           path="login"
