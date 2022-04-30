@@ -7,6 +7,8 @@ import MenuHeader from './components/MenuHeader';
 import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
+import RestaurantCard from "./Restaurant-selection-card";
+import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 
  
 const App = () => {
@@ -58,6 +60,11 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /><MealFriendSelection/></>} />
+          <Route path="restaurant-selection" element={<><MenuHeader
+            token={token}
+            setToken={setToken}
+            setUser={setUser}
+          /><RestaurantSelectionProcess /></>} />
       </Routes>
       </BrowserRouter>
     </>
