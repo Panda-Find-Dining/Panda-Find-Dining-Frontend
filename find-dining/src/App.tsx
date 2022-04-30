@@ -7,7 +7,8 @@ import MenuHeader from './components/MenuHeader';
 import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
-
+import PendingMatchedMeals from "./components/PendingMatchedMeals";
+import OnBoard from "./components/OnBoard";
  
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
@@ -23,7 +24,7 @@ const App = () => {
             token={token}
                     setToken={setToken}
                     setUser={setUser}
-          /> <Welcome /></>}/> 
+          /> <OnBoard /></>}/> 
     <Route path="/" element={<Navigate replace to="home" />} />
     <Route
           path="login"
@@ -64,6 +65,11 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /><MealFriendSelection/></>} />
+          <Route path="pending-matched-meals" element={<><MenuHeader
+            token={token}
+            setToken={setToken}
+            setUser={setUser}
+          /><PendingMatchedMeals/></>} />
       </Routes>
       </BrowserRouter>
     </>
