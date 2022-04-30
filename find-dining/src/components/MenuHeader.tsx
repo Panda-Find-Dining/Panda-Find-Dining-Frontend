@@ -27,10 +27,10 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        setUser("");
-        setToken("");
       })
       .catch((e) => setError("Logout Unsuccessful Try again"));
+      setUser("");
+      setToken("");
   };
 
   return (
@@ -47,7 +47,7 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
           alt="This a placeholder"
         ></img>
         <div className="error">{error}</div>
-        <a href="home" className="logoutLink" onClick={setLogout}>
+        <a href="home" className="logoutLink" onClick={() =>setLogout()}>
           Logout
         </a>
       </div>

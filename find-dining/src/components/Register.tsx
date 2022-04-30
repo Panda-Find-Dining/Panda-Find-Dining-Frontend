@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
+import PasswordChecklist from "react-password-checklist"
 
 const Register = ({ setToken, setUser }) => {
   // const location = useLocation()
@@ -32,6 +33,9 @@ const Register = ({ setToken, setUser }) => {
   };
 
   const handleRegister = () => {
+    if (password !== confirmPassword) {
+      setError("Passwords Must Match!!");
+    } else {
     axios
       .post("https://find-dining-panda.herokuapp.com/api/auth/users/", {
         username: username,
@@ -52,8 +56,8 @@ const Register = ({ setToken, setUser }) => {
             setSuccess("Registration Complete!")
           });
       }).catch((e) => setError("Login Unsuccessful please Try Again!"))
-  };
-
+  }
+  }
   return (
     <div>
          <div></div>
@@ -102,9 +106,16 @@ const Register = ({ setToken, setUser }) => {
         </div>
         <div className="error">{error}</div>
         <div className="success">{success}</div>
+        <PasswordChecklist
+				rules={["match"]}
+				minLength={5}
+				value={password}
+				valueAgain={confirmPassword}
+				onChange={(isValid) => {}}
+			/>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Register
