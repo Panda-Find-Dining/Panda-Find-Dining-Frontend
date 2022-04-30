@@ -13,6 +13,7 @@ const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
   const isLoggedIn = user && token;
+  console.log(isLoggedIn)
   return (
     <>
     <BrowserRouter>
@@ -32,19 +33,20 @@ const App = () => {
                     setUser={setUser}
                   />
                   <Login setUser={setUser} setToken={setToken}/>
+                  <h2 className="feed">Or:</h2>
+              <Register setToken={setToken} setUser={setUser}/>
                 </div>
               )}
               
-              <h2 className="feed">Or:</h2>
-              <Register setToken={setToken} setUser={setUser} element={ <Welcome />}/>
+              
             </header>
           }
         />
-                <Route
+          <Route
           path="home" element={<><MenuHeader
             token={token}
-                    setToken={setToken}
-                    setUser={setUser}
+            setToken={setToken}
+            setUser={setUser}
           /> <Welcome /></>}/>
           <Route path="meal-start" element={<><MenuHeader
             token={token}
@@ -54,7 +56,7 @@ const App = () => {
           <Route path="meal-friend-selection" element={<><MenuHeader
             token={token}
             setToken={setToken}
-                    setUser={setUser}
+            setUser={setUser}
           /><MealFriendSelection/></>} />
       </Routes>
       </BrowserRouter>
