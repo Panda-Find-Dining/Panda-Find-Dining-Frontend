@@ -4,9 +4,11 @@
     justify-content: center;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    min-height: 100vh;
+    width: 70vw;
+    min-height: 70vh;
     overflow: hidden;
+    margin-bottom:0px;
+    margin-left:60px;
   }
   
 
@@ -51,8 +53,9 @@
     background-color: #fff;
     width: 80vw;
     max-width: 260px;
-    height: 300px;
-    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+    height: 320px;
+    border: solid 1px gray;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.30);
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -71,7 +74,7 @@
     position: absolute;
     bottom: 0;
     margin: 10px;
-    color: #fff;
+    color: white;
   }
   
   .infoText {
@@ -79,14 +82,18 @@
     height: 28px;
     justify-content: center;
     display: flex;
-    color: black;
+    color: white;
     animation-name: popup;
     animation-duration: 800ms;
+    padding-bottom:40px;
   }
   
   .buttons {
-    margin: 20px;
-    display: flex;
+    margin: 5px;
+    margin-bottom:10px;
+    display: grid;
+    grid-template-columns: [column-start] 200px [column-start] 50px;
+
   }
   
   .buttons button {
@@ -96,7 +103,7 @@
     border: none;
     color: #fff;
     font-size: 18px;
-    background-color: #9198e5;
+    background-color: teal;
     transition: 200ms;
     margin: 0 10px;
     font-weight: bolder;
@@ -116,4 +123,43 @@
     57%  { transform: scale(1,1) }
     64%  { transform: scale(1,1) }
     100% { transform: scale(1,1) }
+  }
+  .undoButton{
+    flex-shrink: 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    background-color: teal;
+    transition: 200ms;
+    margin: 0 10px;
+    font-weight: bolder;
+    width: 160px;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+      margin-left:120px;
+    margin-bottom: 5px;
+  }
+  .emptyState{
+      text-align: center;
+      color:black;
+      width:230px;
+      padding-top: 50px;
+  }
+  .homeButton{
+    flex-shrink: 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    background-color: teal;
+    transition: 200ms;
+    margin: 0 10px;
+    font-weight: bolder;
+    width: 160px;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
+  }
+  .cardCount{
+    color:black;
   }

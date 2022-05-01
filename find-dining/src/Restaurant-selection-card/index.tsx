@@ -241,7 +241,7 @@ const RestaurantCard = React.forwardRef(({ flickOnSwipe = true, children, onSwip
         handleSwipeReleased(element.current, speed)
       }
     })
-  }, [])
+  }, [handleSwipeReleased,handleSwipeStart])
 
   return (
     React.createElement('div', { ref: element, className }, children)

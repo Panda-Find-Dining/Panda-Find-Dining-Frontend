@@ -1,6 +1,7 @@
 import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface props {
   token:string,
@@ -40,6 +41,12 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
         src={require("../images/panda.jpeg")}
         alt="This a placeholder"
       ></img>
+      <div className="navLinks">
+      <Link to="/matched-pending">Matched/Pending Meals</Link>
+      <a href="home" className="logoutLink" onClick={() =>setLogout()}>
+          Logout
+        </a>
+        </div>
       <div className="logoutProfile">
         <img
           className="profilePic"
@@ -47,9 +54,7 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
           alt="This a placeholder"
         ></img>
         <div className="error">{error}</div>
-        <a href="home" className="logoutLink" onClick={() =>setLogout()}>
-          Logout
-        </a>
+        
       </div>
     </div>
   );
