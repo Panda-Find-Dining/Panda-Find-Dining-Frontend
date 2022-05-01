@@ -11,6 +11,9 @@ import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess"
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
 import { VerticalModal } from "./components/VerticalModal";
 import { useState } from "react"
+import PendingMatchedMeals from "./components/PendingMatchedMeals";
+import OnBoard from "./components/OnBoard";
+
  
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
@@ -22,6 +25,12 @@ const App = () => {
     <>
     <BrowserRouter>
     <Routes>
+    <Route
+          path="on-board" element={<><MenuHeader
+            token={token}
+                    setToken={setToken}
+                    setUser={setUser}
+          /> <OnBoard /></>}/> 
     <Route path="/" element={<Navigate replace to="home" />} />
     <Route
           path="login"
@@ -62,6 +71,7 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /><MealFriendSelection/></>} />
+
           <Route path="restaurant-selection" element={<><VerticalModal
         show={modalShow}
         onHide={() => setModalShow(false)}
@@ -76,6 +86,13 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /></>}/>
+
+          <Route path="pending-matched-meals" element={<><MenuHeader
+            token={token}
+            setToken={setToken}
+            setUser={setUser}
+          /><PendingMatchedMeals/></>} />
+
       </Routes>
       </BrowserRouter>
     </>
