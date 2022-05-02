@@ -7,20 +7,24 @@ import MenuHeader from './components/MenuHeader';
 import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
+import MatchedMeal from "./components/MatchedMeal";
+import OnBoard from "./components/OnBoard";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
 import { VerticalModal } from "./components/VerticalModal";
 import { useState } from "react"
 import PendingMatchedMeals from "./components/PendingMatchedMeals";
-import OnBoard from "./components/OnBoard";
 
  
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
+
   const [modalShow, setModalShow] = useState(false);
   const isLoggedIn = user && token;
   console.log(isLoggedIn)
+  console.log(isLoggedIn)
+
   return (
     <>
     <BrowserRouter>
@@ -71,6 +75,13 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /><MealFriendSelection/></>} />
+          <Route
+          path="matched-restaurant" element={<><MenuHeader
+            token={token}
+                    setToken={setToken}
+                    setUser={setUser}
+          /> <MatchedMeal /></>}/> 
+
 
           <Route path="restaurant-selection" element={<><VerticalModal
         show={modalShow}
