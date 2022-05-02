@@ -3,14 +3,29 @@
 import React, { useEffect, useState } from "react";
 import pokeMap from "../images/pokeworksMap.png";
 import axios from "axios";
+interface token{
+  token: string
+}
 
-const MatchedMeal = () => {
+const MatchedMeal = ({token}:token) => {
   const [match, setMatch] = useState({});
   useEffect(() => {
-    axios
-      .get("https://find-dining-panda.herokuapp.com/api/restaurants/21/")
-      .then((response) => setMatch(response.data));
-  }, []);
+    const options = {
+      method: 'GET',
+      url: 'https://find-dining-panda.herokuapp.com/api/restaurants/60/',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      setMatch(response.data)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, [token]);
 console.log("commit")
   return (
     <div>
