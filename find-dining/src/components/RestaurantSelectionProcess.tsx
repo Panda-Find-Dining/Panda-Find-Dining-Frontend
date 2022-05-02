@@ -104,15 +104,11 @@ console.log(db)
     if(direction === "right")
     return (
       console.log(restPk),
-      setTimeout(() => {
         axios.request(yesOptions).then(function (response) {
           console.log(response.data);
         }).catch(function (error) {
           console.error(error);
         })
-        
-      }, 2000)
-
     )
     return (
       console.log(restPk),
@@ -160,6 +156,7 @@ console.log(db)
     await childRefs[newIndex].current.restoreCard()
     setCount(count - 1)
   }
+
 const goEat = () => {
   if (count < 10) 
   return (
@@ -167,7 +164,7 @@ const goEat = () => {
   
   )
   else return (
-  console.log("Submitted!")
+  navigate("/matched-pending")
   )
 }
 console.log(lastDirection)

@@ -9,7 +9,7 @@ gap: 30px;
 .activeMeals{
     padding: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between center;
     border: solid 1px;
     height: 60px;
     align-content: center;
@@ -24,4 +24,8 @@ gap: 30px;
 .searchResults{
     display:flex;
     gap:20px;
+}
+.restaurantLocation{
+    padding-left: 5px;
+    padding-right: 5px;
 }
