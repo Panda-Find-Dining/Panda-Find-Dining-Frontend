@@ -35,8 +35,11 @@ console.log(error)
       setError(e.message)
     })
     setTimeout(() => {
-      navigate("/home");
+      navigate("/restaurant-selection");
     }, 2000);
+  }
+  const goMatchPend = () => {
+    navigate("/matched-pending")
   }
   return (
       <div className='mealStartPage'>
@@ -54,9 +57,9 @@ console.log(error)
     <div className="error">{error}</div>
     <div className="success">{success}</div>
     <button className='chowDown'>Chow Down!</button>
-    <button className='noThanks'>No Thanks</button>
     </div>
     </form>
+    <button className='noThanks' onClick={() => goMatchPend()}>No Thanks</button>
     </div>
   )
 }

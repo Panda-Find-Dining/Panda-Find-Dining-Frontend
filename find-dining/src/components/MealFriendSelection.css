@@ -13,6 +13,8 @@ gap: 30px;
     border: solid 1px;
     height: 60px;
     align-content: center;
+    margin-bottom: 10px;
+    gap: 50px;
 }
 .searchButton{
     margin-bottom: 10px;

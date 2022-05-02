@@ -38,7 +38,7 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
     <div className="menuHeader">
       <img
         className="siteLogo"
-        src={require("../images/panda.jpeg")}
+        src={require("../images/MenuLogo.png")}
         alt="This a placeholder"
       ></img>
       <div className="navLinks">
@@ -48,11 +48,6 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
         </a>
         </div>
       <div className="logoutProfile">
-        <img
-          className="profilePic"
-          src={require("../images/panda.jpeg")}
-          alt="This a placeholder"
-        ></img>
         <div className="error">{error}</div>
         
       </div>

@@ -1,8 +1,14 @@
 import {useEffect, useState} from 'react'
 import axios from "axios"
 import "./MatchedPending.css"
+import { useNavigate } from 'react-router-dom'
+
 const MatchedPendingMeals = () => {
   const [db, setDB] = useState<any>([])
+  const navigate = useNavigate()
+  const seeMatch = () =>{
+    navigate("/matched-restaurant")
+  }
   useEffect(() => {
     let theDB:any = []
     const options = {
@@ -28,7 +34,9 @@ const MatchedPendingMeals = () => {
       console.error(error);
     });
   }, [])
-  
+  const mealStart = () => {
+    navigate("/meal-start")
+  }
   return (
     <div>
       <h1 className='mealTitle'>Your Current Meals</h1>
@@ -46,9 +54,10 @@ const MatchedPendingMeals = () => {
 
       
       <p className='restaurantLocation'>Tyler</p>
-      <button className="pendingButton">See Match</button>
+      <button className="pendingButton" onClick={()=> seeMatch()}>See Match</button>
       <button className="xButton">X</button>
       </div>
+      <button className="pendingButton" onClick={()=> mealStart()}>Create Meal</button>
       </div>
   )
 }

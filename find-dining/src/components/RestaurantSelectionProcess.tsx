@@ -57,7 +57,7 @@ console.log(db)
     let theDB = []
     const options = {
       method: 'GET',
-      url: 'https://find-dining-panda.herokuapp.com/api/meals/2/restaurants/',
+      url: 'https://find-dining-panda.herokuapp.com/api/meals/25/restaurants/',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'

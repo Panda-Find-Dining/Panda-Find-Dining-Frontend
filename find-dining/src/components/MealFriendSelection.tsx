@@ -6,6 +6,7 @@ import { useState } from "react";
 const MealFriendSelection = () => {
   const [results, setResults] = useState<any>([])
   const [friends, setFriends] = useState<any>([])
+  const [friendPk, setFriendPk] = useState<any>("")
   const [friendName, setFriendName] = useState("")
   const [addFriendError, setAddFriendError] = useState("")
   const [addFriendSuccess, setAddFriendSuccess] = useState("")
@@ -25,7 +26,8 @@ const MealFriendSelection = () => {
           
           axios.request(options).then(function (response) {
             console.log(response.data);
-            setResults(response.data[0].id)
+            setResults(response.data[0])
+            setFriendPk(response.data[0].id)
             setSearchError("")
           }).catch((e) =>  {
             setSearchError(e.message)
@@ -35,7 +37,7 @@ const MealFriendSelection = () => {
 const addFriend = () =>{
 const options = {
   method: 'POST',
-  url: `https://find-dining-panda.herokuapp.com/api/follow/${results}/`,
+  url: `https://find-dining-panda.herokuapp.com/api/follow/${friendPk}/`,
   headers: {
     'Content-Type': 'application/json',
     Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
@@ -66,7 +68,7 @@ console.log(friends)
     <input type="input" placeholder="Search Friends"onChange={(e) => setFriendName(e.target.value)}></input>
     <button className="searchButton">Search</button>
     </form>
-    <div className="searchResults" onClick={addFriend}>{results}<button>+</button></div>
+    <div className="searchResults" onClick={addFriend}>{results.username}<button>+</button></div>
     <div className="error">{addFriendError}</div>
     <div className="success">{addFriendSuccess}</div>
     </div>
@@ -76,11 +78,7 @@ console.log(friends)
         <div className="error">{searchError}</div>
     </div>
     <div className="activeMeals">
-    <img
-        className="profilePic"
-        src={require("../images/panda.jpeg")}
-        alt="This a placeholder"
-      ></img>
+
       
       
       <p>Tyler</p>

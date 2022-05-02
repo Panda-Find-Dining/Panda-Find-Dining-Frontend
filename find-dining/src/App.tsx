@@ -30,11 +30,12 @@ const App = () => {
     <BrowserRouter>
     <Routes>
     <Route
-          path="on-board" element={<><MenuHeader
-            token={token}
-                    setToken={setToken}
-                    setUser={setUser}
-          /> <OnBoard /></>}/> 
+          path="on-board" element={<><OnBoard />
+          <MenuHeader
+          token={token}
+                  setToken={setToken}
+                  setUser={setUser}
+        /></>}/> 
     <Route path="/" element={<Navigate replace to="home" />} />
     <Route
           path="login"
@@ -44,14 +45,12 @@ const App = () => {
                 <Navigate to="/meal-friend-selection" />
               ) : (
                 <div className="mainPage">
+                  <Login setUser={setUser} setToken={setToken}/>
                   <MenuHeader
                     token={token}
                     setToken={setToken}
                     setUser={setUser}
                   />
-                  <Login setUser={setUser} setToken={setToken}/>
-                  <h2 className="feed">Or:</h2>
-              <Register setToken={setToken} setUser={setUser}/>
                 </div>
               )}
               
@@ -59,28 +58,44 @@ const App = () => {
             </header>
           }
         />
+        <Route path="register" element={ <div className="mainPage">
+              <Register setToken={setToken} setUser={setUser}/>
+              <MenuHeader
+                    token={token}
+                    setToken={setToken}
+                    setUser={setUser}
+                  />
+                </div>}
+                />
           <Route
-          path="home" element={<><MenuHeader
+          path="home" element={<>
+          <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
           /> <Welcome /></>}/>
-          <Route path="meal-start" element={<><MenuHeader
+          <Route path="meal-start" element={<>
+          <MealStart />
+          <MenuHeader
             token={token}
             setToken={setToken}
                     setUser={setUser}
-          /><MealStart /></>}/>
-          <Route path="meal-friend-selection" element={<><MenuHeader
+          /></>}/>
+          <Route path="meal-friend-selection" element={<>
+          <MealFriendSelection/>
+          <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
-          /><MealFriendSelection/></>} />
+          /></>} />
           <Route
-          path="matched-restaurant" element={<><MenuHeader
+          path="matched-restaurant" element={<>
+          <MatchedMeal />
+          <MenuHeader
             token={token}
                     setToken={setToken}
                     setUser={setUser}
-          /> <MatchedMeal /></>}/> 
+          /> </>}/> 
 
 
           <Route path="restaurant-selection" element={<><VerticalModal
@@ -92,17 +107,21 @@ const App = () => {
             setToken={setToken}
             setUser={setUser}
           /></>} />
-          <Route path="matched-pending" element={<><MatchedPendingMeals /><MenuHeader
+          <Route path="matched-pending" element={<>
+          <MatchedPendingMeals />
+          <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
           /></>}/>
 
-          <Route path="pending-matched-meals" element={<><MenuHeader
+          <Route path="pending-matched-meals" element={<>
+          <PendingMatchedMeals/>
+          <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
-          /><PendingMatchedMeals/></>} />
+          /></>} />
 
       </Routes>
       </BrowserRouter>
