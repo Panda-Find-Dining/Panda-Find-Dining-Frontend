@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import pokeMap from "../images/pokeworksMap.png";
-import pokeLogo from "../images/pokeworksLogo.png";
 import axios from "axios";
 
 const MatchedMeal = () => {
@@ -20,7 +19,7 @@ console.log("commit")
               <h2>{match.name}</h2>
           </div>
           <div className="photo_reference">
-              <img src={"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match.photo_reference}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M} alt="pic"/>
+              <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match.photo_reference}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`} alt="pic"/>
       </div>
       <div className="card">
                   <h3>Map</h3>
