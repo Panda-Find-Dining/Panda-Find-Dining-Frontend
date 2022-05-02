@@ -3,7 +3,10 @@ import "./MealStart.css"
 import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-const MealStart = () => {
+interface token{
+  token: string
+}
+const MealStart = ({token}:token) => {
 const [location, setLocation] = useState("")
 const [radius, setRadius] = useState("")
 const [error, setError] = useState("")
@@ -18,7 +21,7 @@ const navigate = useNavigate();
       url: 'https://find-dining-panda.herokuapp.com/api/meals/',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+        Authorization: `Token ${token}`
       },
       data: {
         creator: 1,

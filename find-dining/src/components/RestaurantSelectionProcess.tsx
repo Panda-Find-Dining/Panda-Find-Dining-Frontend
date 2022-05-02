@@ -27,7 +27,7 @@ interface restaurantDB {
   name: string,
   url: string,
 }
-function RestaurantSelectionProcess ({setModalShow}) {
+function RestaurantSelectionProcess ({setModalShow, token}) {
   const [restDB, setRestDB] = useState<restaurantDB>([])
   const [currentIndex, setCurrentIndex] = useState(restDB.length - 1)
   const [lastDirection, setLastDirection] = useState()
@@ -60,7 +60,7 @@ console.log(db)
       url: 'https://find-dining-panda.herokuapp.com/api/meals/25/restaurants/',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+        Authorization: `Token ${token}`
       }
     };
     
@@ -77,7 +77,7 @@ console.log(db)
     }).catch(function (error) {
       console.error(error);
     });
-  },[])
+  },[token])
 
 
   // set last direction and decrease current index
@@ -88,7 +88,7 @@ console.log(db)
       url: `https://find-dining-panda.herokuapp.com/api/restaurants/${restaurantPK}/yes/`,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+        Authorization: `Token ${token}`
       }
     };
     const noOptions = {
@@ -96,7 +96,7 @@ console.log(db)
       url: `https://find-dining-panda.herokuapp.com/api/restaurants/${restaurantPK}/no/`,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+        Authorization: `Token ${token}`
       }
     };
     setLastDirection(direction)

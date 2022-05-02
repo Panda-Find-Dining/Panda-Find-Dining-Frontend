@@ -3,7 +3,11 @@ import axios from "axios"
 import "./MatchedPending.css"
 import { useNavigate } from 'react-router-dom'
 
-const MatchedPendingMeals = () => {
+interface token{
+  token: string
+}
+
+const MatchedPendingMeals = ({token}:token) => {
   const [db, setDB] = useState<any>([])
   const navigate = useNavigate()
   const seeMatch = () =>{
@@ -16,7 +20,7 @@ const MatchedPendingMeals = () => {
       url: 'https://find-dining-panda.herokuapp.com/api/users/meals/',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+        Authorization: `Token ${token}`
       }
     };
     
@@ -33,7 +37,7 @@ const MatchedPendingMeals = () => {
     }).catch(function (error) {
       console.error(error);
     });
-  }, [])
+  }, [token])
   const mealStart = () => {
     navigate("/meal-start")
   }

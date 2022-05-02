@@ -2,8 +2,11 @@ import "./MealFriendSelection.css"
 import Select from 'react-select'
 import axios from "axios";
 import { useState } from "react";
+interface token{
+  token: string
+}
 
-const MealFriendSelection = () => {
+const MealFriendSelection = ({token}:token) => {
   const [results, setResults] = useState<any>([])
   const [friends, setFriends] = useState<any>([])
   const [friendPk, setFriendPk] = useState<any>("")
@@ -20,7 +23,7 @@ const MealFriendSelection = () => {
             params: {q: friendName},
             headers: {
               'Content-Type': 'application/json',
-              Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+              Authorization: `Token ${token}`
             }
           };
           
@@ -40,7 +43,7 @@ const options = {
   url: `https://find-dining-panda.herokuapp.com/api/follow/${friendPk}/`,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Token a597b9035bc16eb84b9db749d4a1857fee663242'
+    Authorization: `Token ${token}`
   }
 };
 

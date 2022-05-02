@@ -13,7 +13,6 @@ import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess"
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
 import { VerticalModal } from "./components/VerticalModal";
 import { useState } from "react"
-import PendingMatchedMeals from "./components/PendingMatchedMeals";
 
  
 const App = () => {
@@ -75,14 +74,14 @@ const App = () => {
             setUser={setUser}
           /> <Welcome /></>}/>
           <Route path="meal-start" element={<>
-          <MealStart />
+          <MealStart token={token} />
           <MenuHeader
             token={token}
             setToken={setToken}
                     setUser={setUser}
           /></>}/>
           <Route path="meal-friend-selection" element={<>
-          <MealFriendSelection/>
+          <MealFriendSelection token={token} />
           <MenuHeader
             token={token}
             setToken={setToken}
@@ -90,7 +89,7 @@ const App = () => {
           /></>} />
           <Route
           path="matched-restaurant" element={<>
-          <MatchedMeal />
+          <MatchedMeal token={token} />
           <MenuHeader
             token={token}
                     setToken={setToken}
@@ -101,27 +100,19 @@ const App = () => {
           <Route path="restaurant-selection" element={<><VerticalModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-      /><RestaurantSelectionProcess setModalShow={setModalShow} />
+      /><RestaurantSelectionProcess token={token} setModalShow={setModalShow} />
         <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
           /></>} />
           <Route path="matched-pending" element={<>
-          <MatchedPendingMeals />
+          <MatchedPendingMeals token={token} />
           <MenuHeader
             token={token}
             setToken={setToken}
             setUser={setUser}
           /></>}/>
-
-          <Route path="pending-matched-meals" element={<>
-          <PendingMatchedMeals/>
-          <MenuHeader
-            token={token}
-            setToken={setToken}
-            setUser={setUser}
-          /></>} />
 
       </Routes>
       </BrowserRouter>
