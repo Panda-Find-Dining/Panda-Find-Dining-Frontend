@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist"
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToken, setUser }) => {
   // const location = useLocation()
@@ -12,6 +13,7 @@ const Register = ({ setToken, setUser }) => {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("")
   const [error, setError] = useState("")
+  const navigate = useNavigate()
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -54,6 +56,7 @@ const Register = ({ setToken, setUser }) => {
             setToken(response.data.auth_token);
             setUser(username);
             setSuccess("Registration Complete!")
+            navigate("/matched-pending")
           });
       }).catch((e) => setError("Login Unsuccessful please Try Again!"))
   }

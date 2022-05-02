@@ -1,7 +1,7 @@
 import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface props {
   token:string,
@@ -11,6 +11,7 @@ interface props {
 
 const MenuHeader = ({ token, setToken, setUser }:props) => {
   const [error, setError] = useState("");
+  const navigate = useNavigate()
   const setLogout = () => {
     const options = {
       method: "POST",
@@ -45,6 +46,9 @@ const MenuHeader = ({ token, setToken, setUser }:props) => {
       <Link to="/matched-pending">Matched/Pending Meals</Link>
       <a href="home" className="logoutLink" onClick={() =>setLogout()}>
           Logout
+        </a>
+        <a href="home" className="loginLink" onClick={() =>navigate("/login")}>
+          Login
         </a>
         </div>
       <div className="logoutProfile">
