@@ -12,7 +12,7 @@ const MatchedMeal = () => {
       .get("https://find-dining-panda.herokuapp.com/api/restaurants/21/")
       .then((response) => setMatch(response.data));
   }, []);
-
+console.log("commit")
   return (
     <div>
           <h2>You've matched on a restaurant!</h2>
