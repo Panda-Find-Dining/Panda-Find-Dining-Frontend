@@ -8,7 +8,7 @@ import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
 import MatchedMeal from "./components/MatchedMeal";
-import {OnBoard} from "./components/OnBoard";
+import OnBoard from "./components/OnBoard";
  
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
@@ -16,6 +16,8 @@ const App = () => {
 
   const isLoggedIn = user && token;
   console.log(isLoggedIn)
+  console.log(isLoggedIn)
+
   return (
     <>
     <BrowserRouter>
