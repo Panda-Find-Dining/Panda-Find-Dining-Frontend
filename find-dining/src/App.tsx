@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import MealStart from './components/MealStart';
 import MenuHeader from './components/MenuHeader';
 import Welcome from "./components/Welcome";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
 import MatchedMeal from "./components/MatchedMeal";
 import OnBoard from "./components/OnBoard";
@@ -18,12 +18,14 @@ import { useState } from "react"
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
-
+  const [friendsPks, setFriendsPks] = useState<any>([])
   const [modalShow, setModalShow] = useState(false);
+  const [friendsNames, setFriendsNames] = useState<any>([])
+  const [mealPk, setMealPk] = useLocalStorageState("mealPk", "")
   const isLoggedIn = user && token;
   console.log(isLoggedIn)
   console.log(isLoggedIn)
-
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
   return (
     <>
     <BrowserRouter>
@@ -45,11 +47,15 @@ const App = () => {
               ) : (
                 <div className="mainPage">
                   <Login setUser={setUser} setToken={setToken}/>
+                  <h2>Don't have an account? </h2>
+                  <Link to="/register">Sign up Here</Link>
                   <MenuHeader
+                  isLoggedIn={isLoggedIn}
                     token={token}
                     setToken={setToken}
                     setUser={setUser}
                   />
+                 
                 </div>
               )}
               
@@ -60,6 +66,7 @@ const App = () => {
         <Route path="register" element={ <div className="mainPage">
               <Register setToken={setToken} setUser={setUser}/>
               <MenuHeader
+              isLoggedIn={isLoggedIn}
                     token={token}
                     setToken={setToken}
                     setUser={setUser}
@@ -69,28 +76,32 @@ const App = () => {
           <Route
           path="home" element={<>
           <MenuHeader
+          isLoggedIn={isLoggedIn}
             token={token}
             setToken={setToken}
             setUser={setUser}
           /> <Welcome /></>}/>
           <Route path="meal-start" element={<>
-          <MealStart token={token} />
+          <MealStart mealPk={mealPk} setMealPk={setMealPk} token={token} friendsPks={friendsPks} friendsNames={friendsNames} />
           <MenuHeader
+          isLoggedIn={isLoggedIn}
             token={token}
             setToken={setToken}
                     setUser={setUser}
           /></>}/>
           <Route path="meal-friend-selection" element={<>
-          <MealFriendSelection token={token} />
+          <MealFriendSelection friendsNames={friendsNames} setFriendsNames={setFriendsNames} friendsPks={friendsPks} setFriendsPks={setFriendsPks} token={token} />
           <MenuHeader
+          isLoggedIn={isLoggedIn}
             token={token}
             setToken={setToken}
             setUser={setUser}
           /></>} />
           <Route
           path="matched-restaurant" element={<>
-          <MatchedMeal token={token} />
+          <MatchedMeal mealPk={mealPk} token={token} />
           <MenuHeader
+          isLoggedIn={isLoggedIn}
             token={token}
                     setToken={setToken}
                     setUser={setUser}
@@ -100,15 +111,17 @@ const App = () => {
           <Route path="restaurant-selection" element={<><VerticalModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-      /><RestaurantSelectionProcess token={token} setModalShow={setModalShow} />
+      /><RestaurantSelectionProcess mealPk={mealPk} token={token} setModalShow={setModalShow} />
         <MenuHeader
+        isLoggedIn={isLoggedIn}
             token={token}
             setToken={setToken}
             setUser={setUser}
           /></>} />
           <Route path="matched-pending" element={<>
-          <MatchedPendingMeals token={token} />
+          <MatchedPendingMeals mealPk={mealPk} setMealPk={setMealPk} token={token} />
           <MenuHeader
+          isLoggedIn={isLoggedIn}
             token={token}
             setToken={setToken}
             setUser={setUser}

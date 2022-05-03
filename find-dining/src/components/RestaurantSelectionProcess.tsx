@@ -27,12 +27,13 @@ interface restaurantDB {
   name: string,
   url: string,
 }
-function RestaurantSelectionProcess ({setModalShow, token}) {
+function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
   const [restDB, setRestDB] = useState<restaurantDB>([])
   const [currentIndex, setCurrentIndex] = useState(restDB.length - 1)
   const [lastDirection, setLastDirection] = useState()
   const [count, setCount] = useState(1)
   const [restPk, setRestPk] = useState<number>()
+  const [answer, setAnswer] = useState()
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
 const navigate = useNavigate();
@@ -57,7 +58,7 @@ console.log(db)
     let theDB = []
     const options = {
       method: 'GET',
-      url: 'https://find-dining-panda.herokuapp.com/api/meals/25/restaurants/',
+      url: `https://find-dining-panda.herokuapp.com/api/meals/${mealPk}/restaurants/`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`
@@ -77,7 +78,7 @@ console.log(db)
     }).catch(function (error) {
       console.error(error);
     });
-  },[token])
+  },[token, mealPk])
 
 
   // set last direction and decrease current index
@@ -106,6 +107,10 @@ console.log(db)
       console.log(restPk),
         axios.request(yesOptions).then(function (response) {
           console.log(response.data);
+          setAnswer('Previous Answer: Yes!');
+          setTimeout(() => {
+            setAnswer('')
+          }, 1500);
         }).catch(function (error) {
           console.error(error);
         })
@@ -114,13 +119,15 @@ console.log(db)
       console.log(restPk),
       axios.request(noOptions).then(function (response) {
         console.log(response.data);
-        
+        setAnswer('Previous Answer: No!');
+        setTimeout(() => {
+          setAnswer('')
+        }, 1500);
       }).catch(function (error) {
         console.error(error);
-      })
+      }) 
       
     )
-
   }
   let testCount = 1
   const outOfFrame = (name, idx) => {
@@ -171,8 +178,8 @@ console.log(lastDirection)
 console.log(count)
 console.log(restPk)
 // const API_KEY = process.env.REACT_APP_API_KEY
-const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
-const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
+// const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
+// const google2 = `&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
   return (
     <div>
 
@@ -185,15 +192,18 @@ const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
             ref={childRefs[index]}
             className='swipe'
             key={restaurant.name}
-            onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk)}}
+            onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk);setModalShow(true)
+          }}
             onCardLeftScreen={() => {outOfFrame(restaurant.name, index); setRestPk(restaurant.pk)}}
           >
           {currentIndex === -1 ? (<div></div>):(<h2 className='cardCount'>Restaurant Count: {count}/{restDB.length}</h2>)}
             <div
-              style={{ backgroundImage: 'url(' + google1 + restaurant.url + google2 + ')' }}
+              style={{ backgroundImage: `url(/.netlify/functions/pictures?restaurant=${restaurant.url})` }}
               className='card'
             >
               <h3>{restaurant.name}</h3>
+
+              <h2 className="answer">{answer}</h2>
             </div>
           </RestaurantCard>
           

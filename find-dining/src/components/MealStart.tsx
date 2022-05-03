@@ -4,9 +4,13 @@ import axios from "axios"
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 interface token{
-  token: string
+  token: string,
+  friendsPks: [],
+  friendsNames: []
+  mealPk: number,
+  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>
 }
-const MealStart = ({token}:token) => {
+const MealStart = ({token, friendsPks, friendsNames, mealPk, setMealPk }:token) => {
 const [location, setLocation] = useState("")
 const [radius, setRadius] = useState("")
 const [error, setError] = useState("")
@@ -14,6 +18,7 @@ const [success, setSuccess] = useState("")
 const navigate = useNavigate();
 
   function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
+    let theMealPk = 0
     e.preventDefault();
     setError("")
     const options = {
@@ -27,27 +32,50 @@ const navigate = useNavigate();
         creator: 1,
         location: location,
         radius: radius,
-        invitee: [1,2,3]
+        invitee: friendsPks
       }
     }
 console.log(error)
-    axios.request(options).then(function (response) {
+let multiplePromises = async() => {
+    await axios.request(options).then(function (response) {
       console.log(response.data)
       setSuccess("Meal Created!")
+      theMealPk = response.data.id
+      setMealPk(theMealPk)
     }).catch((e) =>  {
       setError(e.message)
     })
+    const googleOptions = {
+      method: 'GET',
+      url: `https://find-dining-panda.herokuapp.com/api/googleapicall/${theMealPk}/`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      }
+    };
+    await axios.request(googleOptions).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    });
     setTimeout(() => {
       navigate("/restaurant-selection");
     }, 2000);
   }
+  multiplePromises()
+}
   const goMatchPend = () => {
     navigate("/matched-pending")
   }
+  console.log(mealPk)
+
+
+  
+
   return (
       <div className='mealStartPage'>
         <form onSubmit={handleCreateMeal}>
-    <h2 className='mealWith'>Your Dinner with ______</h2>
+    <h2 className='mealWith'>Your Dinner with {friendsNames.map(i => (i + ', ' ))}</h2>
     <div className='search'>
 <h3>Search Location</h3>
 <input type="input" onChange={(e) => setLocation(e.target.value)} className="searchInput" placeholder='Enter your City'></input>
