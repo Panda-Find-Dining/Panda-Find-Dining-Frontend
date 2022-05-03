@@ -178,7 +178,7 @@ console.log(lastDirection)
 console.log(count)
 console.log(restPk)
 useEffect(() => {
-    const url = `/.netlify/functions/pictures?restaurant=${restaurant.url}`;
+    const url = `/.netlify/functions/pictures?restaurant=`;
     try {
       setLoading(true);
       fetch(url).then((res) => res.json());
