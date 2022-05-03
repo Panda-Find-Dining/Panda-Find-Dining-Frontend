@@ -178,7 +178,6 @@ console.log(lastDirection)
 console.log(count)
 console.log(restPk)
 useEffect(() => {
-  async function fetchTodo() {
     const url = `/.netlify/functions/pictures?restaurant=${restaurant.url}`;
     try {
       setLoading(true);
@@ -189,8 +188,6 @@ useEffect(() => {
     } finally {
       setLoading(false);
     }
-  }
-  fetchTodo();
 }, []);
 
 
