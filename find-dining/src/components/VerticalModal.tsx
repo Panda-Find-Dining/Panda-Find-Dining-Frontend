@@ -1,8 +1,10 @@
 import { Modal, Button } from "react-bootstrap"
+import "./VerticalModal.css"
 
 const VerticalModal = (props:any) => {
     return (
         <Modal
+        className="answerModal"
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"

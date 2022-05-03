@@ -4,10 +4,12 @@ import "./MatchedPending.css"
 import { useNavigate } from 'react-router-dom'
 
 interface token{
-  token: string
+  token: string,
+  mealPk: number,
+  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>
 }
 
-const MatchedPendingMeals = ({token}:token) => {
+const MatchedPendingMeals = ({token, mealPk, setMealPk}:token) => {
   const [db, setDB] = useState<any>([])
   const navigate = useNavigate()
   const seeMatch = () =>{

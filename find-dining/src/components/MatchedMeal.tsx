@@ -1,18 +1,19 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import pokeMap from "../images/pokeworksMap.png";
 import axios from "axios";
 interface token{
-  token: string
+  token: string,
+  mealPk: number
 }
 
-const MatchedMeal = ({token}:token) => {
+const MatchedMeal = ({token, mealPk}:token) => {
   const [match, setMatch] = useState({});
   useEffect(() => {
     const options = {
       method: 'GET',
-      url: 'https://find-dining-panda.herokuapp.com/api/restaurants/60/',
+      url: `https://find-dining-panda.herokuapp.com/api/api/meals/${mealPk}/match/`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`
@@ -25,7 +26,7 @@ const MatchedMeal = ({token}:token) => {
     }).catch(function (error) {
       console.error(error);
     });
-  }, [token]);
+  }, [token, mealPk]);
 console.log("commit")
   return (
     <div>

@@ -1,26 +1,32 @@
 import "./MealFriendSelection.css"
 import Select from 'react-select'
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 interface token{
-  token: string
+  token: string,
+  friendsPks: [],
+  setFriendsPks: React.Dispatch<any>,
+  friendsNames: [],
+  setFriendsNames: React.Dispatch<any>
 }
 
-const MealFriendSelection = ({token}:token) => {
+const MealFriendSelection = ({token, friendsPks, setFriendsPks, friendsNames, setFriendsNames}:token) => {
   const [results, setResults] = useState<any>([])
-  const [friends, setFriends] = useState<any>([])
+  const [selectFriendsOptions, setSelectFriendsOptions] = useState<any>([])
+  const [mealFriends, setMealFriends] = useState<any>([])
   const [friendPk, setFriendPk] = useState<any>("")
   const [friendName, setFriendName] = useState("")
   const [addFriendError, setAddFriendError] = useState("")
   const [addFriendSuccess, setAddFriendSuccess] = useState("")
   const [searchError, setSearchError] = useState("")
+  const navigate = useNavigate()
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-      setResults("")
+      setResults([])
         e.preventDefault();
         const options = {
             method: 'GET',
-            url: 'https://find-dining-panda.herokuapp.com/api/search?=Desi',
-            params: {q: friendName},
+            url: `https://find-dining-panda.herokuapp.com/api/search?q=${friendName}`,
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Token ${token}`
@@ -29,18 +35,18 @@ const MealFriendSelection = ({token}:token) => {
           
           axios.request(options).then(function (response) {
             console.log(response.data);
-            setResults(response.data[0])
-            setFriendPk(response.data[0].id)
+            setResults(response.data)
             setSearchError("")
+            console.log(results)
           }).catch((e) =>  {
             setSearchError(e.message)
           })
 }
 
-const addFriend = () =>{
+const addFriend = (user:any) =>{
 const options = {
   method: 'POST',
-  url: `https://find-dining-panda.herokuapp.com/api/follow/${friendPk}/`,
+  url: `https://find-dining-panda.herokuapp.com/api/follow/${user}/`,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Token ${token}`
@@ -50,18 +56,96 @@ const options = {
 axios.request(options).then(function (response) {
   console.log(response.data);
   setAddFriendSuccess("Friend Added")
+  setFriendNamesList()
   setAddFriendError("")
 }).catch((e) =>  {
   setAddFriendError(e.message)
 })
+
 }
-const selectFriendOptions = [
-        { value: "KE", label: "KE" },
-        { value: "Ryan", label: "Ryan" },
-        { value: "Tyler", label: "Tyler" },
-        { value: "Paul", label: "Paul" },
-      ];
-console.log(friends)
+useEffect(() => {
+  let theFriendsNames:any = []
+  let theFriendsPks:any = []
+  const options = {
+    method: 'GET',
+    url: 'https://find-dining-panda.herokuapp.com/api/users/friends/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  axios.request(options).then(function (response) {
+    console.log(response.data);
+    response.data[0].friends.map((friend:any, index:any) => {
+      return(
+      theFriendsNames.push(friend)
+      )
+      
+    },
+    response.data[0].friends_pk.map((friend:any, index:any) => {
+      return(
+      theFriendsPks.push(friend)
+      )
+      
+    },
+    setFriendsPks(theFriendsPks)),
+    setFriendsNames(theFriendsNames))
+    console.log(theFriendsNames)
+    console.log(theFriendsPks)
+    let zipped = theFriendsNames.map((x:any, i:any) => [{value: theFriendsPks[i], label: x}])
+    let newZipped = zipped.flat(1)
+    console.log(newZipped)
+    setSelectFriendsOptions(newZipped)
+
+  }).catch(function (error) {
+    console.error(error);
+  });
+  
+}, [token, setFriendsPks, setFriendsNames])
+
+const setFriendNamesList = () =>{
+    let theFriendsNames:any = []
+    let theFriendsPks:any = []
+    const options = {
+      method: 'GET',
+      url: 'https://find-dining-panda.herokuapp.com/api/users/friends/',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      }
+    };
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      response.data[0].friends.map((friend:any, index:any) => {
+        return(
+        theFriendsNames.push(friend)
+        )
+        
+      },
+      response.data[0].friends_pk.map((friend:any, index:any) => {
+        return(
+        theFriendsPks.push(friend)
+        )
+        
+      },
+      setFriendsPks(theFriendsPks)),
+      setFriendsNames(theFriendsNames))
+      console.log(theFriendsNames)
+      console.log(theFriendsPks)
+      let zipped = theFriendsNames.map((x:any, i:any) => [{value: theFriendsPks[i], label: x}])
+      let newZipped = zipped.flat(1)
+      console.log(newZipped)
+      setSelectFriendsOptions(newZipped)
+  
+    }).catch(function (error) {
+      console.error(error);
+    });
+    
+  }
+
+
+console.log(mealFriends.flat(1).map((friend:any) =>friend.value))
+console.log(friendPk)
   return (
       <div className="mealFriendSelect">
           <h2>Welcome User</h2>
@@ -71,23 +155,16 @@ console.log(friends)
     <input type="input" placeholder="Search Friends"onChange={(e) => setFriendName(e.target.value)}></input>
     <button className="searchButton">Search</button>
     </form>
-    <div className="searchResults" onClick={addFriend}>{results.username}<button>+</button></div>
+
+    <div className="searchResults" >{results.map((user:any, index:any) => <div className="searchList"><div>{user.username}</div><button onClick={ async () => { setFriendPk(user.id); addFriend(user.id)}}>+</button></div>)}</div>
     <div className="error">{addFriendError}</div>
     <div className="success">{addFriendSuccess}</div>
     </div>
     <div className="selectFriend">
-    <Select isMulti className="select" options={selectFriendOptions} onChange={(selection) => setFriends([selection])}/>
-    <button onClick={() =>addFriend()}>Add Friends to Meal</button>
+    <Select isMulti className="select" options={selectFriendsOptions} onChange={(selection) => setMealFriends([selection])}/>
+    <button onClick={() => navigate("/meal-start")}>Add Friends to Meal</button>
         <div className="error">{searchError}</div>
     </div>
-    <div className="activeMeals">
-
-      
-      
-      <p>Tyler</p>
-      <button className="matchButton" >See Match</button>
-      <button className="matchButton">X</button>
-      </div>
       </div>
   )
 }
