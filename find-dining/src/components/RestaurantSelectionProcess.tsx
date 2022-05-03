@@ -180,13 +180,10 @@ console.log(restPk)
 useEffect(() => {
     const url = `/.netlify/functions/pictures?restaurant=`;
     try {
-      setLoading(true);
       fetch(url).then((res) => res.json());
       console.log(data)
     } catch (err) {
       console.log(err);
-    } finally {
-      setLoading(false);
     }
 }, []);
 
