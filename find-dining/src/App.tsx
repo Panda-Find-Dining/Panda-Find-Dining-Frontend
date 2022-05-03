@@ -11,6 +11,7 @@ import MatchedMeal from "./components/MatchedMeal";
 import OnBoard from "./components/OnBoard";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
+
 import { useState } from "react"
 
  
@@ -18,7 +19,6 @@ const App = () => {
   const [token, setToken] = useLocalStorageState("token", "");
   const [user, setUser] = useLocalStorageState("user", "");
   const [friendsPks, setFriendsPks] = useState<any>([])
-  // const [modalShow, setModalShow] = useState(false);
   const [friendsNames, setFriendsNames] = useState<any>([])
   const [mealPk, setMealPk] = useLocalStorageState("mealPk", "")
   const isLoggedIn = user && token;
@@ -107,7 +107,7 @@ const App = () => {
           /> </>}/> 
 
 
-          <Route path="restaurant-selection" element={<><RestaurantSelectionProcess mealPk={mealPk} token={token} setModalShow={setModalShow} />
+          <Route path="restaurant-selection" element={<><RestaurantSelectionProcess mealPk={mealPk} token={token}  />
         <MenuHeader
         isLoggedIn={isLoggedIn}
             token={token}
