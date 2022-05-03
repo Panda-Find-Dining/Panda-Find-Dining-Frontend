@@ -198,7 +198,7 @@ console.log(restPk)
           >
           {currentIndex === -1 ? (<div></div>):(<h2 className='cardCount'>Restaurant Count: {count}/{restDB.length}</h2>)}
             <div
-              style={{ backgroundImage: `/.netlify/functions/pictures?restaurant=${restaurant.url}` }}
+              style={{ backgroundImage: `fetch(/.netlify/functions/pictures?restaurant=${restaurant.url})` }}
               className='card'
             >
               <h3>{restaurant.name}</h3>

@@ -108,10 +108,7 @@ const App = () => {
           /> </>}/> 
 
 
-          <Route path="restaurant-selection" element={<><VerticalModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      /><RestaurantSelectionProcess mealPk={mealPk} token={token} setModalShow={setModalShow} />
+          <Route path="restaurant-selection" element={<><RestaurantSelectionProcess mealPk={mealPk} token={token} setModalShow={setModalShow} />
         <MenuHeader
         isLoggedIn={isLoggedIn}
             token={token}
