@@ -181,7 +181,7 @@ useEffect(() => {
     const url = `/.netlify/functions/pictures?restaurant=${restaurant.url}`;
     try {
       setLoading(true);
-      const data = await fetch(url).then((res) => res.json());
+      fetch(url).then((res) => res.json());
       console.log(data)
     } catch (err) {
       console.log(err);
