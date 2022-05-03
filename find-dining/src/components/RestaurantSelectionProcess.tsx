@@ -177,21 +177,21 @@ const goEat = () => {
 console.log(lastDirection)
 console.log(count)
 console.log(restPk)
-useEffect(() => {
-  async function fetchTodo() {
-    const url = `/.netlify/functions/pictures?restaurant=${restaurant.url}`;
-    try {
-      setLoading(true);
-      const data = await fetch(url).then((res) => res.json());
-      console.log(data)
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  }
-  fetchTodo();
-}, []);
+// useEffect(() => {
+//   async function fetchTodo() {
+//     const url = `/.netlify/functions/pictures?restaurant=${restaurant.url}`;
+//     try {
+//       setLoading(true);
+//       const data = await fetch(url).then((res) => res.json());
+//       console.log(data)
+//     } catch (err) {
+//       console.log(err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }
+//   fetchTodo();
+// }, []);
 
 // const API_KEY = process.env.REACT_APP_API_KEY
 // const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
