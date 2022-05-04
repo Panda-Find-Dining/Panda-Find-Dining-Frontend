@@ -180,7 +180,7 @@ console.log(restPk)
 useEffect(() => {
     const options = {
       method: 'GET',
-      url: `/.netlify/functions/pictures`,
+      url: `./.netlify/functions/pictures`,
     };
     axios.request(options).then(function (response) {
       console.log(response.data);
