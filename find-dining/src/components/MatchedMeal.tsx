@@ -13,7 +13,7 @@ const MatchedMeal = ({token, mealPk}:token) => {
   useEffect(() => {
     const options = {
       method: 'GET',
-      url: `https://find-dining-panda.herokuapp.com/api/api/meals/${mealPk}/match/`,
+      url: `https://find-dining-panda.herokuapp.com/api/meals/${mealPk}/match/`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`
@@ -22,7 +22,7 @@ const MatchedMeal = ({token, mealPk}:token) => {
     
     axios.request(options).then(function (response) {
       console.log(response.data);
-      setMatch(response.data)
+      setMatch(response.data[0])
     }).catch(function (error) {
       console.error(error);
     });

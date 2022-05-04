@@ -1,8 +1,15 @@
-.mealFriendSelect{
+.matchedPendingDiv{
     display: grid;
-    grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 100px [row-start] 50px;
+    grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 60px [row-start] 60px [row-start] 160px [row-start] 60px;
 gap: 30px;
 }
+
+
+/* .mealFriendSelect{ */
+    /* display: grid; */
+    /* grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 160px [row-start] 160px [row-start] 160px; */
+/* gap: 30px; */
+/* } */
 .select{
     margin-bottom:10px;
 }

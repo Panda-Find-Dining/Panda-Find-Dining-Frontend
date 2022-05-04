@@ -165,13 +165,28 @@ console.log(db)
   }
 
 const goEat = () => {
+  const options = {
+    method: 'GET',
+    url: `https://find-dining-panda.herokuapp.com/api/selected-and-match/${mealPk}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
   if (count < 10) 
   return (
   alert("Sorry you must select at least 10 Restaurants before submitting!")
   
   )
   else return (
-  navigate("/matched-pending")
+
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      navigate("/matched-pending")
+    }).catch(function (error) {
+      console.error(error);
+    })
   )
 }
 console.log(lastDirection)
@@ -193,6 +208,44 @@ fetch(`/.netlify/functions/pictures`)
 .then(res => { console.log(res) })
 },[]);
 
+
+const undo = (restaurantPK) => {
+  const undoNoOptions = {
+    method: 'DELETE',
+    url: `https://find-dining-panda.herokuapp.com/api/undo_no/${restaurantPK}/`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  const undoYesOptions = {
+    method: 'DELETE',
+    url: `https://find-dining-panda.herokuapp.com/api/undo_yes/${restaurantPK}/`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  if(lastDirection === "right")
+  return (
+    console.log(restPk),
+      axios.request(undoYesOptions).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      })
+  )
+  return (
+    console.log(restPk),
+    axios.request(undoNoOptions).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    }) 
+    
+  )
+}
+
 const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
 const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
   return (
@@ -207,7 +260,7 @@ const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
             ref={childRefs[index]}
             className='swipe'
             key={restaurant.name}
-            onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk);setModalShow(true)
+            onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk)
           }}
             onCardLeftScreen={() => {outOfFrame(restaurant.name, index); setRestPk(restaurant.pk)}}
           >
@@ -230,7 +283,7 @@ const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Heck No!</button>
         <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Heck Yeah!</button>
       </div>
-      <button className="undoButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
+      <button className="undoButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() =>{ goBack(); undo(restPk)}}>Undo swipe!</button>
       <button className="undoButton"  onClick={() => goEat()}>Let's Eat!</button>
 
     </div>
