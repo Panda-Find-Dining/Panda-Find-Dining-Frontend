@@ -10,7 +10,7 @@ exports.handler = async function (event, context) {
     );
     return {
       statusCode: 200,
-      body: response,
+      body: JSON.stringify(response.data),
     };
   } catch (err) {
     return {
