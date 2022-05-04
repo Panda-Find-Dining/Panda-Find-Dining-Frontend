@@ -178,13 +178,15 @@ console.log(lastDirection)
 console.log(count)
 console.log(restPk)
 useEffect(() => {
-    const url = `/.netlify/functions/pictures?restaurant=`;
-    try {
-      fetch(url).then((res) => res.json());
-      console.log(data)
-    } catch (err) {
-      console.log(err);
-    }
+    const options = {
+      method: 'GET',
+      url: `/.netlify/functions/pictures`,
+    };
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    }) 
 }, []);
 
 
