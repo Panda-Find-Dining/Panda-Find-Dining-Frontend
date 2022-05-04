@@ -191,7 +191,7 @@ useEffect(() => {
 
 
 const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
-const google2 = `&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+const google2 = "AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
   return (
     <div>
 
