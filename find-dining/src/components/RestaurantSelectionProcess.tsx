@@ -189,7 +189,7 @@ console.log(restPk)
 //     }) 
 // }, []);
 useEffect(() => {
-fetch(`./netlify/functions/pictures`)
+fetch(`/.netlify/functions/pictures`)
 .then(res => { console.log(res) })
 },[]);
 
