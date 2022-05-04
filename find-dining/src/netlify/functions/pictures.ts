@@ -1,32 +1,29 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
 
-exports.handler = async (event, context, callback, restaurant) => {
-  const pass = (body) => {
-    callback(null, { statusCode: 200, body: JSON.stringify(body) });
-  };
+
+  import axios from "axios"
+
+const handler = async (event) => {
+  const {lat, long} = event.queryStringParameters
+
+  const API_SECRET = process.env.API_SECRET 
+  const url = `http://api.weatherstack.com/current?access_key=${API_SECRET}&query=${lat},${long}&forcast_days=4`
 
   try {
-    const { restaurant } = event.queryStringParameters;
-    let response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurant}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`,
-      {
-        method: event.httpMethod,
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_GOOGLE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: event.body,
-      }
-    );
-    let data = await response.json();
-    await pass(data);
-  } catch (err) {
-    let error = {
-      statusCode: err.statusCode || 500,
-      body: JSON.stringify({ error: err.message }),
-    };
-    await pass(error);
-  }
-};
+    const { data } = await axios.get(url)
 
-export {}
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    }
+
+  } catch (error) {
+    const { status, statusText, headers, data } = error.response
+    return {
+      statusCode: status,
+      body: JSON.stringify({status, statusText, headers, data})
+    }
+  }
+}
+
+export default  handler 

@@ -177,18 +177,21 @@ const goEat = () => {
 console.log(lastDirection)
 console.log(count)
 console.log(restPk)
+// useEffect(() => {
+//     const options = {
+//       method: 'GET',
+//       url: `../.netlify/functions/pictures`,
+//     };
+//     axios.request(options).then(function (response) {
+//       console.log(response.data);
+//     }).catch(function (error) {
+//       console.error(error);
+//     }) 
+// }, []);
 useEffect(() => {
-    const options = {
-      method: 'GET',
-      url: `../.netlify/functions/pictures`,
-    };
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    }) 
-}, []);
-
+fetch(`./netlify/functions/pictures`)
+.then(res => { console.log(res.json()) })
+},[]);
 
 const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
 const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
