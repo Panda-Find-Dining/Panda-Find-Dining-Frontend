@@ -1,3 +1,4 @@
+// @ts-nocheck (TODO KE: remove after typescript refactor)
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const StyledButton = styled(Button)`
     border: none;
   }
 `;
+
 const Span = styled.span`
   color: #196052;
   font: Lato;
@@ -109,7 +111,7 @@ const MealStart = ({ token }: token) => {
                     color: "black",
                     marginTop: 30 ,
                   }}>
-                <p>Set Radius </p>
+                Set Radius
                 <Form.Control style={{
                     color: "black",
                     borderColor: "#da0063",
@@ -132,6 +134,7 @@ const MealStart = ({ token }: token) => {
                 <StyledButton style={{
                   marginTop: 5,
                   width: 150,
+                  backgroundColor: "#da0063",
                 }}>Chow Down!</StyledButton>
             <StyledButton style={{
                   marginTop: 5,
