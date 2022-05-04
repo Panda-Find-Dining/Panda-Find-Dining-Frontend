@@ -81,13 +81,17 @@ const Login = ({ setToken, setUser }) => {
               Login
             </h1>
             <Form.Label>{error}</Form.Label>
-            <Form.Label style={{
-              color: "black",
-            }}>Username</Form.Label>
+            <Form.Label
+              style={{
+                color: "black",
+              }}
+            >
+              Username
+            </Form.Label>
             <Form.Control
               style={{
                 borderColor: "#da0063",
-                marginBottom: "5px"
+                marginBottom: "5px",
               }}
               required
               className="input"
@@ -97,9 +101,13 @@ const Login = ({ setToken, setUser }) => {
               name="username"
               onChange={(event) => handleChange(event)}
             />
-            <Form.Label style={{
-              color: "black",
-            }}>Password</Form.Label>
+            <Form.Label
+              style={{
+                color: "black",
+              }}
+            >
+              Password
+            </Form.Label>
             <Form.Control
               style={{
                 borderColor: "#da0063",
@@ -114,29 +122,29 @@ const Login = ({ setToken, setUser }) => {
             />
             <Form.Text>Forgot Password?</Form.Text>
             <div className="text-center">
-            <div>
-              <StyledButton 
-                style={{
-                  marginTop: 50,
-                  width: 150,
-                }}
-                onClick={handleLogin}
-              >
-                Login
-              </StyledButton>
-            </div>
-            <div>
-              <StyledButton
-                onClick={() => navigate("/login")}
-                style={{
-                  marginTop: 5,
-                  backgroundColor: "#da0063",
-                  width:150,
-                }}
-              >
-                Register
-              </StyledButton>
-            </div>
+              <div>
+                <StyledButton
+                  style={{
+                    marginTop: 50,
+                    width: 150,
+                  }}
+                  onClick={handleLogin}
+                >
+                  Login
+                </StyledButton>
+              </div>
+              <div>
+                <StyledButton
+                  onClick={() => navigate("/login")}
+                  style={{
+                    marginTop: 5,
+                    backgroundColor: "#da0063",
+                    width: 150,
+                  }}
+                >
+                  Register
+                </StyledButton>
+              </div>
             </div>
           </Form.Group>
         </Form>
