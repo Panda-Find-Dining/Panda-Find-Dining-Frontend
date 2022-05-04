@@ -101,6 +101,7 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
     });
   },[token, mealPk])
 
+
     axios
       .request(options)
       .then(function (response) {
@@ -118,6 +119,7 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
         console.error(error);
       });
   }, [token]);
+
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index, restaurantPK) => {
@@ -212,6 +214,18 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
     setCount(count - 1);
   };
 
+
+const goEat = () => {
+  const options = {
+    method: 'GET',
+    url: `https://find-dining-panda.herokuapp.com/api/selected-and-match/${mealPk}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  if (count < 10) 
+
   const goEat = () => {
     if (count < 10)
       return alert(
@@ -226,6 +240,7 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
   const google1 =
     "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=";
   const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M";
+
   return (
     <Container type="is-center">
       {/* <Span> */}
@@ -239,7 +254,14 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
   
   )
   else return (
-  navigate("/matched-pending")
+
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      navigate("/matched-pending")
+    }).catch(function (error) {
+      console.error(error);
+    })
   )
 }
 console.log(lastDirection)
@@ -261,12 +283,78 @@ fetch(`/.netlify/functions/pictures`)
 .then(res => { console.log(res) })
 },[]);
 
+
+const undo = (restaurantPK) => {
+  const undoNoOptions = {
+    method: 'DELETE',
+    url: `https://find-dining-panda.herokuapp.com/api/undo_no/${restaurantPK}/`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  const undoYesOptions = {
+    method: 'DELETE',
+    url: `https://find-dining-panda.herokuapp.com/api/undo_yes/${restaurantPK}/`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${token}`
+    }
+  };
+  if(lastDirection === "right")
+  return (
+    console.log(restPk),
+      axios.request(undoYesOptions).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
+      })
+  )
+  return (
+    console.log(restPk),
+    axios.request(undoNoOptions).then(function (response) {
+      console.log(response.data);
+    }).catch(function (error) {
+      console.error(error);
+    }) 
+    
+  )
+}
+
 const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
 const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
   return (
     <div>
 
        
+
+      <div className='cardDeck' >
+          <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
+          <button className="homeButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => navigate('/home')}>Go Home!</button>
+        {restDB.map((restaurant, index) => (
+          <RestaurantCard
+            ref={childRefs[index]}
+            className='swipe'
+            key={restaurant.name}
+            onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk)
+          }}
+            onCardLeftScreen={() => {outOfFrame(restaurant.name, index); setRestPk(restaurant.pk)}}
+          >
+          {currentIndex === -1 ? (<div></div>):(<h2 className='cardCount'>Restaurant Count: {count}/{restDB.length}</h2>)}
+            <div
+              style={{ backgroundImage: 'url(' + google1 + restaurant.url + google2 + ')' }}
+              className='card'
+            >
+              <h3>{restaurant.name}</h3>
+
+              <h2 className="answer">{answer}</h2>
+            </div>
+          </RestaurantCard>
+          
+        ))}
+        
+      </div>
+
     <div className='cardDeck' >
     <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
     <button className="homeButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => navigate('/home')}>Go Home!</button>
@@ -286,6 +374,7 @@ const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
       >
         <h3>{restaurant.name}</h3>
 
+
         <h2 className="answer">{answer}</h2>
       </div>
     </RestaurantCard>
@@ -295,6 +384,10 @@ const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
 </div>
         
       </div>
+
+      <button className="undoButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() =>{ goBack(); undo(restPk)}}>Undo swipe!</button>
+      <button className="undoButton"  onClick={() => goEat()}>Let's Eat!</button>
+
 
         <div className="buttons">
           <StyledButton
