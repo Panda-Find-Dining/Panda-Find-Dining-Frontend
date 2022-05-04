@@ -4,6 +4,36 @@ import axios from "axios";
 // import { useLocation } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist"
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Button from "react-bootstrap/Button";
+import FindDiningLogo from "../images/FindDiningLogo.png";
+import { Form } from "react-bootstrap";
+
+const StyledButton = styled(Button)`
+  background-color: #196052;
+  box-shadow: none;
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: #196052;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+`;
+const Span = styled.span`
+  color: #196052;
+  font: Lato;
+  font-weight: bold;
+`;
+
+const Container = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+`;
 
 const Register = ({ setToken, setUser }) => {
   // const location = useLocation()
@@ -62,14 +92,21 @@ const Register = ({ setToken, setUser }) => {
   }
   }
   return (
-    <div>
-         <div></div>
-      <div className="form">
+    <Container>
+      <img src={FindDiningLogo} alt="logo" />
+         <Span>
+      <Form>
+        <Form.Group>
         <div>
           <h1>Register</h1>
         </div>
-        <label>Username</label>
-        <input required
+        <Form.Label style={{
+              color: "black",
+            }}>Username</Form.Label>
+        <Form.Control style={{
+                borderColor: "#da0063",
+                marginBottom: "5px"
+              }} required
           className="input"
           type="text"
           placeholder="username"
@@ -77,8 +114,13 @@ const Register = ({ setToken, setUser }) => {
           value={username}
           onChange={(event) => handleChange(event)}
         />
-        <label>Email</label>
-        <input
+        <Form.Label style={{
+              color: "black",
+            }}>Email</Form.Label>
+        <Form.Control style={{
+                borderColor: "#da0063",
+                marginBottom: "5px"
+              }}
           className="input"
           type="email"
           placeholder="email"
@@ -86,8 +128,13 @@ const Register = ({ setToken, setUser }) => {
           value={email}
           onChange={(event) => handleChange(event)}
         />
-        <label>Password</label>
-        <input required
+        <Form.Label style={{
+              color: "black",
+            }}>Password</Form.Label>
+        <Form.Control style={{
+                borderColor: "#da0063",
+                marginBottom: "5px"
+              }}required
           className="input"
           type="password"
           placeholder="password"
@@ -95,8 +142,13 @@ const Register = ({ setToken, setUser }) => {
           value={password}
           onChange={(event) => handleChange(event)}
         />
-        <label>Confirm Password</label>
-        <input required
+        <Form.Label style={{
+              color: "black",
+            }}>Confirm Password</Form.Label>
+        <Form.Control style={{
+                borderColor: "#da0063",
+                marginBottom: "5px"
+              }}required
           className="input"
           type="password"
           placeholder="confirm password"
@@ -104,8 +156,12 @@ const Register = ({ setToken, setUser }) => {
           value={confirmPassword}
           onChange={(event) => handleChange(event)}
         />
-        <div>
-          <button onClick={handleRegister}>Register</button>
+        </Form.Group>
+        <div className="text-center">
+          <StyledButton style={{
+                  marginTop: 50,
+                  width: 150,
+                }}onClick={handleRegister}>Register</StyledButton>
         </div>
         <div className="error">{error}</div>
         <div className="success">{success}</div>
@@ -116,8 +172,9 @@ const Register = ({ setToken, setUser }) => {
 				valueAgain={confirmPassword}
 				onChange={(isValid) => {}}
 			/>
-      </div>
-    </div>
+      </Form>
+      </Span>
+    </Container>
   );
 };
 
