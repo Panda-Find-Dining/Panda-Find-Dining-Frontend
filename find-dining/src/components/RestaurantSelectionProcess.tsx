@@ -80,7 +80,7 @@ console.log(db)
     });
   },[token, mealPk])
 
-
+console.log('push')
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index, restaurantPK) => {
     console.log(restPk)
