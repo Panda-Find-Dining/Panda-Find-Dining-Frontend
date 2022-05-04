@@ -58,12 +58,13 @@ interface restaurantDB {
   name: string;
   url: string;
 }
-function RestaurantSelectionProcess({ setModalShow, token }) {
-  const [restDB, setRestDB] = useState<restaurantDB>([]);
-  const [currentIndex, setCurrentIndex] = useState(restDB.length - 1);
-  const [lastDirection, setLastDirection] = useState();
-  const [count, setCount] = useState(1);
-  const [restPk, setRestPk] = useState<number>();
+function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
+  const [restDB, setRestDB] = useState<restaurantDB>([])
+  const [currentIndex, setCurrentIndex] = useState(restDB.length - 1)
+  const [lastDirection, setLastDirection] = useState()
+  const [count, setCount] = useState(1)
+  const [restPk, setRestPk] = useState<number>()
+  const [answer, setAnswer] = useState()
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
   const navigate = useNavigate();
@@ -87,13 +88,18 @@ function RestaurantSelectionProcess({ setModalShow, token }) {
   useEffect(() => {
     let theDB = [];
     const options = {
-      method: "GET",
-      url: "https://find-dining-panda.herokuapp.com/api/meals/25/restaurants/",
+      method: 'GET',
+      url: `https://find-dining-panda.herokuapp.com/api/meals/${mealPk}/restaurants/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
       },
-    };
+      setRestDB(theDB))
+      console.log(theDB)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  },[token, mealPk])
 
     axios
       .request(options)
@@ -152,13 +158,29 @@ function RestaurantSelectionProcess({ setModalShow, token }) {
         .request(noOptions)
         .then(function (response) {
           console.log(response.data);
-        })
-        .catch(function (error) {
+          setAnswer('Previous Answer: Yes!');
+          setTimeout(() => {
+            setAnswer('')
+          }, 1500);
+        }).catch(function (error) {
           console.error(error);
         })
-    );
-  };
-  let testCount = 1;
+    )
+    return (
+      console.log(restPk),
+      axios.request(noOptions).then(function (response) {
+        console.log(response.data);
+        setAnswer('Previous Answer: No!');
+        setTimeout(() => {
+          setAnswer('')
+        }, 1500);
+      }).catch(function (error) {
+        console.error(error);
+      }) 
+      
+    )
+  }
+  let testCount = 1
   const outOfFrame = (name, idx) => {
     console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
     testCount += 1;
@@ -213,42 +235,66 @@ function RestaurantSelectionProcess({ setModalShow, token }) {
             className="homeButton"
             style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
             onClick={() => navigate("/home")}
-          >
-            Go Home!
-          </StyledButton>
-          {restDB.map((restaurant, index) => (
-            <RestaurantCard
-              ref={childRefs[index]}
-              className="swipe"
-              key={restaurant.name}
-              onSwipe={(dir) => {
-                swiped(dir, restaurant.name, index, restaurant.pk);
-                setRestPk(restaurant.pk);
-              }}
-              onCardLeftScreen={() => {
-                outOfFrame(restaurant.name, index);
-                setRestPk(restaurant.pk);
-              }}
-            >
-              {currentIndex === -1 ? (
-                <div></div>
-              ) : (
-                <h2 className="cardCount">
-                  Restaurant Count: {count}/{restDB.length}
-                </h2>
-              )}
-              <div
-                style={{
-                  backgroundImage:
-                    "url(" + google1 + restaurant.url + google2 + ")",
-                }}
-                className="card"
-              >
-                <h3>{restaurant.name}</h3>
-              </div>
-            </RestaurantCard>
-          ))}
-        </div>
+  alert("Sorry you must select at least 10 Restaurants before submitting!")
+  
+  )
+  else return (
+  navigate("/matched-pending")
+  )
+}
+console.log(lastDirection)
+console.log(count)
+console.log(restPk)
+// useEffect(() => {
+//     const options = {
+//       method: 'GET',
+//       url: `../.netlify/functions/pictures`,
+//     };
+//     axios.request(options).then(function (response) {
+//       console.log(response.data);
+//     }).catch(function (error) {
+//       console.error(error);
+//     }) 
+// }, []);
+useEffect(() => {
+fetch(`/.netlify/functions/pictures`)
+.then(res => { console.log(res) })
+},[]);
+
+const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
+const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M"
+  return (
+    <div>
+
+       
+    <div className='cardDeck' >
+    <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
+    <button className="homeButton" style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => navigate('/home')}>Go Home!</button>
+  {restDB.map((restaurant, index) => (
+    <RestaurantCard
+      ref={childRefs[index]}
+      className='swipe'
+      key={restaurant.name}
+      onSwipe={(dir) => {swiped(dir, restaurant.name, index, restaurant.pk); setRestPk(restaurant.pk)
+    }}
+      onCardLeftScreen={() => {outOfFrame(restaurant.name, index); setRestPk(restaurant.pk)}}
+    >
+    {currentIndex === -1 ? (<div></div>):(<h2 className='cardCount'>Restaurant Count: {count}/{restDB.length}</h2>)}
+      <div
+        style={{ backgroundImage: 'url(' + google1 + restaurant.url + google2 + ')' }}
+        className='card'
+      >
+        <h3>{restaurant.name}</h3>
+
+        <h2 className="answer">{answer}</h2>
+      </div>
+    </RestaurantCard>
+    
+  ))}
+  
+</div>
+        
+      </div>
 
         <div className="buttons">
           <StyledButton

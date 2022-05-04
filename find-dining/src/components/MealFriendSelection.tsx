@@ -9,6 +9,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 interface token {
   token: string;
+  friendsPks: [],
+  setFriendsPks: React.Dispatch<any>,
+  friendsNames: [],
+  setFriendsNames: React.Dispatch<any>
 }
 
 const StyledButton = styled(Button)`
@@ -47,7 +51,6 @@ const Blurb = styled.div`
   margin: 10px;
   padding: 25px;
 `;
-// const FormControl = styled(Button)``;
 
 const MealFriendSelection = ({ token }: token) => {
   const [results, setResults] = useState<any>([]);
@@ -83,7 +86,7 @@ const MealFriendSelection = ({ token }: token) => {
       });
   };
 
-  const addFriend = () => {
+  const addFriend = (user:any) => {
     const options = {
       method: "POST",
       url: `https://find-dining-panda.herokuapp.com/api/follow/${friendPk}/`,

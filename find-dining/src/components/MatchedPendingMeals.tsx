@@ -9,7 +9,9 @@ import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
 
 interface token{
-  token: string
+  token: string,
+  mealPk: number,
+  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>
 }
 const StyledButton = styled(Button)`
   background-color: #196052;
@@ -37,7 +39,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const MatchedPendingMeals = ({token}:token) => {
+const MatchedPendingMeals = ({token, mealPk, setMealPk}:token) => {
   const [db, setDB] = useState<any>([])
   const navigate = useNavigate()
   const seeMatch = () =>{

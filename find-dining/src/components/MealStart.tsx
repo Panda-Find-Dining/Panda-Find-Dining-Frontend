@@ -36,6 +36,10 @@ const Container = styled.div`
 
 interface token {
   token: string;
+  friendsPks: [],
+  friendsNames: []
+  mealPk: number,
+  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>
 }
 const MealStart = ({ token }: token) => {
   const [location, setLocation] = useState("");
@@ -58,26 +62,42 @@ const MealStart = ({ token }: token) => {
         creator: 1,
         location: location,
         radius: radius,
-        invitee: [1, 2, 3],
+        invitee: friendsPks,
       },
     };
     console.log(error);
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        setSuccess("Meal Created!");
+    let multiplePromises = async() => {
+      await axios.request(options).then(function (response) {
+        console.log(response.data)
+        setSuccess("Meal Created!")
+        theMealPk = response.data.id
+        setMealPk(theMealPk)
+      }).catch((e) =>  {
+        setError(e.message)
       })
-      .catch((e) => {
-        setError(e.message);
+      const googleOptions = {
+        method: 'GET',
+        url: `https://find-dining-panda.herokuapp.com/api/googleapicall/${theMealPk}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`
+        }
+      };
+      await axios.request(googleOptions).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.error(error);
       });
-    setTimeout(() => {
-      navigate("/restaurant-selection");
-    }, 2000);
-  }
+      setTimeout(() => {
+        navigate("/restaurant-selection");
+      }, 2000);
+    }
+    multiplePromises()
   const goMatchPend = () => {
     navigate("/matched-pending");
   };
+  console.log(mealPk)
+
   return (
     <Container>
       <Span>
@@ -86,8 +106,8 @@ const MealStart = ({ token }: token) => {
                   }}>
           <div className="mealStartPage">
             <form onSubmit={handleCreateMeal}>
-              <h2 className="mealWith">Your Dinner with ______</h2>
-              <div className="search">
+               <h2 className='mealWith'>Your Dinner with {friendsNames.map(i => (i + ', ' ))}</h2>
+    <div className='search'>
                 <Form.Label
                   style={{
                     color: "black",
@@ -107,7 +127,7 @@ const MealStart = ({ token }: token) => {
                   placeholder="Enter your City"
                 ></Form.Control>
               </div>
-              <Form.Label style={{
+              <Form.Label className="radius" style={{
                     color: "black",
                     marginTop: 30 ,
                   }}>
@@ -125,7 +145,7 @@ const MealStart = ({ token }: token) => {
                 </Form.Label>
             </form>
               </div>
-              <div className="text-center" style={{
+              <div className="text-center mealButtons" style={{
                     color: "black",
                     marginTop: 30 ,
                   }}>
@@ -136,7 +156,7 @@ const MealStart = ({ token }: token) => {
                   width: 150,
                   backgroundColor: "#da0063",
                 }}>Chow Down!</StyledButton>
-            <StyledButton style={{
+            <StyledButton className='noThanks' style={{
                   marginTop: 5,
                   width: 150,
                 }}onClick={() => goMatchPend()}>No Thanks</StyledButton>
@@ -145,6 +165,6 @@ const MealStart = ({ token }: token) => {
       </Span>
     </Container>
   );
-};
+}
 
 export default MealStart;
