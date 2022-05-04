@@ -190,7 +190,7 @@ console.log(restPk)
 // }, []);
 useEffect(() => {
 fetch(`./netlify/functions/pictures`)
-.then(res => { console.log(res.json()) })
+.then(res => { console.log(res) })
 },[]);
 
 const google1 = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
