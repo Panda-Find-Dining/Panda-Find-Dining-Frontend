@@ -265,7 +265,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
         <button
           className="homeButton"
           style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/matched-pending")}
         >
           Go Home!
         </button>
