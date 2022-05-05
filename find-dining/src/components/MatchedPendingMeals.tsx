@@ -7,9 +7,10 @@ interface token {
   token: string;
   mealPk: number;
   setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>;
+  userPk: string;
 }
 
-const MatchedPendingMeals = ({ token, mealPk, setMealPk }: token) => {
+const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
   const [db, setDB] = useState<any>([]);
   const [pendingDb, setPendingDB] = useState<any>([]);
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk }: token) => {
             invitees: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
+            all_users_have_selected: restaurant.all_users_have_selected,
           });
         }, setDB(theDB));
         console.log(theDB);
@@ -68,6 +70,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk }: token) => {
             invitees: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
+            all_users_have_selected: restaurant.all_users_have_selected,
           });
         }, setPendingDB(thePendingDB));
         console.log(thePendingDB);
@@ -103,6 +106,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk }: token) => {
     setMealPk(restaurant);
     navigate("/restaurant-selection");
   };
+  console.log(userPk);
   return (
     <div className="matchedPendingDiv">
       <h1 className="mealTitle">Your Current Meals</h1>
@@ -111,14 +115,24 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk }: token) => {
         {pendingDb.map((restaurant: any, index: any) =>
           restaurant.archive === false ? (
             <div key={restaurant.id} className="pendingMeals">
-              <p className="restaurantLocation">{restaurant.location}</p>
-              <p>{restaurant.archive}</p>
-              <button
-                className="pendingButton"
-                onClick={() => selectRestaurants(restaurant.id)}
+              <p
+                className="restaurantLocation"
+                onClick={() => console.log(restaurant)}
               >
-                Select Restaurants
-              </button>
+                {restaurant.location}
+              </p>
+              <p>{restaurant.archive}</p>
+              {restaurant.all_users_have_selected.includes(userPk) ? (
+                <div>Friends Still selecting</div>
+              ) : (
+                <button
+                  className="pendingButton"
+                  onClick={() => selectRestaurants(restaurant.id)}
+                >
+                  Select Restaurants
+                </button>
+              )}
+
               <button
                 className="xButton"
                 onClick={() => decline(restaurant.id)}

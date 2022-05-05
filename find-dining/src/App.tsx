@@ -171,6 +171,7 @@ const App = () => {
                   mealPk={mealPk}
                   setMealPk={setMealPk}
                   token={token}
+                  userPk={userPk}
                 />
                 <MenuHeader
                   isLoggedIn={isLoggedIn}
