@@ -128,12 +128,12 @@ const MealStart = ({
         </Form.Label>
         <Form.Label className="search">
           <h3>Search Location</h3>
-          <input
+          <Form.Control
             type="input"
             onChange={(e) => setLocation(e.target.value)}
             className="searchInput"
             placeholder="Enter your City"
-          ></input>
+          ></Form.Control>
         </Form.Label>
         <Form.Label className="radius">
           <h3>Set Radius </h3>
