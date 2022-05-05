@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-// import { Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const StyledButton = styled(Button)`
   background-color: #196052;
@@ -116,12 +116,17 @@ const MealStart = ({
   console.log(mealPk);
 
   return (
+    <Container>
+    <Span>
+      <Form>
     <div className="mealStartPage">
-      <form onSubmit={handleCreateMeal}>
-        <h2 className="mealWith">
+      <Form.Group onSubmit={handleCreateMeal}>
+        <Form.Label className="mealWith" style={{
+                    color: "black",
+                  }}>
           Your Dinner with {friendsNames.map((i) => i + ", ")}
-        </h2>
-        <div className="search">
+        </Form.Label>
+        <Form.Label className="search">
           <h3>Search Location</h3>
           <input
             type="input"
@@ -129,8 +134,8 @@ const MealStart = ({
             className="searchInput"
             placeholder="Enter your City"
           ></input>
-        </div>
-        <div className="radius">
+        </Form.Label>
+        <Form.Label className="radius">
           <h3>Set Radius </h3>
           <input
             type="input"
@@ -138,17 +143,20 @@ const MealStart = ({
             className="radiusInput"
             placeholder="Radius in miles"
           ></input>
-        </div>
+        </Form.Label>
         <div className="mealButtons">
           <div className="error">{error}</div>
           <div className="success">{success}</div>
-          <button className="chowDown">Chow Down!</button>
+          <StyledButton className="chowDown">Chow Down!</StyledButton>
         </div>
-      </form>
-      <button className="noThanks" onClick={() => goMatchPend()}>
+      </Form.Group>
+      <StyledButton className="noThanks" onClick={() => goMatchPend()}>
         No Thanks
-      </button>
+      </StyledButton>
     </div>
+    </Form>
+    </Span>
+    </Container>
   );
 };
 
