@@ -37,9 +37,11 @@ const MenuHeader = ({ token, setToken, setUser, isLoggedIn }:props) => {
 
   return (
     <div className="menuHeader">
-      <img
+      <img style={{
+        width: "12%",
+      }}
         className="siteLogo"
-        src={require("../images/MenuLogo.png")}
+        src={require("../images/TinyPandaLogo.png")}
         alt="This a placeholder"
       ></img>
       <div className="navLinks">

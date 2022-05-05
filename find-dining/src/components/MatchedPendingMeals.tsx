@@ -1,13 +1,43 @@
+// @ts-nocheck (TODO KE: remove after typescript refactor)
+
 import {useEffect, useState} from 'react'
 import axios from "axios"
 import "./MatchedPending.css"
 import { useNavigate } from 'react-router-dom'
+import styled from "styled-components";
+import Button from "react-bootstrap/Button";
+import { Form } from "react-bootstrap";
 
 interface token{
   token: string,
   mealPk: number,
   setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>
 }
+const StyledButton = styled(Button)`
+  background-color: #196052;
+  box-shadow: none;
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: #196052;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+`;
+const Span = styled.span`
+  color: #196052;
+  font: Lato;
+  font-weight: bold;
+`;
+
+const Container = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+`;
 
 const MatchedPendingMeals = ({token, mealPk, setMealPk}:token) => {
   const [db, setDB] = useState<any>([])
@@ -92,6 +122,7 @@ console.log('please work')
     navigate("/restaurant-selection")
   }
   return (
+
     <div className="matchedPendingDiv">
       <h1 className='mealTitle'>Your Current Meals</h1>
     <h2 className='pendingMealsH2'>Pending Meals</h2>
@@ -108,6 +139,24 @@ console.log('please work')
       <div className="pendingMealsMed">
       <div className='matchedMeals'>{db.map((restaurant:any, index:any) => (restaurant.archive === false ? (<div key={restaurant.id} className="pendingMeals">
 
+    <Container>
+    <Span>
+      <h2 className='mealTitle'>Your Current Meals</h2>
+      <Form>
+    <Form.Label className='pendingMealsH2'>Pending Meals</Form.Label>
+    <div>{db.map((restaurant:any, index:any) => (<Form.Control type="input"><Form.Control type="input" key={restaurant.id} className="pendingMeals">
+
+      <Form.Control type="input" className='restaurantLocation'>{restaurant.location}</Form.Control>
+      <StyledButton className="pendingButton">Select Restaurants</StyledButton>
+      <StyledButton className="xButton">X</StyledButton>
+      </Form.Control>
+      </Form.Control>
+      ))}
+      </div>
+      <Form.Label className='pendingMealsH2'>Matched Meals</Form.Label>
+      <div className="pendingMeals">
+
+
 <p className='restaurantLocation'>{restaurant.location}</p>
 <button className="pendingButton" onClick={()=> seeMatch()}>See Match</button>
       <button className="xButton" onClick={() => decline(restaurant.id)}>X</button>
@@ -118,7 +167,16 @@ console.log('please work')
 
       </div>
       <button className="pendingButton" onClick={()=> mealStart()}>Create Meal</button>
+
+      <p className='restaurantLocation'>Tyler</p>
+      <StyledButton className="pendingButton" onClick={()=> seeMatch()}>See Match</StyledButton>
+      <StyledButton className="xButton">X</StyledButton>
+
       </div>
+      <StyledButton className="pendingButton" onClick={()=> mealStart()}>Create Meal</StyledButton>
+      </Form>
+      </Span>
+      </Container>
   )
 }
 

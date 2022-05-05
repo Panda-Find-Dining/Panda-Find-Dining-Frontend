@@ -31,11 +31,7 @@ const App = () => {
     <Routes>
     <Route
           path="on-board" element={<><OnBoard />
-          <MenuHeader
-          token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-        /></>}/> 
+          </>}/> 
     <Route path="/" element={<Navigate replace to="home" />} />
     <Route
           path="login"
