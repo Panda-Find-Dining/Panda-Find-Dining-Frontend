@@ -4,7 +4,6 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import MealStart from "./components/MealStart";
 import MenuHeader from "./components/MenuHeader";
-import Welcome from "./components/Welcome";
 import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
 import MatchedMeal from "./components/MatchedMeal";
@@ -37,7 +36,7 @@ const App = () => {
               </>
             }
           />
-          <Route path="/" element={<Navigate replace to="home" />} />
+          <Route path="/" element={<Navigate replace to="on-board" />} />
           <Route
             path="login"
             element={
@@ -77,20 +76,6 @@ const App = () => {
                   setUser={setUser}
                 />
               </div>
-            }
-          />
-          <Route
-            path="home"
-            element={
-              <>
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                />{" "}
-                <Welcome />
-              </>
             }
           />
           <Route

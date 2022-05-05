@@ -56,7 +56,7 @@ const MenuHeader = ({
       <div className="navLinks">
         <Link to="/matched-pending">Matched/Pending Meals</Link>
         {isLoggedIn ? (
-          <a href="home" className="logoutLink" onClick={() => setLogout()}>
+          <a href="on-board" className="logoutLink" onClick={() => setLogout()}>
             Logout
           </a>
         ) : (
