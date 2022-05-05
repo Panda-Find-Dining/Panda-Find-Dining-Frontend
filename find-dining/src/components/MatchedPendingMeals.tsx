@@ -99,7 +99,7 @@ const MatchedPendingMeals = ({token, mealPk, setMealPk}:token) => {
   const mealStart = () => {
     navigate("/meal-start")
   }
-
+console.log('please work')
   const decline = (restaurantPk:number) => {
     const options = {
       method: 'DELETE',

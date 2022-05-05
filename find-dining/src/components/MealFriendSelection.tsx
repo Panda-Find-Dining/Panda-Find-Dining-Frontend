@@ -94,7 +94,24 @@ const MealFriendSelection = ({ token }: token) => {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
       },
+      setFriendsPks(theFriendsPks)),
+      setFriendsNames(theFriendsNames))
+      console.log(theFriendsNames)
+      console.log(theFriendsPks)
+      let zipped = theFriendsNames.map((x:any, i:any) => [{value: theFriendsPks[i], label: x}])
+      let newZipped = zipped.flat(1)
+      console.log(newZipped)
+      setSelectFriendsOptions(newZipped)
+  
+    }).catch(function (error) {
+      console.error(error);
+    });
+    
+  }
+  console.log('please work')
+
     };
+
 
     axios
       .request(options)

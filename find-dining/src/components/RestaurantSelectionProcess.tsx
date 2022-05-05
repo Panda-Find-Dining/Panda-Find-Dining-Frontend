@@ -207,12 +207,13 @@ function RestaurantSelectionProcess ({setModalShow, token, mealPk}) {
 
   // increase current index and show card
   const goBack = async () => {
-    if (!canGoBack) return;
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
-    setCount(count - 1);
-  };
+    if (!canGoBack) return
+    const newIndex = currentIndex + 1
+    updateCurrentIndex(newIndex)
+    await childRefs[newIndex].current.restoreCard()
+    setCount(count - 1)
+  }
+
 
 
 const goEat = () => {
@@ -225,14 +226,21 @@ const goEat = () => {
     }
   };
   if (count < 10) 
+  return (
+  alert("Sorry you must select at least 10 Restaurants before submitting!")
+  
+  )
+  else return (
 
-  const goEat = () => {
-    if (count < 10)
-      return alert(
-        "Sorry you must select at least 10 Restaurants before submitting!"
-      );
-    else return navigate("/matched-pending");
-  };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      navigate("/matched-pending")
+    }).catch(function (error) {
+      console.error(error);
+    })
+  )
+}
   console.log(lastDirection);
   console.log(count);
   console.log(restPk);
