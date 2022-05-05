@@ -4,13 +4,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface props {
-  token:string,
-  setToken:React.Dispatch<unknown>
-  setUser:React.Dispatch<unknown>
-  isLoggedIn: unknown
+  token: string;
+  setToken: React.Dispatch<unknown>;
+  setUser: React.Dispatch<unknown>;
+  isLoggedIn: unknown;
+  setUserPk: React.Dispatch<unknown>;
 }
 
-const MenuHeader = ({ token, setToken, setUser, isLoggedIn }:props) => {
+const MenuHeader = ({
+  token,
+  setToken,
+  setUser,
+  isLoggedIn,
+  setUserPk,
+}: props) => {
   const [error, setError] = useState("");
   const setLogout = () => {
     const options = {
@@ -31,28 +38,33 @@ const MenuHeader = ({ token, setToken, setUser, isLoggedIn }:props) => {
         console.log(response.data);
       })
       .catch((e) => setError("Logout Unsuccessful Try again"));
-      setUser("");
-      setToken("");
+    setUser("");
+    setToken("");
+    setUserPk("");
   };
 
   return (
     <div className="menuHeader">
-      <img style={{
-        width: "12%",
-      }}
+      <img
+        style={{
+          width: "12%",
+        }}
         className="siteLogo"
         src={require("../images/TinyPandaLogo.png")}
         alt="This a placeholder"
       ></img>
       <div className="navLinks">
-      <Link to="/matched-pending">Matched/Pending Meals</Link>
-      {isLoggedIn ? (      <a href="home" className="logoutLink" onClick={() =>setLogout()}>
-          Logout
-        </a>):(<Link to="/login">Login</Link>)}
-        </div>
+        <Link to="/matched-pending">Matched/Pending Meals</Link>
+        {isLoggedIn ? (
+          <a href="home" className="logoutLink" onClick={() => setLogout()}>
+            Logout
+          </a>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </div>
       <div className="logoutProfile">
         <div className="error">{error}</div>
-        
       </div>
     </div>
   );

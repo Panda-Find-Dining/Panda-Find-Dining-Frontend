@@ -34,7 +34,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Login = ({ setToken, setUser }) => {
+const Login = ({ setToken, setUser, setUserPk }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -54,12 +54,14 @@ const Login = ({ setToken, setUser }) => {
   const handleLogin = () => {
     setError("");
     axios
-      .post("https://find-dining-panda.herokuapp.com/api/auth/token/login/", {
+      .post("https://find-dining-panda.herokuapp.com/api/tokenpk/", {
         username: username,
         password: password,
       })
       .then((response) => {
-        setToken(response.data.auth_token);
+        console.log(response.data.user_id);
+        setToken(response.data.token);
+        setUserPk(response.data.user_id);
         setUser(username);
       })
       .catch((e) => setError("Login unsuccessful! Try Again!"));
