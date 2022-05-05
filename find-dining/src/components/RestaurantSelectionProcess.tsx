@@ -163,7 +163,7 @@ console.log('push')
     await childRefs[newIndex].current.restoreCard()
     setCount(count - 1)
   }
-
+  console.log('please work')
 const goEat = () => {
   const options = {
     method: 'GET',

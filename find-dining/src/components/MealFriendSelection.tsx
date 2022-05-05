@@ -142,7 +142,7 @@ const setFriendNamesList = () =>{
     });
     
   }
-
+  console.log('please work')
 
 console.log(mealFriends.flat(1).map((friend:any) =>friend.value))
 console.log(friendPk)
