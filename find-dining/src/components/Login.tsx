@@ -86,6 +86,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             <Form.Label
               style={{
                 color: "black",
+                marginBottom: 2,
               }}
             >
               Username
@@ -106,7 +107,8 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             <Form.Label
               style={{
                 color: "black",
-                marginTop: 20
+                marginTop: 20,
+                marginBottom: 2,
               }}
             >
               Password

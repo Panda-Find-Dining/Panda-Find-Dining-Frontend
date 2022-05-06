@@ -6,7 +6,7 @@ import PasswordChecklist from "react-password-checklist";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import FindDiningLogo from "../images/FindDiningLogo.png";
+import FDLogo from "../images/FDLogo.png";
 import { Form } from "react-bootstrap";
 
 const StyledButton = styled(Button)`
@@ -94,16 +94,19 @@ const Register = ({ setToken, setUser }) => {
   };
   return (
     <Container>
-      <img src={FindDiningLogo} alt="logo" />
+      <img src={FDLogo} alt="logo" />
       <Span>
         <Form>
           <Form.Group>
             <div>
-              <h1>Register</h1>
+              <h1 style={{
+                marginBottom: 10,
+              }}>Register</h1>
             </div>
             <Form.Label
               style={{
                 color: "black",
+                marginBottom: 2,
               }}
             >
               Username
@@ -124,6 +127,9 @@ const Register = ({ setToken, setUser }) => {
             <Form.Label
               style={{
                 color: "black",
+                marginBottom: 2,
+                marginTop: 10,
+                
               }}
             >
               Email
@@ -143,6 +149,8 @@ const Register = ({ setToken, setUser }) => {
             <Form.Label
               style={{
                 color: "black",
+                marginBottom: 2,
+                marginTop: 10,
               }}
             >
               Password
@@ -163,6 +171,8 @@ const Register = ({ setToken, setUser }) => {
             <Form.Label
               style={{
                 color: "black",
+                marginBottom: 2,
+                marginTop: 10,
               }}
             >
               Confirm Password
@@ -186,6 +196,7 @@ const Register = ({ setToken, setUser }) => {
               style={{
                 marginTop: 50,
                 width: 150,
+                backgroundColor: "black"
               }}
               onClick={handleRegister}
             >
