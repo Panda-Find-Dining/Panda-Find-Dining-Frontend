@@ -6,8 +6,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { Form } from "react-bootstrap";
-import InputGroup from "react-bootstrap/InputGroup";
 import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble from "../images/speechBubble.png";
