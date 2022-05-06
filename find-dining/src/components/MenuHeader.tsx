@@ -1,3 +1,4 @@
+// @ts-nocheck (TODO KE: remove after typescript refactor)
 import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
