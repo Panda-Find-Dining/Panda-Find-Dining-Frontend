@@ -149,7 +149,7 @@ const MealFriendSelection = ({
         console.error(error);
       });
   };
-
+  console.log(friendPk);
   console.log(mealFriends.flat(1).map((friend: any) => friend.value));
   console.log(friendsPks);
   return (
