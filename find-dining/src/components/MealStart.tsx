@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
+import Select from "react-select";
 // import { Form } from "react-bootstrap";
 
 const StyledButton = styled(Button)`
@@ -119,9 +120,17 @@ const MealStart = ({
   const goMatchPend = () => {
     navigate("/meals");
   };
+  const selectRadiusOptions = [
+    { value: 10, label: "10" },
+    { value: 20, label: "20" },
+    { value: 40, label: "40" },
+    { value: 60, label: "60" },
+    { value: 80, label: "80" },
+  ];
   console.log(mealPk);
   console.log(friendsPks);
   console.log(friendsNames);
+  console.log(radius);
   return (
     <div className="mealStartPage">
       <form onSubmit={handleCreateMeal}>
@@ -139,12 +148,12 @@ const MealStart = ({
         </div>
         <div className="radius">
           <h3>Set Radius </h3>
-          <input
-            type="input"
-            onChange={(e) => setRadius(e.target.value)}
-            className="radiusInput"
-            placeholder="Radius in miles"
-          ></input>
+          <Select
+            className="select"
+            options={selectRadiusOptions}
+            onChange={(selection) => setRadius(selection.value)}
+            placeholder={"Select a Radius"}
+          />
         </div>
         <div className="mealButtons">
           <div className="error">{error}</div>

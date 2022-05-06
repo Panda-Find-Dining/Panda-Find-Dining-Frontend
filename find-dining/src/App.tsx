@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import MealStart from "./components/MealStart";
 import MenuHeader from "./components/MenuHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import MealFriendSelection from "./components/MealFriendSelection";
+import MealCreation from "./components/MealCreation";
 import MatchedMeal from "./components/MatchedMeal";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
@@ -33,12 +33,15 @@ const App = () => {
               <>
                 {isLoggedIn ? (
                   <>
-                    <MealFriendSelection
+                    <MealCreation
                       friendsNames={friendsNames}
                       setFriendsNames={setFriendsNames}
                       friendsPks={friendsPks}
                       setFriendsPks={setFriendsPks}
                       token={token}
+                      mealPk={mealPk}
+                      setMealPk={setMealPk}
+                      userPk={userPk}
                     />
                     <MenuHeader
                       isLoggedIn={isLoggedIn}

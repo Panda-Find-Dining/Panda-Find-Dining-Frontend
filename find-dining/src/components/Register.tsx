@@ -191,6 +191,13 @@ const Register = ({ setToken, setUser }) => {
               onChange={(event) => handleChange(event)}
             />
           </Form.Group>
+          <PasswordChecklist
+            rules={["match"]}
+            minLength={5}
+            value={password}
+            valueAgain={confirmPassword}
+            onChange={(isValid) => {}}
+          />
           <div className="text-center">
             <StyledButton
               style={{
@@ -205,13 +212,6 @@ const Register = ({ setToken, setUser }) => {
           </div>
           <div className="error">{error}</div>
           <div className="success">{success}</div>
-          <PasswordChecklist
-            rules={["match"]}
-            minLength={5}
-            value={password}
-            valueAgain={confirmPassword}
-            onChange={(isValid) => {}}
-          />
         </Form>
       </Span>
     </Container>

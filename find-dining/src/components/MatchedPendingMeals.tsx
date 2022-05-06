@@ -80,7 +80,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       });
   }, [token]);
   const mealStart = () => {
-    navigate("/meal-start");
+    navigate("/");
   };
 
   const decline = (restaurantPk: number) => {
