@@ -152,7 +152,13 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
             restaurant.archive === false ? (
               <div key={restaurant.id} className="pendingMeals">
                 <p className="restaurantLocation">{restaurant.location}</p>
-                <button className="pendingButton" onClick={() => seeMatch()}>
+                <button
+                  className="pendingButton"
+                  onClick={() => {
+                    seeMatch();
+                    setMealPk(restaurant.id);
+                  }}
+                >
                   See Match
                 </button>
                 <button
