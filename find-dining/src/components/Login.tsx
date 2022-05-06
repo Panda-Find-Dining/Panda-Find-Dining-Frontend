@@ -137,7 +137,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
               </div>
               <div>
                 <StyledButton
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/register")}
                   style={{
                     marginTop: 5,
                     backgroundColor: "#da0063",

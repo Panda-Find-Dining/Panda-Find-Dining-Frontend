@@ -111,13 +111,13 @@ const MealStart = ({
           console.error(error);
         });
       setTimeout(() => {
-        navigate("/restaurant-selection");
-      }, 2000);
+        navigate("/select");
+      }, 100);
     };
     multiplePromises();
   }
   const goMatchPend = () => {
-    navigate("/matched-pending");
+    navigate("/meals");
   };
   console.log(mealPk);
   console.log(friendsPks);

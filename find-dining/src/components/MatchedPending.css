@@ -25,9 +25,10 @@ gap: 30px;
 .pendingMealsH2{
     display: flex;
     height: 40px;
-    border-bottom: solid 1px;
+    /* border-bottom: solid 1px; */
     justify-content: center;
     color:black;
+    margin-top:60px;
 }
 .searchButton{
     margin-bottom: 10px;
@@ -59,7 +60,12 @@ gap: 30px;
 .mealTitle{
     color: black;
 }
-
+.createButton{
+    margin-top: 80px;
+    height:60px;
+    width:80px;
+    margin-left: 140px;
+}
 /* .mealFriendSelect{ */
     /* display: grid; */
     /* grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 100px [row-start] 50px; */

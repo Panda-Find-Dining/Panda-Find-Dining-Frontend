@@ -187,7 +187,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
         .request(options)
         .then(function (response) {
           console.log(response.data);
-          navigate("/matched-pending");
+          navigate("/meals");
         })
         .catch(function (error) {
           console.error(error);
@@ -265,7 +265,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
         <button
           className="homeButton"
           style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-          onClick={() => navigate("/matched-pending")}
+          onClick={() => navigate("/meals")}
         >
           Go Home!
         </button>

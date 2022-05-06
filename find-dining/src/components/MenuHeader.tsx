@@ -60,9 +60,9 @@ const MenuHeader = ({
         alt="This a placeholder"
       ></img>
       <div className="navLinks">
-        <Link to="/matched-pending">Matched/Pending Meals</Link>
+        <Link to="/meals">Meals</Link>
         {isLoggedIn ? (
-          <a href="on-board" className="logoutLink" onClick={() => setLogout()}>
+          <a href="login" className="logoutLink" onClick={() => setLogout()}>
             Logout
           </a>
         ) : (

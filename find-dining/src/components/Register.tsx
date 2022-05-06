@@ -75,15 +75,18 @@ const Register = ({ setToken, setUser }) => {
         })
         .then((response) => {
           axios
-            .post("https://find-dining-panda.herokuapp.com/api/auth/token/login/", {
-              username: username,
-              password: password,
-            })
+            .post(
+              "https://find-dining-panda.herokuapp.com/api/auth/token/login/",
+              {
+                username: username,
+                password: password,
+              }
+            )
             .then((response) => {
               setToken(response.data.auth_token);
               setUser(username);
               setSuccess("Registration Complete!");
-              navigate("/matched-pending");
+              navigate("/");
             });
         })
         .catch((e) => setError("Login Unsuccessful please Try Again!"));

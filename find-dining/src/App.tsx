@@ -4,10 +4,9 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import MealStart from "./components/MealStart";
 import MenuHeader from "./components/MenuHeader";
-import { BrowserRouter, Route, Routes, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealFriendSelection from "./components/MealFriendSelection";
 import MatchedMeal from "./components/MatchedMeal";
-import OnBoard from "./components/OnBoard";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
 
@@ -29,20 +28,34 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route
-            path="on-board"
+            path="/"
             element={
               <>
-                <OnBoard />
+                <MealFriendSelection
+                  friendsNames={friendsNames}
+                  setFriendsNames={setFriendsNames}
+                  friendsPks={friendsPks}
+                  setFriendsPks={setFriendsPks}
+                  token={token}
+                />
+                <MenuHeader
+                  isLoggedIn={isLoggedIn}
+                  token={token}
+                  setToken={setToken}
+                  setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
+                />
               </>
             }
           />
-          <Route path="/" element={<Navigate replace to="on-board" />} />
           <Route
             path="login"
             element={
               <header>
                 {isLoggedIn ? (
-                  <Navigate to="/meal-friend-selection" />
+                  <Navigate to="/" />
                 ) : (
                   <div className="mainPage">
                     <Login
@@ -50,8 +63,6 @@ const App = () => {
                       setToken={setToken}
                       setUserPk={setUserPk}
                     />
-                    <h2>Don't have an account? </h2>
-                    <Link to="/register">Sign up Here</Link>
                     <MenuHeader
                       isLoggedIn={isLoggedIn}
                       token={token}
@@ -110,30 +121,7 @@ const App = () => {
             }
           />
           <Route
-            path="meal-friend-selection"
-            element={
-              <>
-                <MealFriendSelection
-                  friendsNames={friendsNames}
-                  setFriendsNames={setFriendsNames}
-                  friendsPks={friendsPks}
-                  setFriendsPks={setFriendsPks}
-                  token={token}
-                />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
-              </>
-            }
-          />
-          <Route
-            path="matched-restaurant"
+            path="match"
             element={
               <>
                 <MatchedMeal mealPk={mealPk} token={token} />
@@ -151,7 +139,7 @@ const App = () => {
           />
 
           <Route
-            path="restaurant-selection"
+            path="select"
             element={
               <>
                 <RestaurantSelectionProcess mealPk={mealPk} token={token} />
@@ -168,7 +156,7 @@ const App = () => {
             }
           />
           <Route
-            path="matched-pending"
+            path="meals"
             element={
               <>
                 <MatchedPendingMeals

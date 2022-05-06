@@ -15,7 +15,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
   const [pendingDb, setPendingDB] = useState<any>([]);
   const navigate = useNavigate();
   const seeMatch = () => {
-    navigate("/matched-restaurant");
+    navigate("/match");
   };
   useEffect(() => {
     let theDB: any = [];
@@ -104,13 +104,12 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
   };
   const selectRestaurants = (restaurant: any) => {
     setMealPk(restaurant);
-    navigate("/restaurant-selection");
+    navigate("/select");
   };
   console.log(userPk);
   return (
     <div className="matchedPendingDiv">
-      <h1 className="mealTitle">Your Current Meals</h1>
-      <h2 className="pendingMealsH2">Pending Meals</h2>
+      <h2 className="pendingMealsH2">Upcoming Meals</h2>
       <div className="pendingMealsBig">
         {pendingDb.map((restaurant: any, index: any) =>
           restaurant.archive === false ? (
@@ -174,7 +173,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
           )}
         </div>
       </div>
-      <button className="pendingButton" onClick={() => mealStart()}>
+      <button className="createButton" onClick={() => mealStart()}>
         Create Meal
       </button>
     </div>

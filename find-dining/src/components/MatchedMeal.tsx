@@ -1,7 +1,6 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
 
 import { useEffect, useState } from "react";
-import pokeMap from "../images/pokeworksMap.png";
 import axios from "axios";
 interface token {
   token: string;
@@ -42,18 +41,15 @@ const MatchedMeal = ({ token, mealPk }: token) => {
           alt="pic"
         />
       </div>
-      <div className="card">
-        <h3>Map</h3>
-        <img src={pokeMap} alt="restaurant map" />
-      </div>
+
       <div className="hours">
         <h2>{match.hours}</h2>
       </div>
       <div className="Details">
         <h2>Details:{match.formatted_address}</h2>
       </div>
-      <button>Get Directions</button>
-      <button>More Details</button>
+      {/* <button>Get Directions</button>
+      <button>More Details</button> */}
     </div>
   );
 };
