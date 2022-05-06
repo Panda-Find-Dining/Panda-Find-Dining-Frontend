@@ -151,7 +151,7 @@ const MealFriendSelection = ({
   };
 
   console.log(mealFriends.flat(1).map((friend: any) => friend.value));
-  console.log(friendPk);
+  console.log(friendsPks);
   return (
     <div className="mealFriendSelect">
       <h2>Welcome User</h2>
@@ -193,7 +193,17 @@ const MealFriendSelection = ({
           options={selectFriendsOptions}
           onChange={(selection) => setMealFriends([selection])}
         />
-        <button onClick={() => navigate("/meal-start")}>
+        <button
+          onClick={() => {
+            setFriendsPks(
+              mealFriends.flat(1).map((friend: any) => friend.value)
+            );
+            setFriendsNames(
+              mealFriends.flat(1).map((friend: any) => friend.label)
+            );
+            navigate("/meal-start");
+          }}
+        >
           Add Friends to Meal
         </button>
         <div className="error">{searchError}</div>

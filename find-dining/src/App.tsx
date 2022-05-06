@@ -58,6 +58,8 @@ const App = () => {
                       setToken={setToken}
                       setUser={setUser}
                       setUserPk={setUserPk}
+                      setFriendsPks={setFriendsPks}
+                      setFriendsNames={setFriendsNames}
                     />
                   </div>
                 )}
@@ -74,6 +76,9 @@ const App = () => {
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
               </div>
             }
@@ -89,12 +94,17 @@ const App = () => {
                   token={token}
                   friendsPks={friendsPks}
                   friendsNames={friendsNames}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
                 <MenuHeader
                   isLoggedIn={isLoggedIn}
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
               </>
             }
@@ -115,6 +125,9 @@ const App = () => {
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
               </>
             }
@@ -129,6 +142,9 @@ const App = () => {
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />{" "}
               </>
             }
@@ -144,6 +160,9 @@ const App = () => {
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
               </>
             }
@@ -163,6 +182,9 @@ const App = () => {
                   token={token}
                   setToken={setToken}
                   setUser={setUser}
+                  setUserPk={setUserPk}
+                  setFriendsPks={setFriendsPks}
+                  setFriendsNames={setFriendsNames}
                 />
               </>
             }
