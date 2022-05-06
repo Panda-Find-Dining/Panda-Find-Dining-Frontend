@@ -31,22 +31,28 @@ const App = () => {
             path="/"
             element={
               <>
-                <MealFriendSelection
-                  friendsNames={friendsNames}
-                  setFriendsNames={setFriendsNames}
-                  friendsPks={friendsPks}
-                  setFriendsPks={setFriendsPks}
-                  token={token}
-                />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
+                {isLoggedIn ? (
+                  <>
+                    <MealFriendSelection
+                      friendsNames={friendsNames}
+                      setFriendsNames={setFriendsNames}
+                      friendsPks={friendsPks}
+                      setFriendsPks={setFriendsPks}
+                      token={token}
+                    />
+                    <MenuHeader
+                      isLoggedIn={isLoggedIn}
+                      token={token}
+                      setToken={setToken}
+                      setUser={setUser}
+                      setUserPk={setUserPk}
+                      setFriendsPks={setFriendsPks}
+                      setFriendsNames={setFriendsNames}
+                    />
+                  </>
+                ) : (
+                  <Navigate to="/login" />
+                )}
               </>
             }
           />
