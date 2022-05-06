@@ -1,8 +1,51 @@
+// @ts-nocheck (TODO KE: remove after typescript refactor)
+
 import "./MealFriendSelection.css";
 import Select from "react-select";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { Form } from "react-bootstrap";
+import InputGroup from "react-bootstrap/InputGroup";
+import styled from "styled-components";
+import hungryPanda from "../images/hungryPanda.png";
+import speechBubble from "../images/speechBubble.png";
+
+
+const StyledButton = styled(Button)`
+  background-color: #DA0063;
+  box-shadow: none;
+
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: #DA0063;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+`;
+const Span = styled.span`
+  color: #196052;
+  font: Lato;
+  font-weight: bold;
+`;
+
+const Container = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Blurb = styled.div`
+  text-align: center;
+  margin: 10px;
+  padding: 25px;
+`;
+
 interface token {
   token: string;
   friendsPks: [];
@@ -152,11 +195,36 @@ const MealFriendSelection = ({
   console.log(friendPk);
   console.log(mealFriends.flat(1).map((friend: any) => friend.value));
   console.log(friendsPks);
+
   return (
+    <Container>
+      <Span>
     <div className="mealFriendSelect">
       <h2>Welcome User</h2>
-      <div>
-        Put that microwave dinner down, find some friends to eat with here:
+      <Blurb style={{
+        color: "black"
+      }}>
+        Put that microwave dinner down & find some friends to eat with here:
+      </Blurb>
+      <div style={{
+            width: 200,
+            
+          }}>
+        <img
+          src={speechBubble}
+          alt="speech bubble"
+          style={{
+            width: 200,
+            
+          }}
+        />
+        <img
+          src={hungryPanda}
+          alt="panda pic"
+          style={{
+            width: 150,
+          }}
+        />
       </div>
       <div className="searchFriends">
         <form onSubmit={handleSearch}>
@@ -165,7 +233,7 @@ const MealFriendSelection = ({
             placeholder="Search Friends"
             onChange={(e) => setFriendName(e.target.value)}
           ></input>
-          <button className="searchButton">Search</button>
+          <StyledButton className="searchButton">Search</StyledButton>
         </form>
 
         <div className="searchResults">
@@ -193,7 +261,7 @@ const MealFriendSelection = ({
           options={selectFriendsOptions}
           onChange={(selection) => setMealFriends([selection])}
         />
-        <button
+        <StyledButton
           onClick={() => {
             setFriendsPks(
               mealFriends.flat(1).map((friend: any) => friend.value)
@@ -205,10 +273,12 @@ const MealFriendSelection = ({
           }}
         >
           Add Friends to Meal
-        </button>
+        </StyledButton>
         <div className="error">{searchError}</div>
       </div>
     </div>
+    </Span>
+    </Container>
   );
 };
 
