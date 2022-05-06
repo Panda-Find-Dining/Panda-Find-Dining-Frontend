@@ -42,10 +42,14 @@ interface token {
   mealPk: number;
   setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>;
   userPk: number;
+  setFriendsPks: React.Dispatch<any>;
+  setFriendsNames: React.Dispatch<any>;
 }
 const MealStart = ({
   token,
+  setFriendsPks,
   friendsPks,
+  setFriendsNames,
   friendsNames,
   mealPk,
   setMealPk,
@@ -84,6 +88,8 @@ const MealStart = ({
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
           setMealPk(theMealPk);
+          setFriendsNames([]);
+          setFriendsPks([]);
         })
         .catch((e) => {
           setError(e.message);
@@ -114,7 +120,8 @@ const MealStart = ({
     navigate("/matched-pending");
   };
   console.log(mealPk);
-
+  console.log(friendsPks);
+  console.log(friendsNames);
   return (
     <div className="mealStartPage">
       <form onSubmit={handleCreateMeal}>

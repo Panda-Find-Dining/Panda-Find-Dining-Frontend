@@ -9,6 +9,8 @@ interface props {
   setUser: React.Dispatch<unknown>;
   isLoggedIn: unknown;
   setUserPk: React.Dispatch<unknown>;
+  setFriendsNames: React.Dispatch<any>;
+  setFriendsPks: React.Dispatch<any>;
 }
 
 const MenuHeader = ({
@@ -17,6 +19,8 @@ const MenuHeader = ({
   setUser,
   isLoggedIn,
   setUserPk,
+  setFriendsNames,
+  setFriendsPks,
 }: props) => {
   const [error, setError] = useState("");
   const setLogout = () => {
@@ -41,6 +45,8 @@ const MenuHeader = ({
     setUser("");
     setToken("");
     setUserPk("");
+    setFriendsNames([]);
+    setFriendsPks([]);
   };
 
   return (
