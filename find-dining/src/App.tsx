@@ -50,8 +50,7 @@ const App = () => {
                       setToken={setToken}
                       setUserPk={setUserPk}
                     />
-                    <h2>Don't have an account? </h2>
-                    <Link to="/register">Sign up Here</Link>
+                    
                     <MenuHeader
                       isLoggedIn={isLoggedIn}
                       token={token}

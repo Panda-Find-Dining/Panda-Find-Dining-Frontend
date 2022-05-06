@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 import FindDiningLogo from "../images/FindDiningLogo.png";
 
 const StyledButton = styled(Button)`
-  background-color: #196052;
+  background-color: #da0063;
   box-shadow: none;
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #196052;
+    background-color: #da0063;
     outline: none;
   }
   &:focus {
@@ -71,7 +71,13 @@ const Login = ({ setToken, setUser, setUserPk }) => {
   console.log(error);
   return (
     <Container>
-      <img src={FindDiningLogo} alt="logo" />
+      <div className="text-center">
+      <img  
+              style={{
+                marginBottom: 10,
+                width: 225
+              }} src={FindDiningLogo} alt="logo" />
+              </div>
       <Span>
         <Form>
           <Form.Group>
@@ -85,14 +91,14 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             <Form.Label>{error}</Form.Label>
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
               }}
             >
               Username
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -105,14 +111,15 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
+                marginTop: 20,
               }}
             >
               Password
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
               }}
               required
               className="input"
@@ -120,9 +127,12 @@ const Login = ({ setToken, setUser, setUserPk }) => {
               placeholder="password"
               value={password}
               name="password"
+              aria-describedby="passwordHelpBlock"
               onChange={(event) => handleChange(event)}
             />
-            <Form.Text>Forgot Password?</Form.Text>
+            <Form.Text style={{
+                marginTop: 20
+              }}>Forgot Password?</Form.Text>
             <div className="text-center">
               <div>
                 <StyledButton
@@ -140,8 +150,8 @@ const Login = ({ setToken, setUser, setUserPk }) => {
                   onClick={() => navigate("/login")}
                   style={{
                     marginTop: 5,
-                    backgroundColor: "#da0063",
                     width: 150,
+                    backgroundColor: "black"
                   }}
                 >
                   Register

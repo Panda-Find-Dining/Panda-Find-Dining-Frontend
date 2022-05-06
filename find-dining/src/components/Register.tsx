@@ -10,12 +10,12 @@ import FindDiningLogo from "../images/FindDiningLogo.png";
 import { Form } from "react-bootstrap";
 
 const StyledButton = styled(Button)`
-  background-color: #196052;
+  background-color: #da0063;
   box-shadow: none;
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #196052;
+    background-color: #da0063;
     outline: none;
   }
   &:focus {
