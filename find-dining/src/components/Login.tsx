@@ -5,15 +5,15 @@ import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import FindDiningLogo from "../images/FindDiningLogo.png";
+import FDLogo from "../images/FDLogo.png";
 
 const StyledButton = styled(Button)`
-  background-color: #196052;
+  background-color: #da0063;
   box-shadow: none;
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #196052;
+    background-color: #da0063;
     outline: none;
   }
   &:focus {
@@ -71,7 +71,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
   console.log(error);
   return (
     <Container>
-      <img src={FindDiningLogo} alt="logo" />
+      <img src={FDLogo} alt="logo" />
       <Span>
         <Form>
           <Form.Group>
@@ -106,6 +106,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             <Form.Label
               style={{
                 color: "black",
+                marginTop: 20
               }}
             >
               Password
@@ -140,7 +141,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
                   onClick={() => navigate("/register")}
                   style={{
                     marginTop: 5,
-                    backgroundColor: "#da0063",
+                    backgroundColor: "black",
                     width: 150,
                   }}
                 >

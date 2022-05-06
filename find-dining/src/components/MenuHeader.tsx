@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 interface props {
   token: string;
   setToken: React.Dispatch<unknown>;
@@ -53,10 +54,10 @@ const MenuHeader = ({
     <div className="menuHeader">
       <img
         style={{
-          width: "12%",
+          width: "15%",
         }}
         className="siteLogo"
-        src={require("../images/TinyPandaLogo.png")}
+        src={require("../images/FDMenuLogo.png")}
         alt="This a placeholder"
       ></img>
       <div className="navLinks">
