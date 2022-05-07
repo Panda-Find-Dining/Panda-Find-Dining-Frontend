@@ -94,11 +94,14 @@ const Register = ({ setToken, setUser, setUserPk }) => {
   };
   return (
     <Container>
-      <img style={{
+      <img
+        style={{
           marginBottom: 10,
-        }}src={FDLogo} alt="logo" />
+        }}
+        src={FDLogo}
+        alt="logo"
+      />
       <Span>
-      
         <Form>
           <Form.Group>
             <Form.Label

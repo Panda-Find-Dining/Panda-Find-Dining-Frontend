@@ -52,6 +52,7 @@ interface token {
   mealPk: number;
   setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>;
   userPk: number;
+  user: string;
 }
 
 const MealCreation = ({
@@ -63,6 +64,7 @@ const MealCreation = ({
   mealPk,
   setMealPk,
   userPk,
+  user,
 }: token) => {
   const [results, setResults] = useState<any>([]);
   const [selectFriendsOptions, setSelectFriendsOptions] = useState<any>([]);
@@ -278,6 +280,7 @@ const MealCreation = ({
   console.log(searched);
   console.log(results);
   console.log(friendName);
+
   return (
     <Container>
       <Span>
@@ -306,8 +309,8 @@ const MealCreation = ({
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  Put that microwave dinner down & find some friends to eat with
-                  here...
+                  Hey {user}, put that microwave dinner down & find some friends
+                  to eat with here...
                 </div>
               </Blurb>
               <div
@@ -460,7 +463,11 @@ const MealCreation = ({
                 >
                   <i>
                     Your meal with{" "}
-                    {currentMealFriendsNames.map((i) => i + ", ")}
+                    {currentMealFriendsNames.length === 1
+                      ? currentMealFriendsNames.map((i) => i)
+                      : currentMealFriendsNames.map((item, i, arr) =>
+                          i !== arr.length - 1 ? item + ", " : "and " + item
+                        )}
                   </i>
                 </h2>
                 <div className="search">

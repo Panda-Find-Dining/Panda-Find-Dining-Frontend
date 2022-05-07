@@ -42,6 +42,7 @@ const App = () => {
                       mealPk={mealPk}
                       setMealPk={setMealPk}
                       userPk={userPk}
+                      user={user}
                     />
                     <MenuHeader
                       isLoggedIn={isLoggedIn}
