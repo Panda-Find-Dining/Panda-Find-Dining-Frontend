@@ -1,5 +1,5 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist";
