@@ -9,8 +9,6 @@ import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble2 from "../images/speechBubble2.png";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import { FormControl } from "react-bootstrap";
 
 const StyledButton = styled(Button)`
   background-color: #da0063;
