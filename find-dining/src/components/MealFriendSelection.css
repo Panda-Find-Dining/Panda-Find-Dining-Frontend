@@ -1,33 +1,72 @@
+/* * { */
+  /* box-sizing: border-box; */
+/* } */
+
+/* /~ Container needed to position the overlay. Adjust the width as needed ~/ */
+/* .container { */
+  /* position: relative; */
+  /* width: 50%; */
+  /* max-width: 300px; */
+/* } */
+
+/* /~ Make the image to responsive ~/ */
+/* .image { */
+  /* display: block; */
+  /* width: 100%; */
+  /* height: auto; */
+/* } */
+
+/* /~ The overlay effect - lays on top of the container and over the image ~/ */
+/* .overlay { */
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* background: rgb(0, 0, 0); */
+  /* background: rgba(0, 0, 0, 0.5); /~ Black see-through ~/ */
+  /* color: #f1f1f1; */
+  /* width: 100%; */
+  /* transition: 0.5s ease; */
+  /* opacity: 0; */
+  /* color: white; */
+  /* font-size: 20px; */
+  /* padding: 20px; */
+  /* text-align: center; */
+/* } */
+
+/* When you mouse over the container, fade in the overlay title */
+/* .container:hover .overlay { */
+  /* opacity: 1; */
+/* } */
+
 /* .mealFriendSelect{ */
-    /* display: grid; */
-    /* grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 100px [row-start] 50px; */
+/* display: grid; */
+/* grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 100px [row-start] 50px; */
 /* gap: 30px; */
 /* } */
 /* .select{ */
-    /* margin-bottom:10px; */
+/* margin-bottom:10px; */
 /* } */
 /* .activeMeals{ */
-    /* padding: 5px; */
-    /* display: flex; */
-    /* justify-content: space-between center; */
-    /* border: solid 1px; */
-    /* height: 60px; */
-    /* align-content: center; */
-    /* margin-bottom: 10px; */
-    /* gap: 50px; */
+/* padding: 5px; */
+/* display: flex; */
+/* justify-content: space-between center; */
+/* border: solid 1px; */
+/* height: 60px; */
+/* align-content: center; */
+/* margin-bottom: 10px; */
+/* gap: 50px; */
 /* } */
 /* .searchButton{ */
-    /* margin-bottom: 10px; */
+/* margin-bottom: 10px; */
 /* } */
 /* .matchButton{ */
-    /* margin-top: 10px; */
-    /* height:40px; */
+/* margin-top: 10px; */
+/* height:40px; */
 /* } */
-.searchResults{
-    display:flex;
-    gap:20px;
-}
+/* .searchResults{ */
+/* display:flex; */
+/* gap:20px; */
+/* } */
 /* .restaurantLocation{ */
-    /* padding-left: 5px; */
-    /* padding-right: 5px; */
+/* padding-left: 5px; */
+/* padding-right: 5px; */
 /* } */

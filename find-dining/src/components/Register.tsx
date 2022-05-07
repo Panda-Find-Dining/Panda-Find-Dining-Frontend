@@ -1,5 +1,5 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist";
@@ -95,22 +95,16 @@ const Register = ({ setToken, setUser }) => {
 
   return (
     <Container>
-      <img src={FDLogo} alt="logo" />
+      <img style={{
+          marginBottom: 10,
+        }}src={FDLogo} alt="logo" />
       <Span>
+      
         <Form>
           <Form.Group>
-            <div>
-              <h1
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                Register
-              </h1>
-            </div>
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
               }}
             >
@@ -118,7 +112,7 @@ const Register = ({ setToken, setUser }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -131,7 +125,7 @@ const Register = ({ setToken, setUser }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -140,7 +134,7 @@ const Register = ({ setToken, setUser }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               className="input"
@@ -152,7 +146,7 @@ const Register = ({ setToken, setUser }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -161,7 +155,7 @@ const Register = ({ setToken, setUser }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -174,8 +168,8 @@ const Register = ({ setToken, setUser }) => {
             />
             <Form.Label
               style={{
-                color: "black",
-                marginBottom: 2,
+                color: "#da0063",
+                marginBottom: 1,
                 marginTop: 10,
               }}
             >
@@ -183,7 +177,7 @@ const Register = ({ setToken, setUser }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required

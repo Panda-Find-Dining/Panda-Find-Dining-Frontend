@@ -71,21 +71,20 @@ const Login = ({ setToken, setUser, setUserPk }) => {
   console.log(error);
   return (
     <Container>
-      <img src={FDLogo} alt="logo" />
+      <img
+        style={{
+          marginBottom: 10,
+        }}
+        src={FDLogo}
+        alt="logo"
+      />
       <Span>
         <Form>
           <Form.Group>
-            <h1
-              style={{
-                marginBottom: 10,
-              }}
-            >
-              Login
-            </h1>
             <Form.Label>{error}</Form.Label>
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
               }}
             >
@@ -93,7 +92,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -106,7 +105,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginTop: 20,
                 marginBottom: 2,
               }}
@@ -115,7 +114,7 @@ const Login = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
               }}
               required
               className="input"
