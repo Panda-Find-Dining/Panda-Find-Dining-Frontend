@@ -84,7 +84,6 @@ const MealCreation = ({
   const navigate = useNavigate();
   function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
     let theMealPk = 0;
-    e.preventDefault();
     setError("");
 
     const options = {
@@ -128,13 +127,11 @@ const MealCreation = ({
         .request(googleOptions)
         .then(function (response) {
           console.log(response.data);
+          navigate("/select");
         })
         .catch(function (error) {
           console.error(error);
         });
-      setTimeout(() => {
-        navigate("/select");
-      }, 100);
     };
     multiplePromises();
   }
@@ -284,321 +281,170 @@ const MealCreation = ({
   return (
     <Container>
       <Span>
-
-        <div className="mealFriendSelect">
-          <h2>Welcome User</h2>
-          <Blurb
-            style={{
-              color: "black",
-            }}
-          >
-            Put that microwave dinner down & find some friends to eat with here:
-          </Blurb>
-          <div
-            style={{
-              width: 200,
-            }}
-          >
-            <img
-              src={speechBubble}
-              alt="speech bubble"
-              style={{
-                width: 200,
-              }}
-            />
-            <img
-              src={hungryPanda}
-              alt="panda pic"
-              style={{
-                width: 150,
-              }}
-            />
-          </div>
-
-          <div className="searchFriends">
-            <input
-              type="input"
-              placeholder="Search Friends"
-              onChange={(e) => setFriendName(e.target.value)}
-              required
-            ></input>
-            <StyledButton
-              className="searchButton"
-              onClick={() => handleSearch()}
-            >
-              Search
-            </StyledButton>
-
-            <div className="searchResults">
-              {results.length === 0 && searched === false ? (
-                <></>
-              ) : results.length === 0 && searched === true ? (
-                <div>Sorry they haven't Joined Yet!</div>
-              ) : (
-                results.map((user: any, index: any) => (
-                  <div className="searchList">
-                    <div>{user.username}</div>
-                    <button
-                      onClick={async () => {
-                        setFriendPk(user.id);
-                        addFriend(user.id);
-                      }}
-                    >
-                      +
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-            <div className="error">{addFriendError}</div>
-            <div className="success">{addFriendSuccess}</div>
-          </div>
-
-          <div className="selectFriend">
-            <div>
-              <Select
-                isMulti
-                className="select"
-                options={selectFriendsOptions}
-                onChange={(selection) => {
-                  setMealFriends([selection]);
-                }}
-              />
-            </div>
-            <StyledButton
-              onClick={() => {
-                setFriendsPks(
-                  mealFriends.flat(1).map((friend: any) => friend.value)
-                );
-                setFriendsNames(
-                  mealFriends.flat(1).map((friend: any) => friend.label)
-                );
-                setCurrentMealFriendsNames(
-                  mealFriends.flat(1).map((friend: any) => friend.label)
-                );
-                setShowLocationRadius(true);
-              }}
-            >
-              Add Friends to Meal
-            </StyledButton>
-            <div className="error">{searchError}</div>
-          </div>
-        </div>
-      </Span>
-      {showLocationRadius === true ? (
-        <div className="mealStartPage">
-          <form onSubmit={handleCreateMeal}>
-            <h2 className="mealWith">
-              Your Dinner with {currentMealFriendsNames.map((i) => i + ", ")}
-            </h2>
-            <div className="search">
-              <h3>Search Location</h3>
-              <input
-                type="input"
-                onChange={(e) => setLocation(e.target.value)}
-                className="searchInput"
-                placeholder="Enter your City"
-              ></input>
-            </div>
-            <div className="radius">
-              <h3>Set Radius </h3>
-              <Select
-                className="select"
-                options={selectRadiusOptions}
-                onChange={(selection) => setRadius(selection.value)}
-                placeholder={"Select a Radius"}
-              />
-            </div>
-            <div className="mealButtons">
-              <div className="error">{error}</div>
-              <div className="success">{success}</div>
-              <button
-                className="chowDown"
-                onClick={() => setShowLocationRadius(false)}
-              >
-                Chow Down!
-              </button>
-            </div>
-          </form>
-          <button
-            className="noThanks"
-            onClick={() => {
-              setRadius("");
-              setLocation("");
-              setFriendsNames([]);
-              setFriendsPks([]);
-              window.location.reload(false);
-              setShowLocationRadius(false);
-            }}
-          >
-            No Thanks
-          </button>
-        </div>
-      ) : (
-        <></>
-      )}
         <Form>
-          <form id="create-meal-form">
-            <div className="mealFriendSelect">
-              {/* <h2>Welcome User</h2> */}
-              <div
-                className="container"
+          <div className="mealFriendSelect">
+            {/* <h2>Welcome User</h2> */}
+            <div
+              className="container"
+              style={{
+                position: "relative",
+                textAlign: "center",
+                color: "white",
+              }}
+            >
+              <Blurb
                 style={{
-                  position: "relative",
-                  textAlign: "center",
-                  color: "white",
+                  color: "black",
                 }}
               >
-                <Blurb
+                <div
+                  className="centered"
                   style={{
-                    color: "black",
+                    position: "absolute",
+                    top: "57%",
+                    left: "38%",
+                    transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <div
-                    className="centered"
-                    style={{
-                      position: "absolute",
-                      top: "57%",
-                      left: "38%",
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  >
-                    Put that microwave dinner down & find some friends to eat
-                    with here...
-                  </div>
-                </Blurb>
-                <div
-                  className="text-center"
+                  Put that microwave dinner down & find some friends to eat with
+                  here...
+                </div>
+              </Blurb>
+              <div
+                className="text-center"
+                style={{
+                  width: 200,
+                }}
+              >
+                <img
+                  src={speechBubble2}
+                  alt="speech bubble"
                   style={{
                     width: 200,
                   }}
-                >
-                  <img
-                    src={speechBubble2}
-                    alt="speech bubble"
-                    style={{
-                      width: 200,
-                    }}
-                  />
-                </div>
-                <div className="right">
-                  <img
-                    align="right"
-                    src={hungryPanda}
-                    alt="panda pic"
-                    style={{
-                      width: 150,
-                      textAlign: "right",
-                    }}
-                  />
-                </div>
+                />
               </div>
-
-              <div className="searchFriends">
-                <div className="mb-3">
-                  <Form.Label
-                    style={{
-                      color: "#da0063",
-                      marginBottom: 2,
-                      marginTop: 30,
-                    }}
-                  >
-                    Search for friend to invite to a meal:
-                  </Form.Label>
-                  <Form.Control 
-                    type="input"
-                    placeholder="search by username"
-                    onChange={(e) => setFriendName(e.target.value)}
-                  />
-                  <StyledButton
-                    style={{
-                      width: "30",
-                      marginTop: 10,
-                    }}
-                    bg="outline-secondary"
-                    className="searchButton"
-                    onClick={() => handleSearch()}
-                  >
-                    Search
-                  </StyledButton>
-                </div>
-                <div className="searchResults">
-                  {results ? (
-                    results.map((user: any, index: any) => (
-                      <div className="searchList">
-                        <div
-                          style={{
-                            color: "black",
-                          }}
-                        >
-                          {user.username}
-                        </div>
-                        <StyledButton
-                          style={{
-                            backgroundColor: "black",
-                          }}
-                          onClick={async () => {
-                            setFriendPk(user.id);
-                            addFriend(user.id);
-                          }}
-                        >
-                          +
-                        </StyledButton>
-                      </div>
-                    ))
-                  ) : (
-                    <div>Sorry they haven't Joined Yet!</div>
-                  )}
-                </div>
-                <div className="error">{addFriendError}</div>
-                <div className="success">{addFriendSuccess}</div>
-              </div>
-              <Form.Label
-                style={{
-                  color: "#da0063",
-                  marginBottom: 2,
-                  marginTop: 10,
-                }}
-              >
-                Select friend(s) from dropdown:
-              </Form.Label>
-              <div className="selectFriend">
-                <div>
-                  <Select 
-                    isMulti
-                    className="select"
-                    options={selectFriendsOptions}
-                    onChange={(selection) => {
-                      setMealFriends([selection]);
-                    }}
-                  />
-                </div>
-                <StyledButton
-                  onClick={() => {
-                    setFriendsPks(
-                      mealFriends.flat(1).map((friend: any) => friend.value)
-                    );
-                    setFriendsNames(
-                      mealFriends.flat(1).map((friend: any) => friend.label)
-                    );
-                    setCurrentMealFriendsNames(
-                      mealFriends.flat(1).map((friend: any) => friend.label)
-                    );
+              <div className="right">
+                <img
+                  align="right"
+                  src={hungryPanda}
+                  alt="panda pic"
+                  style={{
+                    width: 150,
+                    textAlign: "right",
                   }}
-                >
-                  Add to Meal
-                </StyledButton>
-                <div className="error">{searchError}</div>
+                />
               </div>
             </div>
 
-            <div
+            <div className="searchFriends">
+              <div className="mb-3">
+                <Form.Label
+                  style={{
+                    color: "#da0063",
+                    marginBottom: 2,
+                    marginTop: 30,
+                  }}
+                >
+                  Search for friend to invite to a meal:
+                </Form.Label>
+                <Form.Control
+                  type="input"
+                  placeholder="search by username"
+                  onChange={(e) => setFriendName(e.target.value)}
+                />
+                <StyledButton
+                  style={{
+                    width: "30",
+                    marginTop: 10,
+                  }}
+                  bg="outline-secondary"
+                  className="searchButton"
+                  onClick={() => handleSearch()}
+                >
+                  Search
+                </StyledButton>
+              </div>
+              <div className="searchResults">
+                {results.length === 0 && searched === false ? (
+                  <></>
+                ) : results.length === 0 && searched === true ? (
+                  <div>Sorry they haven't Joined Yet!</div>
+                ) : (
+                  results.map((user: any, index: any) => (
+                    <div className="searchList">
+                      <div>{user.username}</div>
+                      <StyledButton
+                        style={{
+                          backgroundColor: "black",
+                        }}
+                        onClick={async () => {
+                          setFriendPk(user.id);
+                          addFriend(user.id);
+                        }}
+                      >
+                        +
+                      </StyledButton>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="error">{addFriendError}</div>
+              <div className="success">{addFriendSuccess}</div>
+            </div>
+            <Form.Label
               style={{
-                marginTop: 40,
+                color: "#da0063",
+                marginBottom: 2,
+                marginTop: 10,
               }}
-              className="mealStartPage"
             >
-              <form onSubmit={handleCreateMeal}>
+              Select friend(s) from dropdown:
+            </Form.Label>
+            <div className="selectFriend">
+              <div>
+                <Select
+                  isMulti
+                  className="select"
+                  options={selectFriendsOptions}
+                  onChange={(selection) => {
+                    setMealFriends([selection]);
+                  }}
+                />
+              </div>
+              <StyledButton
+                onClick={() => {
+                  setFriendsPks(
+                    mealFriends.flat(1).map((friend: any) => friend.value)
+                  );
+                  setFriendsNames(
+                    mealFriends.flat(1).map((friend: any) => friend.label)
+                  );
+                  setCurrentMealFriendsNames(
+                    mealFriends.flat(1).map((friend: any) => friend.label)
+                  );
+                  setShowLocationRadius(true);
+                }}
+              >
+                Add to Meal
+              </StyledButton>
+              <div className="error">{searchError}</div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              marginTop: 40,
+            }}
+            className="mealStartPage"
+          >
+            {showLocationRadius === true ? (
+              <div
+                style={{
+                  marginTop: 40,
+                }}
+                className="mealStartPage"
+              >
                 <hr
                   style={{
                     borderTop: "4px solid #bbb",
@@ -617,7 +463,6 @@ const MealCreation = ({
                     {currentMealFriendsNames.map((i) => i + ", ")}
                   </i>
                 </h2>
-
                 <div className="search">
                   <Form.Label
                     style={{
@@ -628,32 +473,31 @@ const MealCreation = ({
                   >
                     Search Location
                   </Form.Label>
-                  <input style={{
-                    borderColor: "none"
-                  }}  
+                  <input
+                    style={{
+                      borderColor: "none",
+                    }}
                     type="input"
                     onChange={(e) => setLocation(e.target.value)}
                     className="searchInput"
                     placeholder="enter your city"
                   ></input>
                 </div>
-                <div className="radius">
-                  <Form.Label
-                    style={{
-                      color: "#da0063",
-                      marginBottom: 2,
-                      marginTop: 10,
-                    }}
-                  >
-                    Set Radius{" "}
-                  </Form.Label>
-                  <Select
-                    className="select"
-                    options={selectRadiusOptions}
-                    onChange={(selection) => setRadius(selection.value)}
-                    placeholder={"select radius"}
-                  />
-                </div>
+                <Form.Label
+                  style={{
+                    color: "#da0063",
+                    marginBottom: 2,
+                    marginTop: 10,
+                  }}
+                >
+                  Set Radius{" "}
+                </Form.Label>
+                <Select
+                  className="select"
+                  options={selectRadiusOptions}
+                  onChange={(selection) => setRadius(selection.value)}
+                  placeholder={"select radius"}
+                />
                 <div className="mealButtons text-center">
                   <div className="error">{error}</div>
                   <div className="success">{success}</div>
@@ -662,33 +506,44 @@ const MealCreation = ({
                       marginTop: 50,
                       width: 150,
                     }}
+                    onClick={() => {
+                      setShowLocationRadius(false);
+                      handleCreateMeal();
+                    }}
                     className="chowDown"
                   >
                     Chow Down!
                   </StyledButton>
                 </div>
-              </form>
-              <div className="text-center">
-                <StyledButton
-                  style={{
-                    marginTop: 5,
-                    width: 150,
-                    backgroundColor: "black",
-                  }}
-                  className="changedMind"
-                  onClick={() => {
-                    setRadius("");
-                    setLocation("");
-                    setFriendsNames([]);
-                    setFriendsPks([]);
-                    window.location.reload(false);
-                  }}
-                >
-                  Reset{" "}
-                </StyledButton>
+                <div className="mealButtons">
+                  <div className="error">{error}</div>
+                  <div className="success">{success}</div>
+                </div>
+                <div className="text-center">
+                  <StyledButton
+                    style={{
+                      marginTop: 5,
+                      width: 150,
+                      backgroundColor: "black",
+                    }}
+                    className="changedMind"
+                    onClick={() => {
+                      setRadius("");
+                      setLocation("");
+                      setFriendsNames([]);
+                      setFriendsPks([]);
+                      window.location.reload(false);
+                      setShowLocationRadius(false);
+                    }}
+                  >
+                    Reset{" "}
+                  </StyledButton>
+                </div>
               </div>
-            </div>
-          </form>
+            ) : (
+              <></>
+            )}
+          </div>
         </Form>
       </Span>
     </Container>
