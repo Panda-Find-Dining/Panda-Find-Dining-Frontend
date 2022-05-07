@@ -14,14 +14,26 @@ gap: 30px;
 .select{
     margin-bottom:10px;
 }
+/* .emptyStateContainer { */
+    /* position: relative; */
+/* } */
+.pendingEmpty{
+    position: absolute;
+    margin-top: 120px;
+    z-index: 2;
+}
 .pendingMeals{
     padding: 5px;
+    z-index: 1;
     display: flex;
     justify-content: space-around;
     border: solid 1px;
     height: 80px;
     align-content: center;
+    background-color: #fff solid;
+     
 }
+
 .pendingMealsH2{
     display: flex;
     height: 40px;
@@ -66,6 +78,7 @@ gap: 30px;
     width:80px;
     margin-left: 140px;
 }
+
 /* .mealFriendSelect{ */
     /* display: grid; */
     /* grid-template-rows:[row-start] 80px [row-start] 50px [row-start] 160px [row-start] 100px [row-start] 50px; */
