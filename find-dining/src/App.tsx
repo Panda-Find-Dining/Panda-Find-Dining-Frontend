@@ -90,7 +90,11 @@ const App = () => {
             path="register"
             element={
               <div className="mainPage">
-                <Register setToken={setToken} setUser={setUser} />
+                <Register
+                  setToken={setToken}
+                  setUser={setUser}
+                  setUserPk={setUserPk}
+                />
                 <MenuHeader
                   isLoggedIn={isLoggedIn}
                   token={token}

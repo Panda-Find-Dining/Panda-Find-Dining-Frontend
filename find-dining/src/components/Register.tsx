@@ -1,13 +1,15 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
-import PasswordChecklist from "react-password-checklist";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import FDLogo from "../images/FDLogo.png";
 import { Form } from "react-bootstrap";
+import PasswordCheckList from "./PasswordCheckList";
+import SuccessIcon from "./SuccessIcon";
+import ErrorIcon from "./ErrorIcon";
 
 const StyledButton = styled(Button)`
   background-color: #196052;
@@ -35,7 +37,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Register = ({ setToken, setUser }) => {
+const Register = ({ setToken, setUser, setUserPk }) => {
   // const location = useLocation()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -75,16 +77,14 @@ const Register = ({ setToken, setUser }) => {
         })
         .then((response) => {
           axios
-            .post(
-              "https://find-dining-panda.herokuapp.com/api/auth/token/login/",
-              {
-                username: username,
-                password: password,
-              }
-            )
+            .post("https://find-dining-panda.herokuapp.com/api/tokenpk/", {
+              username: username,
+              password: password,
+            })
             .then((response) => {
-              setToken(response.data.auth_token);
+              setToken(response.data.token);
               setUser(username);
+              setUserPk(response.data.user_id);
               setSuccess("Registration Complete!");
               navigate("/");
             });
@@ -92,7 +92,6 @@ const Register = ({ setToken, setUser }) => {
         .catch((e) => setError("Login Unsuccessful please Try Again!"));
     }
   };
-
   return (
     <Container>
       <img src={FDLogo} alt="logo" />
@@ -195,20 +194,21 @@ const Register = ({ setToken, setUser }) => {
               onChange={(event) => handleChange(event)}
             />
           </Form.Group>
-          <PasswordChecklist
-            rules={["match"]}
-            minLength={5}
-            value={password}
-            valueAgain={confirmPassword}
-            onChange={(isValid) => {}}
-            messages={
-              password === ""
-                ? { match: " " }
-                : password === confirmPassword
-                ? { match: "Passwords Match!" }
-                : { match: "Passwords Don't Match!" }
-            }
+          <PasswordCheckList
+            password={password}
+            passwordConfirm={confirmPassword}
+            icons={{
+              success: SuccessIcon,
+              error: ErrorIcon,
+            }}
+            options={{
+              match: {
+                nomatch: "Passwords Don't Match!",
+                gotmatch: "Passwords Match!",
+              },
+            }}
           />
+
           <div className="text-center">
             <StyledButton
               style={{
