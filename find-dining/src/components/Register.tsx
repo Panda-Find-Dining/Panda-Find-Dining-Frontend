@@ -1,5 +1,5 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 // import { useLocation } from "react-router-dom";
 import PasswordChecklist from "react-password-checklist";
@@ -92,6 +92,7 @@ const Register = ({ setToken, setUser }) => {
         .catch((e) => setError("Login Unsuccessful please Try Again!"));
     }
   };
+
   return (
     <Container>
       <img src={FDLogo} alt="logo" />
@@ -99,9 +100,13 @@ const Register = ({ setToken, setUser }) => {
         <Form>
           <Form.Group>
             <div>
-              <h1 style={{
-                marginBottom: 10,
-              }}>Register</h1>
+              <h1
+                style={{
+                  marginBottom: 10,
+                }}
+              >
+                Register
+              </h1>
             </div>
             <Form.Label
               style={{
@@ -129,7 +134,6 @@ const Register = ({ setToken, setUser }) => {
                 color: "black",
                 marginBottom: 2,
                 marginTop: 10,
-                
               }}
             >
               Email
@@ -197,13 +201,20 @@ const Register = ({ setToken, setUser }) => {
             value={password}
             valueAgain={confirmPassword}
             onChange={(isValid) => {}}
+            messages={
+              password === ""
+                ? { match: " " }
+                : password === confirmPassword
+                ? { match: "Passwords Match!" }
+                : { match: "Passwords Don't Match!" }
+            }
           />
           <div className="text-center">
             <StyledButton
               style={{
                 marginTop: 50,
                 width: 150,
-                backgroundColor: "black"
+                backgroundColor: "black",
               }}
               onClick={handleRegister}
             >

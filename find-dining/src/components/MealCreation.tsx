@@ -136,9 +136,9 @@ const MealCreation = ({
     };
     multiplePromises();
   }
-  const goMatchPend = () => {
-    navigate("/meals");
-  };
+  //   const goMatchPend = () => {
+  //     navigate("/meals");
+  //   };
   const selectRadiusOptions = [
     { value: 10, label: "10" },
     { value: 20, label: "20" },
@@ -152,7 +152,6 @@ const MealCreation = ({
   console.log(radius);
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     setResults([]);
-    e.preventDefault();
     const options = {
       method: "GET",
       url: `https://find-dining-panda.herokuapp.com/api/search?q=${friendName}`,
@@ -278,129 +277,148 @@ const MealCreation = ({
   console.log(friendsPks);
 
   return (
-    <Container>
-      <Span>
-        <div className="mealFriendSelect">
-          <h2>Welcome User</h2>
-          <Blurb
-            style={{
-              color: "black",
-            }}
-          >
-            Put that microwave dinner down & find some friends to eat with here:
-          </Blurb>
-          <div
-            style={{
-              width: 200,
-            }}
-          >
-            <img
-              src={speechBubble}
-              alt="speech bubble"
+    <form id="create-meal-form">
+      <Container>
+        <Span>
+          <div className="mealFriendSelect">
+            <h2>Welcome User</h2>
+            <Blurb
+              style={{
+                color: "black",
+              }}
+            >
+              Put that microwave dinner down & find some friends to eat with
+              here:
+            </Blurb>
+            <div
               style={{
                 width: 200,
               }}
-            />
-            <img
-              src={hungryPanda}
-              alt="panda pic"
-              style={{
-                width: 150,
-              }}
-            />
-          </div>
-          <div className="searchFriends">
-            <form onSubmit={handleSearch}>
+            >
+              <img
+                src={speechBubble}
+                alt="speech bubble"
+                style={{
+                  width: 200,
+                }}
+              />
+              <img
+                src={hungryPanda}
+                alt="panda pic"
+                style={{
+                  width: 150,
+                }}
+              />
+            </div>
+            <div className="searchFriends">
               <input
                 type="input"
                 placeholder="Search Friends"
                 onChange={(e) => setFriendName(e.target.value)}
               ></input>
-              <StyledButton className="searchButton">Search</StyledButton>
-            </form>
+              <StyledButton
+                className="searchButton"
+                onClick={() => handleSearch()}
+              >
+                Search
+              </StyledButton>
 
-            <div className="searchResults">
-              {results.map((user: any, index: any) => (
-                <div className="searchList">
-                  <div>{user.username}</div>
-                  <button
-                    onClick={async () => {
-                      setFriendPk(user.id);
-                      addFriend(user.id);
-                    }}
-                  >
-                    +
-                  </button>
-                </div>
-              ))}
+              <div className="searchResults">
+                {results ? (
+                  results.map((user: any, index: any) => (
+                    <div className="searchList">
+                      <div>{user.username}</div>
+                      <button
+                        onClick={async () => {
+                          setFriendPk(user.id);
+                          addFriend(user.id);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <div>Sorry they haven't Joined Yet!</div>
+                )}
+              </div>
+              <div className="error">{addFriendError}</div>
+              <div className="success">{addFriendSuccess}</div>
             </div>
-            <div className="error">{addFriendError}</div>
-            <div className="success">{addFriendSuccess}</div>
-          </div>
-          <div className="selectFriend">
-            <div>
-              <Select
-                isMulti
-                className="select"
-                options={selectFriendsOptions}
-                onChange={(selection) => {
-                  setMealFriends([selection]);
+            <div className="selectFriend">
+              <div>
+                <Select
+                  isMulti
+                  className="select"
+                  options={selectFriendsOptions}
+                  onChange={(selection) => {
+                    setMealFriends([selection]);
+                  }}
+                />
+              </div>
+              <StyledButton
+                onClick={() => {
+                  setFriendsPks(
+                    mealFriends.flat(1).map((friend: any) => friend.value)
+                  );
+                  setFriendsNames(
+                    mealFriends.flat(1).map((friend: any) => friend.label)
+                  );
+                  setCurrentMealFriendsNames(
+                    mealFriends.flat(1).map((friend: any) => friend.label)
+                  );
                 }}
+              >
+                Add Friends to Meal
+              </StyledButton>
+              <div className="error">{searchError}</div>
+            </div>
+          </div>
+        </Span>
+        <div className="mealStartPage">
+          <form onSubmit={handleCreateMeal}>
+            <h2 className="mealWith">
+              Your Dinner with {currentMealFriendsNames.map((i) => i + ", ")}
+            </h2>
+            <div className="search">
+              <h3>Search Location</h3>
+              <input
+                type="input"
+                onChange={(e) => setLocation(e.target.value)}
+                className="searchInput"
+                placeholder="Enter your City"
+              ></input>
+            </div>
+            <div className="radius">
+              <h3>Set Radius </h3>
+              <Select
+                className="select"
+                options={selectRadiusOptions}
+                onChange={(selection) => setRadius(selection.value)}
+                placeholder={"Select a Radius"}
               />
             </div>
-            <StyledButton
-              onClick={() => {
-                setFriendsPks(
-                  mealFriends.flat(1).map((friend: any) => friend.value)
-                );
-                setFriendsNames(
-                  mealFriends.flat(1).map((friend: any) => friend.label)
-                );
-                setCurrentMealFriendsNames(
-                  mealFriends.flat(1).map((friend: any) => friend.label)
-                );
-              }}
-            >
-              Add Friends to Meal
-            </StyledButton>
-            <div className="error">{searchError}</div>
-          </div>
+            <div className="mealButtons">
+              <div className="error">{error}</div>
+              <div className="success">{success}</div>
+              <button className="chowDown">Chow Down!</button>
+            </div>
+          </form>
+          <button
+            className="noThanks"
+            onClick={() => {
+              setRadius("");
+              setLocation("");
+              setFriendsNames([]);
+              setFriendsPks([]);
+              window.location.reload(false);
+            }}
+          >
+            No Thanks
+          </button>
         </div>
-      </Span>
-      <div className="mealStartPage">
-        <form onSubmit={handleCreateMeal}>
-          <h2 className="mealWith">
-            Your Dinner with {currentMealFriendsNames.map((i) => i + ", ")}
-          </h2>
-          <div className="search">
-            <h3>Search Location</h3>
-            <input
-              type="input"
-              onChange={(e) => setLocation(e.target.value)}
-              className="searchInput"
-              placeholder="Enter your City"
-            ></input>
-          </div>
-          <div className="radius">
-            <h3>Set Radius </h3>
-            <Select
-              className="select"
-              options={selectRadiusOptions}
-              onChange={(selection) => setRadius(selection.value)}
-              placeholder={"Select a Radius"}
-            />
-          </div>
-          <div className="mealButtons">
-            <div className="error">{error}</div>
-            <div className="success">{success}</div>
-            <button className="chowDown">Chow Down!</button>
-          </div>
-        </form>
-        <button className="noThanks" onClick={() => goMatchPend()}>
-          No Thanks
-        </button>
-      </div>
-    </Container>
+      </Container>
+    </form>
   );
 };
 

@@ -2,8 +2,7 @@
 import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 interface props {
   token: string;
@@ -50,7 +49,7 @@ const MenuHeader = ({
     setFriendsNames([]);
     setFriendsPks([]);
   };
-
+  const navigate = useNavigate();
   return (
     <div className="menuHeader">
       <img
@@ -60,6 +59,7 @@ const MenuHeader = ({
         className="siteLogo"
         src={require("../images/FDMenuLogo.png")}
         alt="This a placeholder"
+        onClick={() => navigate("/")}
       ></img>
       <div className="navLinks">
         <Link to="/meals">Meals</Link>
@@ -70,6 +70,7 @@ const MenuHeader = ({
         ) : (
           <Link to="/login">Login</Link>
         )}
+        <Link to="/">Home</Link>
       </div>
       <div className="logoutProfile">
         <div className="error">{error}</div>

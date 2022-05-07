@@ -23,10 +23,10 @@
     /* margin-top: 10px; */
     /* height:40px; */
 /* } */
-/* .searchResults{ */
-    /* display:flex; */
-    /* gap:20px; */
-/* } */
+.searchResults{
+    display:flex;
+    gap:20px;
+}
 /* .restaurantLocation{ */
     /* padding-left: 5px; */
     /* padding-right: 5px; */
