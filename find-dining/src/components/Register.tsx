@@ -94,22 +94,16 @@ const Register = ({ setToken, setUser, setUserPk }) => {
   };
   return (
     <Container>
-      <img src={FDLogo} alt="logo" />
+      <img style={{
+          marginBottom: 10,
+        }}src={FDLogo} alt="logo" />
       <Span>
+      
         <Form>
           <Form.Group>
-            <div>
-              <h1
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                Register
-              </h1>
-            </div>
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
               }}
             >
@@ -117,7 +111,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -130,7 +124,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -139,7 +133,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               className="input"
@@ -151,7 +145,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             />
             <Form.Label
               style={{
-                color: "black",
+                color: "#da0063",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -160,7 +154,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required
@@ -173,8 +167,8 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             />
             <Form.Label
               style={{
-                color: "black",
-                marginBottom: 2,
+                color: "#da0063",
+                marginBottom: 1,
                 marginTop: 10,
               }}
             >
@@ -182,7 +176,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
             </Form.Label>
             <Form.Control
               style={{
-                borderColor: "#da0063",
+                borderColor: "black",
                 marginBottom: "5px",
               }}
               required

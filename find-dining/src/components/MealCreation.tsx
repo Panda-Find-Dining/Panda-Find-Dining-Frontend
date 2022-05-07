@@ -1,6 +1,5 @@
 // @ts-nocheck (TODO KE: remove after typescript refactor)
 
-import "./MealFriendSelection.css";
 import Select from "react-select";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -8,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
-import speechBubble from "../images/speechBubble.png";
+import speechBubble2 from "../images/speechBubble2.png";
+import Form from "react-bootstrap/Form";
 
 const StyledButton = styled(Button)`
   background-color: #da0063;
@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
   }
 `;
 const Span = styled.span`
-  color: #196052;
+  color: #da0063;
   font: Lato;
   font-weight: bold;
 `;
@@ -284,6 +284,7 @@ const MealCreation = ({
   return (
     <Container>
       <Span>
+
         <div className="mealFriendSelect">
           <h2>Welcome User</h2>
           <Blurb
@@ -436,6 +437,260 @@ const MealCreation = ({
       ) : (
         <></>
       )}
+        <Form>
+          <form id="create-meal-form">
+            <div className="mealFriendSelect">
+              {/* <h2>Welcome User</h2> */}
+              <div
+                className="container"
+                style={{
+                  position: "relative",
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                <Blurb
+                  style={{
+                    color: "black",
+                  }}
+                >
+                  <div
+                    className="centered"
+                    style={{
+                      position: "absolute",
+                      top: "57%",
+                      left: "38%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  >
+                    Put that microwave dinner down & find some friends to eat
+                    with here...
+                  </div>
+                </Blurb>
+                <div
+                  className="text-center"
+                  style={{
+                    width: 200,
+                  }}
+                >
+                  <img
+                    src={speechBubble2}
+                    alt="speech bubble"
+                    style={{
+                      width: 200,
+                    }}
+                  />
+                </div>
+                <div className="right">
+                  <img
+                    align="right"
+                    src={hungryPanda}
+                    alt="panda pic"
+                    style={{
+                      width: 150,
+                      textAlign: "right",
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="searchFriends">
+                <div className="mb-3">
+                  <Form.Label
+                    style={{
+                      color: "#da0063",
+                      marginBottom: 2,
+                      marginTop: 30,
+                    }}
+                  >
+                    Search for friend to invite to a meal:
+                  </Form.Label>
+                  <Form.Control 
+                    type="input"
+                    placeholder="search by username"
+                    onChange={(e) => setFriendName(e.target.value)}
+                  />
+                  <StyledButton
+                    style={{
+                      width: "30",
+                      marginTop: 10,
+                    }}
+                    bg="outline-secondary"
+                    className="searchButton"
+                    onClick={() => handleSearch()}
+                  >
+                    Search
+                  </StyledButton>
+                </div>
+                <div className="searchResults">
+                  {results ? (
+                    results.map((user: any, index: any) => (
+                      <div className="searchList">
+                        <div
+                          style={{
+                            color: "black",
+                          }}
+                        >
+                          {user.username}
+                        </div>
+                        <StyledButton
+                          style={{
+                            backgroundColor: "black",
+                          }}
+                          onClick={async () => {
+                            setFriendPk(user.id);
+                            addFriend(user.id);
+                          }}
+                        >
+                          +
+                        </StyledButton>
+                      </div>
+                    ))
+                  ) : (
+                    <div>Sorry they haven't Joined Yet!</div>
+                  )}
+                </div>
+                <div className="error">{addFriendError}</div>
+                <div className="success">{addFriendSuccess}</div>
+              </div>
+              <Form.Label
+                style={{
+                  color: "#da0063",
+                  marginBottom: 2,
+                  marginTop: 10,
+                }}
+              >
+                Select friend(s) from dropdown:
+              </Form.Label>
+              <div className="selectFriend">
+                <div>
+                  <Select 
+                    isMulti
+                    className="select"
+                    options={selectFriendsOptions}
+                    onChange={(selection) => {
+                      setMealFriends([selection]);
+                    }}
+                  />
+                </div>
+                <StyledButton
+                  onClick={() => {
+                    setFriendsPks(
+                      mealFriends.flat(1).map((friend: any) => friend.value)
+                    );
+                    setFriendsNames(
+                      mealFriends.flat(1).map((friend: any) => friend.label)
+                    );
+                    setCurrentMealFriendsNames(
+                      mealFriends.flat(1).map((friend: any) => friend.label)
+                    );
+                  }}
+                >
+                  Add to Meal
+                </StyledButton>
+                <div className="error">{searchError}</div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: 40,
+              }}
+              className="mealStartPage"
+            >
+              <form onSubmit={handleCreateMeal}>
+                <hr
+                  style={{
+                    borderTop: "4px solid #bbb",
+                    borderRadius: "5px",
+                    color: "#da0063",
+                  }}
+                ></hr>
+                <h2
+                  style={{
+                    paddingTop: 10,
+                  }}
+                  className="mealWith"
+                >
+                  <i>
+                    Your meal with{" "}
+                    {currentMealFriendsNames.map((i) => i + ", ")}
+                  </i>
+                </h2>
+
+                <div className="search">
+                  <Form.Label
+                    style={{
+                      color: "#da0063",
+                      marginBottom: 2,
+                      marginTop: 10,
+                    }}
+                  >
+                    Search Location
+                  </Form.Label>
+                  <input style={{
+                    borderColor: "none"
+                  }}  
+                    type="input"
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="searchInput"
+                    placeholder="enter your city"
+                  ></input>
+                </div>
+                <div className="radius">
+                  <Form.Label
+                    style={{
+                      color: "#da0063",
+                      marginBottom: 2,
+                      marginTop: 10,
+                    }}
+                  >
+                    Set Radius{" "}
+                  </Form.Label>
+                  <Select
+                    className="select"
+                    options={selectRadiusOptions}
+                    onChange={(selection) => setRadius(selection.value)}
+                    placeholder={"select radius"}
+                  />
+                </div>
+                <div className="mealButtons text-center">
+                  <div className="error">{error}</div>
+                  <div className="success">{success}</div>
+                  <StyledButton
+                    style={{
+                      marginTop: 50,
+                      width: 150,
+                    }}
+                    className="chowDown"
+                  >
+                    Chow Down!
+                  </StyledButton>
+                </div>
+              </form>
+              <div className="text-center">
+                <StyledButton
+                  style={{
+                    marginTop: 5,
+                    width: 150,
+                    backgroundColor: "black",
+                  }}
+                  className="changedMind"
+                  onClick={() => {
+                    setRadius("");
+                    setLocation("");
+                    setFriendsNames([]);
+                    setFriendsPks([]);
+                    window.location.reload(false);
+                  }}
+                >
+                  Reset{" "}
+                </StyledButton>
+              </div>
+            </div>
+          </form>
+        </Form>
+      </Span>
     </Container>
   );
 };
