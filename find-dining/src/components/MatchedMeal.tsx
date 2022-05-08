@@ -29,6 +29,7 @@ const MatchedMeal = ({ token, mealPk }: token) => {
         console.error(error);
       });
   }, [token, mealPk]);
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
   return (
     <div>
       <h2>You've matched on a restaurant!</h2>
@@ -38,6 +39,10 @@ const MatchedMeal = ({ token, mealPk }: token) => {
       <div className="photo_reference">
         <img
           src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match.photo_reference}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`}
+          alt="pic"
+        />
+        <img
+          src={`https://maps.googleapis.com/maps/api/staticmap?center=${match.formatted_address}&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Clabel:M%7C${match.lat},${match.lon}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`}
           alt="pic"
         />
       </div>

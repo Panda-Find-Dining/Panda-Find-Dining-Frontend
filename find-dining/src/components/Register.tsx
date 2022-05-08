@@ -95,6 +95,8 @@ const Register = ({ setToken, setUser, setUserPk }) => {
         .catch((e) => setError("Login Unsuccessful please Try Again!"));
     }
   };
+  console.log(username);
+  console.log(password);
   return (
     <Container>
       <img
