@@ -41,6 +41,7 @@ const Register = ({ setToken, setUser, setUserPk }) => {
   // const location = useLocation()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("");
@@ -74,6 +75,8 @@ const Register = ({ setToken, setUser, setUserPk }) => {
         .post("https://find-dining-panda.herokuapp.com/api/auth/users/", {
           username: username,
           password: password,
+          re_password: confirmPassword,
+          email: email,
         })
         .then((response) => {
           axios
