@@ -1,4 +1,3 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
 import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
@@ -7,12 +6,12 @@ import Nav from 'react-bootstrap/Nav'
 
 interface props {
   token: string;
-  setToken: React.Dispatch<unknown>;
-  setUser: React.Dispatch<unknown>;
+  setToken: React.Dispatch<string>;
+  setUser: React.Dispatch<string>;
   isLoggedIn: unknown;
-  setUserPk: React.Dispatch<unknown>;
-  setFriendsNames: React.Dispatch<any>;
-  setFriendsPks: React.Dispatch<any>;
+  setUserPk: React.Dispatch<string>;
+  setFriendsNames: React.Dispatch<[]>;
+  setFriendsPks: React.Dispatch<[]>;
 }
 
 const MenuHeader = ({
