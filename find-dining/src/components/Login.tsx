@@ -1,4 +1,3 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -7,6 +6,11 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import FDLogo from "../images/FDLogo.png";
 
+interface loginProps {
+  setToken: React.Dispatch<string>;
+  setUser: React.Dispatch<string>;
+  setUserPk: React.Dispatch<string>;
+}
 const StyledButton = styled(Button)`
   background-color: #da0063;
   box-shadow: none;
@@ -33,8 +37,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const Login = ({ setToken, setUser, setUserPk }) => {
+const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -42,7 +45,9 @@ const Login = ({ setToken, setUser, setUserPk }) => {
   const [email, setEmail] = useState("");
   const [resetConfirm, setResetConfirm] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     event.preventDefault();
 
     if (event.target.name === "username") {

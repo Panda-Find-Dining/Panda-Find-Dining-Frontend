@@ -1,7 +1,5 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
 import { useState } from "react";
 import axios from "axios";
-// import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
@@ -36,9 +34,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+interface registerProps {
+  setToken: React.Dispatch<string>;
+  setUser: React.Dispatch<string>;
+  setUserPk: React.Dispatch<string>;
+}
 
-const Register = ({ setToken, setUser, setUserPk }) => {
-  // const location = useLocation()
+const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -47,7 +49,9 @@ const Register = ({ setToken, setUser, setUserPk }) => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const handleChange = (event) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     event.preventDefault();
 
     if (event.target.name === "username") {

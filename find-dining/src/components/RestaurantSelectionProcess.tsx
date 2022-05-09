@@ -1,5 +1,11 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  RefObject,
+  CSSProperties,
+} from "react";
 import RestaurantCard from "../Restaurant-selection-card";
 import "./RestaurantSelectionProcess.css";
 import { useNavigate } from "react-router-dom";
@@ -23,21 +29,36 @@ const db = [
     url: "./img/KE.jpg",
   },
 ];
+
 interface restaurantDB {
   name: string;
   url: string;
+  pk: string;
 }
-function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
-  const [restDB, setRestDB] = useState<restaurantDB>([]);
+
+interface restaurantSelectProps {
+  token: string;
+  mealPk: string;
+}
+interface restaurant {
+  name: string;
+  url: string;
+  pk: string;
+  photo_reference: string;
+  id: string;
+}
+
+function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
+  const [restDB, setRestDB] = useState<restaurantDB[]>([]);
   const [currentIndex, setCurrentIndex] = useState(restDB.length - 1);
-  const [lastDirection, setLastDirection] = useState();
+  const [lastDirection, setLastDirection] = useState("");
   const [count, setCount] = useState(1);
-  const [restPk, setRestPk] = useState<number>();
-  const [answer, setAnswer] = useState();
+  const [restPk, setRestPk] = useState("");
+  const [answer, setAnswer] = useState("");
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
   const navigate = useNavigate();
-  const childRefs = useMemo(
+  const childRefs: RefObject<any>[] = useMemo(
     () =>
       Array(restDB.length)
         .fill(0)
@@ -45,7 +66,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
     [restDB.length]
   );
 
-  const updateCurrentIndex = (val) => {
+  const updateCurrentIndex = (val: number) => {
     setCurrentIndex(val);
     currentIndexRef.current = val;
   };
@@ -55,7 +76,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
   const canSwipe = currentIndex >= 0;
 
   useEffect(() => {
-    let theDB = [];
+    let theDB: restaurantDB[] = [];
     const options = {
       method: "GET",
       url: `https://find-dining-panda.herokuapp.com/api/meals/${mealPk}/restaurants/`,
@@ -69,7 +90,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        response.data.map((restaurant, index) => {
+        response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             name: restaurant.name,
             url: restaurant.photo_reference,
@@ -85,7 +106,12 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
 
   console.log("push");
   // set last direction and decrease current index
-  const swiped = (direction, nameToDelete, index, restaurantPK) => {
+  const swiped = (
+    direction: string,
+    nameToDelete: string,
+    index: number,
+    restaurantPK: string
+  ) => {
     console.log(restPk);
     const yesOptions = {
       method: "POST",
@@ -138,7 +164,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
     );
   };
   let testCount = 1;
-  const outOfFrame = (name, idx) => {
+  const outOfFrame = (name: string, idx: number) => {
     console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
     testCount += 1;
     setCount(testCount);
@@ -152,7 +178,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
     return testCount;
   };
 
-  const swipe = async (dir) => {
+  const swipe = async (dir: string) => {
     if (canSwipe && currentIndex < restDB.length) {
       await childRefs[currentIndex].current.swipe(dir);
       // Swipe the card!
@@ -213,7 +239,7 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
     });
   }, []);
 
-  const undo = (restaurantPK) => {
+  const undo = (restaurantPK: string) => {
     const undoNoOptions = {
       method: "DELETE",
       url: `https://find-dining-panda.herokuapp.com/api/undo_no/${restaurantPK}/`,
@@ -264,7 +290,9 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
         <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
         <button
           className="homeButton"
-          style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+          style={{
+            backgroundColor: (!canGoBack as CSSProperties) && "#c3c4d3",
+          }}
           onClick={() => navigate("/meals")}
         >
           Go Home!
@@ -274,8 +302,8 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
             ref={childRefs[index]}
             className="swipe"
             key={restaurant.name}
-            onSwipe={(dir) => {
-              swiped(dir, restaurant.name, index, restaurant.pk);
+            onSwipe={(direction: string) => {
+              swiped(direction, restaurant.name, index, restaurant.pk);
               setRestPk(restaurant.pk);
             }}
             onCardLeftScreen={() => {
@@ -307,13 +335,17 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
 
       <div className="buttons">
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          style={{
+            backgroundColor: (!canSwipe as CSSProperties) && "#c3c4d3",
+          }}
           onClick={() => swipe("left")}
         >
           Heck No!
         </button>
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          style={{
+            backgroundColor: (!canSwipe as CSSProperties) && "#c3c4d3",
+          }}
           onClick={() => swipe("right")}
         >
           Heck Yeah!
@@ -321,7 +353,9 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
       </div>
       <button
         className="undoButton"
-        style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+        style={{
+          backgroundColor: (!canGoBack as CSSProperties) && "#c3c4d3",
+        }}
         onClick={() => {
           goBack();
           undo(restPk);
