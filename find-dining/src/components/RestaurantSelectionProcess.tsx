@@ -1,3 +1,4 @@
+// @ts-nocheck (TODO KE: remove after typescript refactor)
 import React, {
   useState,
   useMemo,
@@ -29,14 +30,12 @@ const StyledButton = styled(Button)`
     border: none;
   }
 `;
-const heckNo = styled.button`
-text-align: left;
-`
-const heckYeah = styled.button`
-text-align: right;
-`
-
-
+// const heckNo = styled.button`
+//   text-align: left;
+// `;
+// const heckYeah = styled.button`
+//   text-align: right;
+// `;
 
 interface restaurantDB {
   name: string;
@@ -302,9 +301,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
         <button
           className="homeButton"
-
-          style={{ backgroundColor: !canGoBack as CSSProperties && "#da0063", }}
-
+          style={{
+            backgroundColor: (!canGoBack as CSSProperties) && "#da0063",
+          }}
           onClick={() => navigate("/meals")}
         >
           Go Home!
@@ -344,7 +343,6 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         ))}
       </div>
 
-
       <div
         style={{
           marginBottom: 70,
@@ -353,7 +351,10 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         className="buttons"
       >
         <heckNo
-          style={{ backgroundColor: !canSwipe as CSSProperties && "white", color: "black" }}
+          style={{
+            backgroundColor: (!canSwipe as CSSProperties) && "white",
+            color: "black",
+          }}
           onClick={() => swipe("left")}
         >
           <img
@@ -366,7 +367,10 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
           {/* Heck No! */}
         </heckNo>
         <heckYeah
-          style={{ backgroundColor: !canSwipe as CSSProperties && "white", color: "black" }}
+          style={{
+            backgroundColor: (!canSwipe as CSSProperties) && "white",
+            color: "black",
+          }}
           onClick={() => swipe("right")}
         >
           <img
@@ -382,7 +386,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       <div>
         <StyledButton
           className="undoButton"
-          style={{ backgroundColor: !canGoBack as CSSProperties && "#da0063" }}
+          style={{
+            backgroundColor: (!canGoBack as CSSProperties) && "#da0063",
+          }}
           onClick={() => {
             goBack();
             undo(restPk);

@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 // import Form from "react-bootstrap/Form";
-import hungryPanda from "../images/hungryPanda.png";
-import speechBubble2 from "../images/speechBubble2.png";
-
-
+// import hungryPanda from "../images/hungryPanda.png";
+// import speechBubble2 from "../images/speechBubble2.png";
 
 const StyledButton = styled(Button)`
   background-color: #da0063;
@@ -23,9 +21,10 @@ const StyledButton = styled(Button)`
   &:focus {
     box-shadow: none;
     border: none;
-  }`
+  }
+`;
 
-  const Span = styled.span`
+const Span = styled.span`
   color: #da0063;
   font: Lato;
   font-weight: bold;
@@ -37,15 +36,13 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Blurb = styled.div`
-  text-align: center;
-  margin: 10px;
-  padding: 25px;
-`;
-interface token {
+// const Blurb = styled.div`
+//   text-align: center;
+//   margin: 10px;
+//   padding: 25px;
+// `;
 
 interface matchedPendingProps {
-
   token: string;
   mealPk: string;
   setMealPk: React.Dispatch<React.SetStateAction<string>>;
@@ -249,93 +246,98 @@ const MatchedPendingMeals = ({
   return (
     <Container>
       <Span>
-    <div className="matchedPendingDiv">
-      <h2 className="pendingMealsH2">Upcoming Meals</h2>
-      <div className="pendingMealsBig">
-        {pendingFalseCount === 0 ? (
-          <div>Sorry No Pending Meals</div>
-        ) : (
-          pendingDb.map((restaurant: restaurant, index: number) =>
-            restaurant.archive === false ? (
-              <div key={restaurant.id} className="pendingMeals">
-                <p
-                  className="restaurantLocation"
-                  onClick={() => console.log(restaurant)}
-                >
-                  {restaurant.location}
-                </p>
-                <p>{restaurant.archive}</p>
-                {restaurant.all_users_have_selected.includes(userPk) ? (
-                  <div>Friends Still selecting</div>
-                ) : (
-                  <StyledButton
-                    className="pendingButton"
-                    onClick={() => selectRestaurants(restaurant.id.toString())}
-                  >
-                    Select Restaurants
-                  </StyledButton>
-                )}
-
-                <StyledButton style={{
-                  width: 20,
-                }}
-                  className="xButton"
-                  onClick={() => {
-                    decline(restaurant.id);
-                    removePendingItem(pendingDb, index);
-                  }}
-                >
-                  X
-                </StyledButton>
-              </div>
+        <div className="matchedPendingDiv">
+          <h2 className="pendingMealsH2">Upcoming Meals</h2>
+          <div className="pendingMealsBig">
+            {pendingFalseCount === 0 ? (
+              <div>Sorry No Pending Meals</div>
             ) : (
-              <></>
-            )
-          )
-        )}
-      </div>
+              pendingDb.map((restaurant: restaurant, index: number) =>
+                restaurant.archive === false ? (
+                  <div key={restaurant.id} className="pendingMeals">
+                    <p
+                      className="restaurantLocation"
+                      onClick={() => console.log(restaurant)}
+                    >
+                      {restaurant.location}
+                    </p>
+                    <p>{restaurant.archive}</p>
+                    {restaurant.all_users_have_selected.includes(userPk) ? (
+                      <div>Friends Still selecting</div>
+                    ) : (
+                      <StyledButton
+                        className="pendingButton"
+                        onClick={() =>
+                          selectRestaurants(restaurant.id.toString())
+                        }
+                      >
+                        Select Restaurants
+                      </StyledButton>
+                    )}
 
-      <h2 className="pendingMealsH2">Matched Meals</h2>
-      <div className="pendingMealsMed">
-        <div className="matchedMeals">
-          {matchFalseCount === 0 ? (
-            <div>Sorry No Matches</div>
-          ) : (
-            db.map((restaurant: restaurant, index: number) =>
-              restaurant.archive === false ? (
-                <div key={restaurant.id} className="pendingMeals">
-                  <p className="restaurantLocation">{restaurant.location}</p>
-                  <StyledButton
-                    className="pendingButton"
-                    onClick={() => {
-                      seeMatch();
-                      setMealPk(restaurant.id.toString());
-                    }}
-                  >
-                    See Match
-                  </StyledButton>
-                  <StyledButton
-                    className="xButton"
-                    onClick={() => {
-                      decline(restaurant.id);
-                      removeMatchItem(db, index);
-                    }}
-                  >
-                    X
-                  </StyledButton>
-                </div>
-              ) : (
-                <></>
+                    <StyledButton
+                      style={{
+                        width: 20,
+                      }}
+                      className="xButton"
+                      onClick={() => {
+                        decline(restaurant.id);
+                        removePendingItem(pendingDb, index);
+                      }}
+                    >
+                      X
+                    </StyledButton>
+                  </div>
+                ) : (
+                  <></>
+                )
               )
-            )
-          )}
+            )}
+          </div>
+
+          <h2 className="pendingMealsH2">Matched Meals</h2>
+          <div className="pendingMealsMed">
+            <div className="matchedMeals">
+              {matchFalseCount === 0 ? (
+                <div>Sorry No Matches</div>
+              ) : (
+                db.map((restaurant: restaurant, index: number) =>
+                  restaurant.archive === false ? (
+                    <div key={restaurant.id} className="pendingMeals">
+                      <p className="restaurantLocation">
+                        {restaurant.location}
+                      </p>
+                      <StyledButton
+                        className="pendingButton"
+                        onClick={() => {
+                          seeMatch();
+                          setMealPk(restaurant.id.toString());
+                        }}
+                      >
+                        See Match
+                      </StyledButton>
+                      <StyledButton
+                        className="xButton"
+                        onClick={() => {
+                          decline(restaurant.id);
+                          removeMatchItem(db, index);
+                        }}
+                      >
+                        X
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                )
+              )}
+            </div>
+          </div>
+          <StyledButton className="createButton" onClick={() => mealStart()}>
+            Create Meal
+          </StyledButton>
         </div>
-      </div>
-      <StyledButton className="createButton" onClick={() => mealStart()}>
-        Create Meal
-      </StyledButton>
-    </div>
-    </Span>
+      </Span>
     </Container>
   );
 };
