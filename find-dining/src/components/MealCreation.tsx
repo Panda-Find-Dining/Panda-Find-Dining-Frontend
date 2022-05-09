@@ -1,5 +1,3 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
-
 import Select from "react-select";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -9,6 +7,35 @@ import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble2 from "../images/speechBubble2.png";
 import Form from "react-bootstrap/Form";
+
+interface friend {
+  id: number;
+  location: string;
+  invitee: string;
+  num_of_diners: string;
+  archive: boolean;
+  all_users_have_selected: string;
+}
+
+interface token {
+  token: string;
+  friendsPks: string[] | undefined;
+  setFriendsPks: React.Dispatch<React.SetStateAction<string[] | undefined>>;
+  friendsNames: string[] | undefined;
+  setFriendsNames: React.Dispatch<React.SetStateAction<string[] | undefined>>;
+  mealPk: string | undefined;
+  setMealPk: React.Dispatch<React.SetStateAction<string>>;
+  userPk: string;
+  user: string;
+}
+interface user {
+  id: string;
+  username: string;
+}
+interface selectOpt {
+  value: string;
+  label: string;
+}
 
 const StyledButton = styled(Button)`
   background-color: #da0063;
@@ -43,18 +70,6 @@ const Blurb = styled.div`
   padding: 25px;
 `;
 
-interface token {
-  token: string;
-  friendsPks: [];
-  setFriendsPks: React.Dispatch<any>;
-  friendsNames: [];
-  setFriendsNames: React.Dispatch<any>;
-  mealPk: number;
-  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>;
-  userPk: number;
-  user: string;
-}
-
 const MealCreation = ({
   token,
   friendsPks,
@@ -66,16 +81,17 @@ const MealCreation = ({
   userPk,
   user,
 }: token) => {
-  const [results, setResults] = useState<any>([]);
+  // <React.SetStateAction{ value: string; label: string; }[]>
+  const [results, setResults] = useState([]);
   const [selectFriendsOptions, setSelectFriendsOptions] = useState<any>([]);
   const [mealFriends, setMealFriends] = useState<any>([]);
-  const [friendPk, setFriendPk] = useState<any>("");
+  const [friendPk, setFriendPk] = useState("");
   const [friendName, setFriendName] = useState("");
   const [addFriendError, setAddFriendError] = useState("");
   const [addFriendSuccess, setAddFriendSuccess] = useState("");
   const [searchError, setSearchError] = useState("");
   const [location, setLocation] = useState("");
-  const [radius, setRadius] = useState("");
+  const [radius, setRadius] = useState<React.SetStateAction<string> | void>("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showLocationRadius, setShowLocationRadius] = useState(false);
@@ -84,7 +100,7 @@ const MealCreation = ({
     []
   );
   const navigate = useNavigate();
-  function handleCreateMeal(e: React.FormEvent<HTMLFormElement>) {
+  function handleCreateMeal() {
     let theMealPk = 0;
     setError("");
 
@@ -110,7 +126,7 @@ const MealCreation = ({
           console.log(response.data);
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
-          setMealPk(theMealPk);
+          setMealPk(theMealPk.toString());
           setFriendsNames([]);
           setFriendsPks([]);
         })
@@ -137,21 +153,19 @@ const MealCreation = ({
     };
     multiplePromises();
   }
-  //   const goMatchPend = () => {
-  //     navigate("/meals");
-  //   };
+
   const selectRadiusOptions = [
-    { value: 10, label: "10" },
-    { value: 20, label: "20" },
-    { value: 40, label: "40" },
-    { value: 60, label: "60" },
-    { value: 80, label: "80" },
+    { value: "10", label: "10" },
+    { value: "20", label: "20" },
+    { value: "40", label: "40" },
+    { value: "60", label: "60" },
+    { value: "80", label: "80" },
   ];
   console.log(mealPk);
   console.log(friendsPks);
   console.log(friendsNames);
   console.log(radius);
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = () => {
     setResults([]);
     const options = {
       method: "GET",
@@ -176,7 +190,7 @@ const MealCreation = ({
       });
   };
 
-  const addFriend = (user: any) => {
+  const addFriend = (user: string) => {
     const options = {
       method: "POST",
       url: `https://find-dining-panda.herokuapp.com/api/follow/${user}/`,
@@ -214,17 +228,17 @@ const MealCreation = ({
       .then(function (response) {
         console.log(response.data);
         response.data[0].friends.map(
-          (friend: any, index: any) => {
+          (friend: string, index: number) => {
             return theFriendsNames.push(friend);
           },
-          response.data[0].friends_pk.map((friend: any, index: any) => {
+          response.data[0].friends_pk.map((friend: string, index: number) => {
             return theFriendsPks.push(friend);
           }, setFriendsPks(theFriendsPks)),
           setFriendsNames(theFriendsNames)
         );
         console.log(theFriendsNames);
         console.log(theFriendsPks);
-        let zipped = theFriendsNames.map((x: any, i: any) => [
+        let zipped = theFriendsNames.map((x: string, i: number) => [
           { value: theFriendsPks[i], label: x },
         ]);
         let newZipped = zipped.flat(1);
@@ -237,8 +251,8 @@ const MealCreation = ({
   }, [token, setFriendsPks, setFriendsNames]);
 
   const setFriendNamesList = () => {
-    let theFriendsNames: any = [];
-    let theFriendsPks: any = [];
+    let theFriendsNames: string[] = [];
+    let theFriendsPks: string[] = [];
     const options = {
       method: "GET",
       url: "https://find-dining-panda.herokuapp.com/api/users/friends/",
@@ -252,17 +266,17 @@ const MealCreation = ({
       .then(function (response) {
         console.log(response.data);
         response.data[0].friends.map(
-          (friend: any, index: any) => {
+          (friend: string, index: number) => {
             return theFriendsNames.push(friend);
           },
-          response.data[0].friends_pk.map((friend: any, index: any) => {
+          response.data[0].friends_pk.map((friend: string, index: number) => {
             return theFriendsPks.push(friend);
           }, setFriendsPks(theFriendsPks)),
           setFriendsNames(theFriendsNames)
         );
         console.log(theFriendsNames);
         console.log(theFriendsPks);
-        let zipped = theFriendsNames.map((x: any, i: any) => [
+        let zipped = theFriendsNames.map((x: string, i: number) => [
           { value: theFriendsPks[i], label: x },
         ]);
         let newZipped = zipped.flat(1);
@@ -273,20 +287,16 @@ const MealCreation = ({
         console.error(error);
       });
   };
-
   console.log(friendPk);
-  console.log(mealFriends.flat(1).map((friend: any) => friend.value));
   console.log(friendsPks);
   console.log(searched);
   console.log(results);
   console.log(friendName);
-
   return (
     <Container>
       <Span>
         <Form>
           <div className="mealFriendSelect">
-            {/* <h2>Welcome User</h2> */}
             <div
               className="container"
               style={{
@@ -329,10 +339,11 @@ const MealCreation = ({
               </div>
               <div className="right">
                 <img
-                  align="right"
+                  //   align={right}
                   src={hungryPanda}
                   alt="panda pic"
                   style={{
+                    justifyContent: "right",
                     width: 150,
                     textAlign: "right",
                   }}
@@ -374,7 +385,7 @@ const MealCreation = ({
                 ) : results.length === 0 && searched === true ? (
                   <div>Sorry they haven't Joined Yet!</div>
                 ) : (
-                  results.map((user: any, index: any) => (
+                  results.map((user: user, index: number) => (
                     <div className="searchList">
                       <div>{user.username}</div>
                       <StyledButton
@@ -418,13 +429,13 @@ const MealCreation = ({
               <StyledButton
                 onClick={() => {
                   setFriendsPks(
-                    mealFriends.flat(1).map((friend: any) => friend.value)
+                    mealFriends.flat(1).map((friend: selectOpt) => friend.value)
                   );
                   setFriendsNames(
-                    mealFriends.flat(1).map((friend: any) => friend.label)
+                    mealFriends.flat(1).map((friend: selectOpt) => friend.label)
                   );
                   setCurrentMealFriendsNames(
-                    mealFriends.flat(1).map((friend: any) => friend.label)
+                    mealFriends.flat(1).map((friend: selectOpt) => friend.label)
                   );
                   setShowLocationRadius(true);
                 }}
@@ -464,9 +475,10 @@ const MealCreation = ({
                   <i>
                     Your meal with{" "}
                     {currentMealFriendsNames.length === 1
-                      ? currentMealFriendsNames.map((i) => i)
-                      : currentMealFriendsNames.map((item, i, arr) =>
-                          i !== arr.length - 1 ? item + ", " : "and " + item
+                      ? currentMealFriendsNames.map((i: string) => i)
+                      : currentMealFriendsNames.map(
+                          (item: string, i: number, arr: []) =>
+                            i !== arr.length - 1 ? item + ", " : "and " + item
                         )}
                   </i>
                 </h2>
@@ -502,7 +514,7 @@ const MealCreation = ({
                 <Select
                   className="select"
                   options={selectRadiusOptions}
-                  onChange={(selection) => setRadius(selection.value)}
+                  onChange={(selection) => setRadius(selection?.value)}
                   placeholder={"select radius"}
                 />
                 <div className="mealButtons text-center">
@@ -539,7 +551,7 @@ const MealCreation = ({
                       setLocation("");
                       setFriendsNames([]);
                       setFriendsPks([]);
-                      window.location.reload(false);
+                      window.location.reload();
                       setShowLocationRadius(false);
                     }}
                   >

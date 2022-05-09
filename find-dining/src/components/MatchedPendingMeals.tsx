@@ -1,24 +1,37 @@
-import { useEffect, useState} from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 
-interface token {
+interface matchedPendingProps {
   token: string;
-  mealPk: number;
-  setMealPk: React.Dispatch<React.SetStateAction<number | undefined>>;
+  mealPk: string;
+  setMealPk: React.Dispatch<React.SetStateAction<string>>;
   userPk: string;
 }
+interface restaurant {
+  id: number;
+  location: string;
+  invitee: string;
+  num_of_diners: string;
+  archive: boolean;
+  all_users_have_selected: string;
+}
 
-const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
-  const [db, setDB] = useState<any>([]);
-  const [pendingDb, setPendingDB] = useState<any>([]);
+const MatchedPendingMeals = ({
+  token,
+  mealPk,
+  setMealPk,
+  userPk,
+}: matchedPendingProps) => {
+  const [db, setDB] = useState<restaurant[]>([]);
+  const [pendingDb, setPendingDB] = useState<restaurant[]>([]);
   const navigate = useNavigate();
   const seeMatch = () => {
     navigate("/match");
   };
   useEffect(() => {
-    let theDB: any = [];
+    let theDB: restaurant[] = [];
     const options = {
       method: "GET",
       url: "https://find-dining-panda.herokuapp.com/api/match/",
@@ -32,11 +45,11 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        response.data.map((restaurant: any, index: any) => {
+        response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitees: restaurant.invitee,
+            invitee: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -49,7 +62,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       });
   }, [token]);
   useEffect(() => {
-    let thePendingDB: any = [];
+    let thePendingDB: restaurant[] = [];
     const options = {
       method: "GET",
       url: "https://find-dining-panda.herokuapp.com/api/pending/",
@@ -63,11 +76,11 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        response.data.map((restaurant: any, index: any) => {
+        response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitees: restaurant.invitee,
+            invitee: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -103,30 +116,29 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       });
   };
 
-  const selectRestaurants = (restaurant: any) => {
+  const selectRestaurants = (restaurant: SetStateAction<string>) => {
     setMealPk(restaurant);
     navigate("/select");
   };
   console.log(userPk);
   let pendingFalseCount = 0;
-  pendingDb.map((restaurant: any, index: any) =>
+  pendingDb.map((restaurant: restaurant, index: number) =>
     restaurant.archive === false ? (pendingFalseCount += 1) : pendingFalseCount
   );
   let matchFalseCount = 0;
-  db.map((restaurant: any, index: any) =>
+  db.map((restaurant: restaurant, index: number) =>
     restaurant.archive === false ? (matchFalseCount += 1) : matchFalseCount
   );
-  const removePendingItem = (data: any, index: any) => {
-    setPendingDB(data.filter((o: any, i: any) => index !== i));
+  const removePendingItem = (data: restaurant[], index: number) => {
+    setPendingDB(data.filter((o, i) => index !== i));
   };
-  const removeMatchItem = (data: any, index: any) => {
-    setDB(data.filter((o: any, i: any) => index !== i));
+  const removeMatchItem = (data: restaurant[], index: number) => {
+    setDB(data.filter((o, i) => index !== i));
   };
   console.log(pendingFalseCount);
   console.log(matchFalseCount);
   const refreshPendingDb = () => {
-    // window.location.reload();
-    let thePendingDB: any = [];
+    let thePendingDB: restaurant[] = [];
     const pendingOptions = {
       method: "GET",
       url: "https://find-dining-panda.herokuapp.com/api/pending/",
@@ -140,11 +152,11 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       .request(pendingOptions)
       .then(function (response) {
         console.log(response.data);
-        response.data.map((restaurant: any, index: any) => {
+        response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitees: restaurant.invitee,
+            invitee: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -157,8 +169,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       });
   };
   const refreshMatchDb = () => {
-    // window.location.reload();
-    let theDB: any = [];
+    let theDB: restaurant[] = [];
     const matchOptions = {
       method: "GET",
       url: "https://find-dining-panda.herokuapp.com/api/match/",
@@ -172,11 +183,11 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
       .request(matchOptions)
       .then(function (response) {
         console.log(response.data);
-        response.data.map((restaurant: any, index: any) => {
+        response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitees: restaurant.invitee,
+            invitee: restaurant.invitee,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -200,7 +211,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
         {pendingFalseCount === 0 ? (
           <div>Sorry No Pending Meals</div>
         ) : (
-          pendingDb.map((restaurant: any, index: any) =>
+          pendingDb.map((restaurant: restaurant, index: number) =>
             restaurant.archive === false ? (
               <div key={restaurant.id} className="pendingMeals">
                 <p
@@ -215,7 +226,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                 ) : (
                   <button
                     className="pendingButton"
-                    onClick={() => selectRestaurants(restaurant.id)}
+                    onClick={() => selectRestaurants(restaurant.id.toString())}
                   >
                     Select Restaurants
                   </button>
@@ -244,7 +255,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
           {matchFalseCount === 0 ? (
             <div>Sorry No Matches</div>
           ) : (
-            db.map((restaurant: any, index: any) =>
+            db.map((restaurant: restaurant, index: number) =>
               restaurant.archive === false ? (
                 <div key={restaurant.id} className="pendingMeals">
                   <p className="restaurantLocation">{restaurant.location}</p>
@@ -252,7 +263,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                     className="pendingButton"
                     onClick={() => {
                       seeMatch();
-                      setMealPk(restaurant.id);
+                      setMealPk(restaurant.id.toString());
                     }}
                   >
                     See Match

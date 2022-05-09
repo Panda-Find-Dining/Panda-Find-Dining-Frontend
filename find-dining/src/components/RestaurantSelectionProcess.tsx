@@ -27,7 +27,7 @@ interface restaurantDB {
   name: string;
   url: string;
 }
-function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
+function RestaurantSelectionProcess({ token, mealPk }) {
   const [restDB, setRestDB] = useState<restaurantDB>([]);
   const [currentIndex, setCurrentIndex] = useState(restDB.length - 1);
   const [lastDirection, setLastDirection] = useState();

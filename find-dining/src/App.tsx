@@ -1,8 +1,6 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
 import useLocalStorageState from "use-local-storage-state";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import MealStart from "./components/MealStart";
 import MenuHeader from "./components/MenuHeader";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import MealCreation from "./components/MealCreation";
@@ -13,12 +11,20 @@ import MatchedPendingMeals from "./components/MatchedPendingMeals";
 import { useState } from "react";
 
 const App = () => {
-  const [token, setToken] = useLocalStorageState("token", "");
-  const [user, setUser] = useLocalStorageState("user", "");
-  const [userPk, setUserPk] = useLocalStorageState("userPk", "");
-  const [friendsPks, setFriendsPks] = useState<any>([]);
-  const [friendsNames, setFriendsNames] = useState<any>([]);
-  const [mealPk, setMealPk] = useLocalStorageState("mealPk", "");
+  const [token, setToken] = useLocalStorageState("token", {
+    defaultValue: "",
+  });
+  const [user, setUser] = useLocalStorageState("user", {
+    defaultValue: "",
+  });
+  const [userPk, setUserPk] = useLocalStorageState("userPk", {
+    defaultValue: "",
+  });
+  const [friendsPks, setFriendsPks] = useState<string[] | undefined>();
+  const [friendsNames, setFriendsNames] = useState<string[] | undefined>();
+  const [mealPk, setMealPk] = useLocalStorageState("mealPk", {
+    defaultValue: "",
+  });
   const isLoggedIn = user && token;
   console.log(isLoggedIn);
   console.log(process.env.REACT_APP_GOOGLE_API_KEY);
@@ -106,32 +112,6 @@ const App = () => {
                   setFriendsNames={setFriendsNames}
                 />
               </div>
-            }
-          />
-          <Route
-            path="meal-start"
-            element={
-              <>
-                <MealStart
-                  mealPk={mealPk}
-                  setMealPk={setMealPk}
-                  userPk={userPk}
-                  token={token}
-                  friendsPks={friendsPks}
-                  friendsNames={friendsNames}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
-              </>
             }
           />
           <Route
