@@ -7,7 +7,11 @@ import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble2 from "../images/speechBubble2.png";
 import Form from "react-bootstrap/Form";
-
+declare module "react" {
+  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+    align?: "right";
+  }
+}
 interface friend {
   id: number;
   location: string;
@@ -17,7 +21,7 @@ interface friend {
   all_users_have_selected: string;
 }
 
-interface token {
+interface mealCreationProps {
   token: string;
   friendsPks: string[] | undefined;
   setFriendsPks: React.Dispatch<React.SetStateAction<string[] | undefined>>;
@@ -80,7 +84,7 @@ const MealCreation = ({
   setMealPk,
   userPk,
   user,
-}: token) => {
+}: mealCreationProps) => {
   // <React.SetStateAction{ value: string; label: string; }[]>
   const [results, setResults] = useState([]);
   const [selectFriendsOptions, setSelectFriendsOptions] = useState<any>([]);
@@ -339,7 +343,7 @@ const MealCreation = ({
               </div>
               <div className="right">
                 <img
-                  //   align={right}
+                  align="right"
                   src={hungryPanda}
                   alt="panda pic"
                   style={{

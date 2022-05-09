@@ -41,6 +41,9 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [reset, setReset] = useState(false);
+  const [email, setEmail] = useState("");
+  const [resetConfirm, setResetConfirm] = useState("");
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -53,6 +56,9 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
 
     if (event.target.name === "password") {
       setPassword(event.target.value);
+    }
+    if (event.target.name === "email") {
+      setEmail(event.target.value);
     }
   };
 
@@ -73,7 +79,32 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
   };
   const navigate = useNavigate();
 
+  const resetPassword = () => {
+    setError("");
+    const options = {
+      method: "POST",
+      url: "https://find-dining-panda.herokuapp.com/api/auth/users/reset_password/",
+      data: {
+        email: email,
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        setResetConfirm("Password Reset Email Sent!");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
   console.log(error);
+  console.log(reset);
+  console.log(email);
   return (
     <Container>
       <img
@@ -129,7 +160,48 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
               name="password"
               onChange={(event) => handleChange(event)}
             />
-            <Form.Text>Forgot Password?</Form.Text>
+            <Form.Text onClick={() => setReset(!reset)}>
+              Forgot Password?
+            </Form.Text>
+            {reset === true ? (
+              <>
+                <Form.Control
+                  style={{
+                    borderColor: "black",
+                    marginBottom: "5px",
+                  }}
+                  required
+                  className="input"
+                  type="text"
+                  placeholder="email"
+                  value={email}
+                  name="email"
+                  onChange={(event) => handleChange(event)}
+                />
+                <StyledButton
+                  style={{
+                    marginTop: 50,
+                    width: 150,
+                  }}
+                  onClick={() => resetPassword()}
+                >
+                  Reset Password
+                </StyledButton>
+                <Form.Label
+                  style={{
+                    color: "#da0063",
+                    marginTop: 20,
+                    marginBottom: 2,
+                  }}
+                >
+                  Please Enter your e-mail to reset your password.
+                </Form.Label>
+                <p>{resetConfirm}</p>
+                <div></div>
+              </>
+            ) : (
+              <></>
+            )}
             <div className="text-center">
               <div>
                 <StyledButton
