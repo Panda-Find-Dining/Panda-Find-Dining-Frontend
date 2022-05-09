@@ -4,6 +4,37 @@ import RestaurantCard from "../Restaurant-selection-card";
 import "./RestaurantSelectionProcess.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
+import Button from "react-bootstrap/Button";
+import angryPanda from "../images/angryPanda.png";
+import hungryPanda from "../images/hungryPanda.png";
+
+const StyledButton = styled(Button)`
+  background-color: #da0063;
+  box-shadow: none;
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+`;
+// const Span = styled.span`
+//   color: #196052;
+//   font: Lato;
+//   font-weight: bold;
+// `;
+
+// const Container = styled.div`
+//   padding: 50px;
+//   display: flex;
+//   flex-direction: column;
+// `;
+
 const db = [
   {
     name: "Paul",
@@ -260,11 +291,16 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
   const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M";
   return (
     <div>
-      <div className="cardDeck">
+      <div
+        style={{
+          marginBottom: -60,
+        }}
+        className="cardDeck"
+      >
         <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
         <button
           className="homeButton"
-          style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+          style={{ backgroundColor: !canGoBack && "#da0063" }}
           onClick={() => navigate("/meals")}
         >
           Go Home!
@@ -298,40 +334,66 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
               className="card"
             >
               <h3>{restaurant.name}</h3>
-
               <h2 className="answer">{answer}</h2>
             </div>
           </RestaurantCard>
         ))}
       </div>
 
-      <div className="buttons">
+      <div
+        style={{
+          marginBottom: 70,
+        }}
+        className="buttons"
+      >
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          style={{ backgroundColor: !canSwipe && "white", color: "black" }}
           onClick={() => swipe("left")}
         >
+          <img
+            style={{
+              width: 100,
+            }}
+            src={angryPanda}
+            alt="panda button"
+          />
           Heck No!
         </button>
         <button
-          style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+          style={{ backgroundColor: !canSwipe && "white", color: "black" }}
           onClick={() => swipe("right")}
         >
+          <img
+            style={{
+              width: 100,
+            }}
+            src={hungryPanda}
+            alt="panda button"
+          />
           Heck Yeah!
         </button>
       </div>
-      <button
-        className="undoButton"
-        style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-        onClick={() => {
-          goBack();
-          undo(restPk);
-        }}
-      >
-        Undo swipe!
-      </button>
-      <button className="undoButton" onClick={() => goEat()}>
-        Let's Eat!
-      </button>
+      <div>
+        <StyledButton
+          className="undoButton"
+          style={{ backgroundColor: !canGoBack && "#da0063" }}
+          onClick={() => {
+            goBack();
+            undo(restPk);
+          }}
+        >
+          Undo swipe!
+        </StyledButton>
+        <StyledButton
+          style={{
+            backgroundColor: "black",
+          }}
+          className="undoButton"
+          onClick={() => goEat()}
+        >
+          Let's Eat!
+        </StyledButton>
+      </div>
     </div>
   );
 }

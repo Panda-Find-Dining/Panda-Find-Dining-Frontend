@@ -3,6 +3,7 @@ import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav'
 
 interface props {
   token: string;
@@ -61,7 +62,8 @@ const MenuHeader = ({
         alt="This a placeholder"
         onClick={() => navigate("/")}
       ></img>
-      <div className="navLinks">
+      <Nav>
+      <Nav.Item as="li" className="navLinks">
         <Link to="/meals">Meals</Link>
         {isLoggedIn ? (
           <a href="login" className="logoutLink" onClick={() => setLogout()}>
@@ -71,7 +73,8 @@ const MenuHeader = ({
           <Link to="/login">Login</Link>
         )}
         <Link to="/">Home</Link>
-      </div>
+      </Nav.Item>
+      </Nav>
       <div className="logoutProfile">
         <div className="error">{error}</div>
       </div>
