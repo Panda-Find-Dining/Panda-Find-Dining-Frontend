@@ -1,4 +1,3 @@
-// @ts-nocheck (TODO KE: remove after typescript refactor)
 import React, {
   useState,
   useMemo,
@@ -30,12 +29,6 @@ const StyledButton = styled(Button)`
     border: none;
   }
 `;
-// const heckNo = styled.button`
-//   text-align: left;
-// `;
-// const heckYeah = styled.button`
-//   text-align: right;
-// `;
 
 interface restaurantDB {
   name: string;
@@ -350,7 +343,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         }}
         className="buttons"
       >
-        <heckNo
+        <div
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
@@ -365,8 +358,8 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             alt="panda button"
           />
           {/* Heck No! */}
-        </heckNo>
-        <heckYeah
+        </div>
+        <div
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
@@ -381,7 +374,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             alt="panda button"
           />
           {/* Heck Yeah! */}
-        </heckYeah>
+        </div>
       </div>
       <div>
         <StyledButton
