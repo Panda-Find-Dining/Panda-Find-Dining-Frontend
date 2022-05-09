@@ -47,12 +47,6 @@ interface restaurant {
   photo_reference: string;
   id: string;
 }
-interface swiped {
-  direction: string;
-  nameToDelete?: string;
-  index: number;
-  restaurantPK?: string;
-}
 
 function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
   const [restDB, setRestDB] = useState<restaurantDB[]>([]);

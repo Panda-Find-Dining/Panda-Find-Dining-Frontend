@@ -12,14 +12,6 @@ declare module "react" {
     align?: "right";
   }
 }
-interface friend {
-  id: number;
-  location: string;
-  invitee: string;
-  num_of_diners: string;
-  archive: boolean;
-  all_users_have_selected: string;
-}
 
 interface mealCreationProps {
   token: string;
