@@ -2,7 +2,45 @@ import { useEffect, useState} from "react";
 import axios from "axios";
 import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import styled from "styled-components";
+// import Form from "react-bootstrap/Form";
+import hungryPanda from "../images/hungryPanda.png";
+import speechBubble2 from "../images/speechBubble2.png";
 
+
+const StyledButton = styled(Button)`
+  background-color: #da0063;
+  box-shadow: none;
+
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: #da0063;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }`
+
+  const Span = styled.span`
+  color: #da0063;
+  font: Lato;
+  font-weight: bold;
+`;
+
+const Container = styled.div`
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Blurb = styled.div`
+  text-align: center;
+  margin: 10px;
+  padding: 25px;
+`;
 interface token {
   token: string;
   mealPk: number;
@@ -194,6 +232,8 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
     refreshMatchDb();
   }, 30000);
   return (
+    <Container>
+      <Span>
     <div className="matchedPendingDiv">
       <h2 className="pendingMealsH2">Upcoming Meals</h2>
       <div className="pendingMealsBig">
@@ -213,15 +253,17 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                 {restaurant.all_users_have_selected.includes(userPk) ? (
                   <div>Friends Still selecting</div>
                 ) : (
-                  <button
+                  <StyledButton
                     className="pendingButton"
                     onClick={() => selectRestaurants(restaurant.id)}
                   >
                     Select Restaurants
-                  </button>
+                  </StyledButton>
                 )}
 
-                <button
+                <StyledButton style={{
+                  width: 20,
+                }}
                   className="xButton"
                   onClick={() => {
                     decline(restaurant.id);
@@ -229,7 +271,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                   }}
                 >
                   X
-                </button>
+                </StyledButton>
               </div>
             ) : (
               <></>
@@ -248,7 +290,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
               restaurant.archive === false ? (
                 <div key={restaurant.id} className="pendingMeals">
                   <p className="restaurantLocation">{restaurant.location}</p>
-                  <button
+                  <StyledButton
                     className="pendingButton"
                     onClick={() => {
                       seeMatch();
@@ -256,8 +298,8 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                     }}
                   >
                     See Match
-                  </button>
-                  <button
+                  </StyledButton>
+                  <StyledButton
                     className="xButton"
                     onClick={() => {
                       decline(restaurant.id);
@@ -265,7 +307,7 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
                     }}
                   >
                     X
-                  </button>
+                  </StyledButton>
                 </div>
               ) : (
                 <></>
@@ -274,10 +316,12 @@ const MatchedPendingMeals = ({ token, mealPk, setMealPk, userPk }: token) => {
           )}
         </div>
       </div>
-      <button className="createButton" onClick={() => mealStart()}>
+      <StyledButton className="createButton" onClick={() => mealStart()}>
         Create Meal
-      </button>
+      </StyledButton>
     </div>
+    </Span>
+    </Container>
   );
 };
 

@@ -23,17 +23,12 @@ const StyledButton = styled(Button)`
     border: none;
   }
 `;
-// const Span = styled.span`
-//   color: #196052;
-//   font: Lato;
-//   font-weight: bold;
-// `;
-
-// const Container = styled.div`
-//   padding: 50px;
-//   display: flex;
-//   flex-direction: column;
-// `;
+const heckNo = styled.button`
+text-align: left;
+`
+const heckYeah = styled.button`
+text-align: right;
+`
 
 const db = [
   {
@@ -343,10 +338,11 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
       <div
         style={{
           marginBottom: 70,
+          paddingLeft: 40,
         }}
         className="buttons"
       >
-        <button
+        <heckNo
           style={{ backgroundColor: !canSwipe && "white", color: "black" }}
           onClick={() => swipe("left")}
         >
@@ -357,9 +353,9 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
             src={angryPanda}
             alt="panda button"
           />
-          Heck No!
-        </button>
-        <button
+          {/* Heck No! */}
+        </heckNo>
+        <heckYeah
           style={{ backgroundColor: !canSwipe && "white", color: "black" }}
           onClick={() => swipe("right")}
         >
@@ -370,8 +366,8 @@ function RestaurantSelectionProcess({ setModalShow, token, mealPk }) {
             src={hungryPanda}
             alt="panda button"
           />
-          Heck Yeah!
-        </button>
+          {/* Heck Yeah! */}
+        </heckYeah>
       </div>
       <div>
         <StyledButton
