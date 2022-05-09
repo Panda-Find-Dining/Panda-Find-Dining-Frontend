@@ -10,25 +10,33 @@ import RestaurantCard from "../Restaurant-selection-card";
 import "./RestaurantSelectionProcess.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const db = [
-  {
-    name: "Paul",
-    url: "./img/Paul.jpg",
-  },
-  {
-    name: "Ryan",
-    url: "./img/Ryan.jpg",
-  },
+import styled from "styled-components";
+import Button from "react-bootstrap/Button";
+import angryPanda from "../images/angryPanda.png";
+import hungryPanda from "../images/hungryPanda.png";
 
-  {
-    name: "Tyler",
-    url: "./img/Tyler.png",
-  },
-  {
-    name: "KE",
-    url: "./img/KE.jpg",
-  },
-];
+const StyledButton = styled(Button)`
+  background-color: #da0063;
+  box-shadow: none;
+  border: none;
+  min-width: 10px;
+  &:hover {
+    background-color: none;
+    outline: none;
+  }
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+`;
+const heckNo = styled.button`
+text-align: left;
+`
+const heckYeah = styled.button`
+text-align: right;
+`
+
+
 
 interface restaurantDB {
   name: string;
@@ -70,7 +78,6 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
     setCurrentIndex(val);
     currentIndexRef.current = val;
   };
-  console.log(db);
   const canGoBack = currentIndex < restDB.length - 1;
 
   const canSwipe = currentIndex >= 0;
@@ -286,13 +293,18 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
   const google2 = "&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M";
   return (
     <div>
-      <div className="cardDeck">
+      <div
+        style={{
+          marginBottom: -60,
+        }}
+        className="cardDeck"
+      >
         <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
         <button
           className="homeButton"
-          style={{
-            backgroundColor: (!canGoBack as CSSProperties) && "#c3c4d3",
-          }}
+
+          style={{ backgroundColor: !canGoBack as CSSProperties && "#da0063", }}
+
           onClick={() => navigate("/meals")}
         >
           Go Home!
@@ -326,46 +338,68 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
               className="card"
             >
               <h3>{restaurant.name}</h3>
-
               <h2 className="answer">{answer}</h2>
             </div>
           </RestaurantCard>
         ))}
       </div>
 
-      <div className="buttons">
-        <button
-          style={{
-            backgroundColor: (!canSwipe as CSSProperties) && "#c3c4d3",
-          }}
+
+      <div
+        style={{
+          marginBottom: 70,
+          paddingLeft: 40,
+        }}
+        className="buttons"
+      >
+        <heckNo
+          style={{ backgroundColor: !canSwipe as CSSProperties && "white", color: "black" }}
           onClick={() => swipe("left")}
         >
-          Heck No!
-        </button>
-        <button
-          style={{
-            backgroundColor: (!canSwipe as CSSProperties) && "#c3c4d3",
-          }}
+          <img
+            style={{
+              width: 100,
+            }}
+            src={angryPanda}
+            alt="panda button"
+          />
+          {/* Heck No! */}
+        </heckNo>
+        <heckYeah
+          style={{ backgroundColor: !canSwipe as CSSProperties && "white", color: "black" }}
           onClick={() => swipe("right")}
         >
-          Heck Yeah!
-        </button>
+          <img
+            style={{
+              width: 100,
+            }}
+            src={hungryPanda}
+            alt="panda button"
+          />
+          {/* Heck Yeah! */}
+        </heckYeah>
       </div>
-      <button
-        className="undoButton"
-        style={{
-          backgroundColor: (!canGoBack as CSSProperties) && "#c3c4d3",
-        }}
-        onClick={() => {
-          goBack();
-          undo(restPk);
-        }}
-      >
-        Undo swipe!
-      </button>
-      <button className="undoButton" onClick={() => goEat()}>
-        Let's Eat!
-      </button>
+      <div>
+        <StyledButton
+          className="undoButton"
+          style={{ backgroundColor: !canGoBack as CSSProperties && "#da0063" }}
+          onClick={() => {
+            goBack();
+            undo(restPk);
+          }}
+        >
+          Undo swipe!
+        </StyledButton>
+        <StyledButton
+          style={{
+            backgroundColor: "black",
+          }}
+          className="undoButton"
+          onClick={() => goEat()}
+        >
+          Let's Eat!
+        </StyledButton>
+      </div>
     </div>
   );
 }
