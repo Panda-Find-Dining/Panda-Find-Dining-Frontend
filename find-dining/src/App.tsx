@@ -7,7 +7,6 @@ import MealCreation from "./components/MealCreation";
 import MatchedMeal from "./components/MatchedMeal";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
-
 import { useState } from "react";
 
 const App = () => {
@@ -26,9 +25,9 @@ const App = () => {
     defaultValue: "",
   });
   const isLoggedIn = user && token;
-  console.log(isLoggedIn);
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
-  console.log(userPk);
+
+  console.log(process.env.REACT_APP_API_KEY);
+
   return (
     <>
       <BrowserRouter>
@@ -137,15 +136,6 @@ const App = () => {
             element={
               <>
                 <RestaurantSelectionProcess mealPk={mealPk} token={token} />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
               </>
             }
           />

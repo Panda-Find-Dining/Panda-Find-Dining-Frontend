@@ -96,7 +96,6 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             pk: restaurant.id,
           });
         }, setRestDB(theDB));
-        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -136,7 +135,6 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         axios
           .request(yesOptions)
           .then(function (response) {
-            console.log(response.data);
             setAnswer("Previous Answer: Yes!");
             setTimeout(() => {
               setAnswer("");
@@ -151,7 +149,6 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       axios
         .request(noOptions)
         .then(function (response) {
-          console.log(response.data);
           setAnswer("Previous Answer: No!");
           setTimeout(() => {
             setAnswer("");
@@ -211,32 +208,12 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       return axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
           navigate("/meals");
         })
         .catch(function (error) {
           console.error(error);
         });
   };
-  console.log(lastDirection);
-  console.log(count);
-  console.log(restPk);
-  // useEffect(() => {
-  //     const options = {
-  //       method: 'GET',
-  //       url: `../.netlify/functions/pictures`,
-  //     };
-  //     axios.request(options).then(function (response) {
-  //       console.log(response.data);
-  //     }).catch(function (error) {
-  //       console.error(error);
-  //     })
-  // }, []);
-  useEffect(() => {
-    fetch(`/.netlify/functions/pictures`).then((res) => {
-      console.log(res);
-    });
-  }, []);
 
   const undo = (restaurantPK: string) => {
     const undoNoOptions = {
@@ -260,9 +237,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         console.log(restPk),
         axios
           .request(undoYesOptions)
-          .then(function (response) {
-            console.log(response.data);
-          })
+          .then(function (response) {})
           .catch(function (error) {
             console.error(error);
           })
@@ -271,9 +246,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       console.log(restPk),
       axios
         .request(undoNoOptions)
-        .then(function (response) {
-          console.log(response.data);
-        })
+        .then(function (response) {})
         .catch(function (error) {
           console.error(error);
         })

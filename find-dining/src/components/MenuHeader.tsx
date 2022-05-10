@@ -2,7 +2,7 @@ import "./MenuHeader.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Nav from 'react-bootstrap/Nav'
+import Nav from "react-bootstrap/Nav";
 
 interface props {
   token: string;
@@ -39,9 +39,7 @@ const MenuHeader = ({
 
     axios
       .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
+      .then(function (response) {})
       .catch((e) => setError("Logout Unsuccessful Try again"));
     setUser("");
     setToken("");
@@ -62,17 +60,17 @@ const MenuHeader = ({
         onClick={() => navigate("/")}
       ></img>
       <Nav>
-      <Nav.Item as="li" className="navLinks">
-        <Link to="/meals">Meals</Link>
-        {isLoggedIn ? (
-          <a href="login" className="logoutLink" onClick={() => setLogout()}>
-            Logout
-          </a>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-        <Link to="/">Home</Link>
-      </Nav.Item>
+        <Nav.Item as="li" className="navLinks">
+          <Link to="/meals">Meals</Link>
+          {isLoggedIn ? (
+            <a href="login" className="logoutLink" onClick={() => setLogout()}>
+              Logout
+            </a>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+          <Link to="/">Home</Link>
+        </Nav.Item>
       </Nav>
       <div className="logoutProfile">
         <div className="error">{error}</div>

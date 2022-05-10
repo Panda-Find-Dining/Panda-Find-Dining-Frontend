@@ -77,7 +77,6 @@ const MealCreation = ({
   userPk,
   user,
 }: mealCreationProps) => {
-  // <React.SetStateAction{ value: string; label: string; }[]>
   const [results, setResults] = useState([]);
   const [selectFriendsOptions, setSelectFriendsOptions] = useState<any>([]);
   const [mealFriends, setMealFriends] = useState<any>([]);
@@ -119,7 +118,6 @@ const MealCreation = ({
       await axios
         .request(options)
         .then(function (response) {
-          console.log(response.data);
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
           setMealPk(theMealPk.toString());
@@ -140,7 +138,6 @@ const MealCreation = ({
       await axios
         .request(googleOptions)
         .then(function (response) {
-          console.log(response.data);
           navigate("/select");
         })
         .catch(function (error) {
@@ -157,10 +154,6 @@ const MealCreation = ({
     { value: "60", label: "60" },
     { value: "80", label: "80" },
   ];
-  console.log(mealPk);
-  console.log(friendsPks);
-  console.log(friendsNames);
-  console.log(radius);
   const handleSearch = () => {
     setResults([]);
     const options = {
@@ -175,10 +168,8 @@ const MealCreation = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setResults(response.data);
         setSearchError("");
-        console.log(results);
         setSearched(true);
       })
       .catch((e) => {
@@ -199,7 +190,6 @@ const MealCreation = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setAddFriendSuccess("Friend Added");
         setFriendNamesList();
         setAddFriendError("");
@@ -222,7 +212,6 @@ const MealCreation = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         response.data[0].friends.map(
           (friend: string, index: number) => {
             return theFriendsNames.push(friend);
@@ -232,13 +221,10 @@ const MealCreation = ({
           }, setFriendsPks(theFriendsPks)),
           setFriendsNames(theFriendsNames)
         );
-        console.log(theFriendsNames);
-        console.log(theFriendsPks);
         let zipped = theFriendsNames.map((x: string, i: number) => [
           { value: theFriendsPks[i], label: x },
         ]);
         let newZipped = zipped.flat(1);
-        console.log(newZipped);
         setSelectFriendsOptions(newZipped);
       })
       .catch(function (error) {
@@ -260,7 +246,6 @@ const MealCreation = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         response.data[0].friends.map(
           (friend: string, index: number) => {
             return theFriendsNames.push(friend);
@@ -276,7 +261,6 @@ const MealCreation = ({
           { value: theFriendsPks[i], label: x },
         ]);
         let newZipped = zipped.flat(1);
-        console.log(newZipped);
         setSelectFriendsOptions(newZipped);
       })
       .catch(function (error) {
@@ -284,10 +268,6 @@ const MealCreation = ({
       });
   };
   console.log(friendPk);
-  console.log(friendsPks);
-  console.log(searched);
-  console.log(results);
-  console.log(friendName);
   return (
     <Container>
       <Span>
@@ -455,6 +435,28 @@ const MealCreation = ({
                 }}
                 className="mealStartPage"
               >
+                <StyledButton
+                  onClick={() => {
+                    setFriendsPks(
+                      mealFriends
+                        .flat(1)
+                        .map((friend: selectOpt) => friend.value)
+                    );
+                    setFriendsNames(
+                      mealFriends
+                        .flat(1)
+                        .map((friend: selectOpt) => friend.label)
+                    );
+                    setCurrentMealFriendsNames(
+                      mealFriends
+                        .flat(1)
+                        .map((friend: selectOpt) => friend.label)
+                    );
+                    setShowLocationRadius(true);
+                  }}
+                >
+                  Update Meal Friends
+                </StyledButton>
                 <hr
                   style={{
                     borderTop: "4px solid #bbb",
