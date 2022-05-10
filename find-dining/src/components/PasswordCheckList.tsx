@@ -38,7 +38,12 @@ const PasswordCheckListTest = ({
           ) as React.ElementType;
 
           return (
-            <div
+            <div style={{
+              display: "flex",
+              alignContent: "center",
+              justifyItems: "center",
+              marginTop: "15px",
+            }}
               key={activeRuleIndex.toString()}
               className={`password-checklist__item${
                 password || passwordConfirm
@@ -51,16 +56,20 @@ const PasswordCheckListTest = ({
               }`}
             >
               {(password || passwordConfirm) && Icon && (
-                <span>
-                  <Icon />
+                <span> 
+                  <Icon  />
                 </span>
               )}
-              {password === "" ? (
-                <></>
-              ) : password !== passwordConfirm ? (
-                <p>{activeRules[activeRuleKey].nomatch}</p>
+              {password === "" ? null : password !== passwordConfirm ? (
+                <p style={{
+                  margin: "auto",
+                  color: "red",
+                }}>{activeRules[activeRuleKey].nomatch}</p>
               ) : (
-                <p>{activeRules[activeRuleKey].gotmatch}</p>
+                <p style={{
+                  margin: "auto",
+                  color: "green",
+                }}>{activeRules[activeRuleKey].gotmatch}</p>
               )}
             </div>
           );
