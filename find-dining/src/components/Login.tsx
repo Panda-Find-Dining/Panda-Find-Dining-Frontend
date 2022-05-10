@@ -70,7 +70,6 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
         password: password,
       })
       .then((response) => {
-        console.log(response.data.user_id);
         setToken(response.data.token);
         setUserPk(response.data.user_id);
         setUser(username);
@@ -92,7 +91,6 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setResetConfirm("Password Reset Email Sent!");
         setTimeout(() => {
           navigate("/");
@@ -102,9 +100,6 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
         console.error(error);
       });
   };
-  console.log(error);
-  console.log(reset);
-  console.log(email);
   return (
     <Container>
      <div className="text-center">

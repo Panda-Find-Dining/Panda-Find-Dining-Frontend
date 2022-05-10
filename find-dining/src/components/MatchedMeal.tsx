@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MyMap from "./MyMap";
 
 interface matchProps {
   token: string;
@@ -10,12 +11,14 @@ interface matched {
   photo_reference: string;
   hours: string;
   formatted_address: string;
-  lat: string;
-  lon: string;
+  lat: string | undefined;
+  lon: string | undefined;
 }
 
 const MatchedMeal = ({ token, mealPk }: matchProps) => {
   const [match, setMatch] = useState<matched>();
+  const [numLat, setNumLat] = useState(0);
+  const [numLon, setNumLon] = useState(0);
 
   useEffect(() => {
     const options = {
@@ -30,29 +33,14 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setMatch(response.data[0]);
+        setNumLat(parseInt(response.data[0].lat));
+        setNumLon(parseInt(response.data[0].lon));
       })
       .catch(function (error) {
         console.error(error);
       });
   }, [token, mealPk]);
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
-  // let map: google.maps.Map;
-
-  // function initMap(): void {
-  //   map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-  //     center: { lat: -34.397, lng: 150.644 },
-  //     zoom: 8,
-  //   });
-  // }
-
-  // declare global {
-  //   interface Window {
-  //     initMap: () => void;
-  //   }
-  // }
-  // window.initMap = initMap;
   return (
     <div>
       <h2>You've matched on a restaurant!</h2>
@@ -64,10 +52,7 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
           src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`}
           alt="pic"
         />
-        <img
-          src={`https://maps.googleapis.com/maps/api/staticmap?center=${match?.formatted_address}&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Clabel:M%7C${match?.lat},${match?.lon}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`}
-          alt="pic"
-        />
+        <MyMap lat={numLat} lon={numLon}></MyMap>
       </div>
 
       <div className="hours">
