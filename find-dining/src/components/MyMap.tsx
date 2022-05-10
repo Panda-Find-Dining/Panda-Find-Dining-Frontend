@@ -13,7 +13,7 @@ interface center {
 function MyMap({ lat, lon }: MyMapProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M",
+    googleMapsApiKey: process.env.REACT_APP_API_KEY as any,
   });
   const containerStyle = {
     width: "400px",
