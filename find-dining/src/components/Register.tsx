@@ -83,18 +83,11 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
           email: email,
         })
         .then((response) => {
-          axios
-            .post("https://find-dining-panda.herokuapp.com/api/tokenpk/", {
-              username: username,
-              password: password,
-            })
-            .then((response) => {
-              setToken(response.data.token);
-              setUser(username);
-              setUserPk(response.data.user_id);
-              setSuccess("Registration Complete!");
-              navigate("/");
-            });
+          setToken(response.data.token);
+          setUser(username);
+          setUserPk(response.data.user_id);
+          setSuccess("Registration Complete!");
+          navigate("/");
         })
         .catch((e) => setError("Login Unsuccessful please Try Again!"));
     }
@@ -102,14 +95,14 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
   return (
     <Container>
       <div className="text-center">
-      <img 
-        style={{
-          marginBottom: 10,
-          width: 240,
-        }}
-        src={FDLogo}
-        alt="logo"
-      />
+        <img
+          style={{
+            marginBottom: 10,
+            width: 240,
+          }}
+          src={FDLogo}
+          alt="logo"
+        />
       </div>
       <Span>
         <Form>

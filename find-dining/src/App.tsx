@@ -26,8 +26,6 @@ const App = () => {
   });
   const isLoggedIn = user && token;
 
-  console.log(process.env.REACT_APP_API_KEY);
-
   return (
     <>
       <BrowserRouter>
@@ -78,7 +76,6 @@ const App = () => {
                       setToken={setToken}
                       setUserPk={setUserPk}
                     />
-                    
                   </div>
                 )}
               </header>
@@ -93,7 +90,6 @@ const App = () => {
                   setUser={setUser}
                   setUserPk={setUserPk}
                 />
-                
               </div>
             }
           />
