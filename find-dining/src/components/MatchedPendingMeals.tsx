@@ -43,6 +43,7 @@ interface restaurant {
   id: number;
   location: string;
   invitee: string;
+  invitee_pk: string;
   num_of_diners: string;
   archive: boolean;
   all_users_have_selected: string;
@@ -82,6 +83,7 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
+            invitee_pk: restaurant.invitee_pk,
           });
         }, setDB(theDB));
       })
@@ -111,6 +113,7 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
+            invitee_pk: restaurant.invitee_pk,
           });
         }, setPendingDB(thePendingDB));
       })
@@ -134,8 +137,7 @@ const MatchedPendingMeals = ({
 
     axios
       .request(options)
-      .then(function (response) {
-      })
+      .then(function (response) {})
       .catch(function (error) {
         console.error(error);
       });
@@ -181,6 +183,7 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
+            invitee_pk: restaurant.invitee_pk,
           });
         }, setPendingDB(thePendingDB));
       })
@@ -210,8 +213,10 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
+            invitee_pk: restaurant.invitee_pk,
           });
         }, setDB(theDB));
+        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -239,12 +244,17 @@ const MatchedPendingMeals = ({
                       onClick={() => console.log(restaurant)}
                     >
                       {restaurant.location}
+                      {restaurant.invitee}
                     </p>
                     <p>{restaurant.archive}</p>
                     {restaurant.all_users_have_selected.includes(userPk) ? (
-                      <div style={{
-                        color: "black"
-                      }}>Friends Still selecting</div>
+                      <div
+                        style={{
+                          color: "black",
+                        }}
+                      >
+                        Friends Still selecting
+                      </div>
                     ) : (
                       <StyledButton
                         className="pendingButton"
@@ -259,7 +269,7 @@ const MatchedPendingMeals = ({
                     <StyledButton
                       style={{
                         width: 15,
-                        backgroundColor: "black"
+                        backgroundColor: "black",
                       }}
                       className="xButton"
                       onClick={() => {
@@ -288,6 +298,8 @@ const MatchedPendingMeals = ({
                     <div key={restaurant.id} className="pendingMeals">
                       <p className="restaurantLocation">
                         {restaurant.location}
+                        <br></br>
+                        {restaurant.invitee}
                       </p>
                       <StyledButton
                         className="pendingButton"
@@ -317,14 +329,17 @@ const MatchedPendingMeals = ({
           </div>
         </div>
       </Span>
-      <StyledButton style={{
-                marginTop: 50,
-                width: 150,
-                backgroundColor: "black",
-              }} className="createButton" onClick={() => mealStart()}>
-            Create Meal
-          </StyledButton>
-
+      <StyledButton
+        style={{
+          marginTop: 50,
+          width: 150,
+          backgroundColor: "black",
+        }}
+        className="createButton"
+        onClick={() => mealStart()}
+      >
+        Create Meal
+      </StyledButton>
     </Container>
   );
 };
