@@ -55,7 +55,7 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
       </div>
       <div className="photo_reference">
         <img
-          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=AIzaSyC3_vtSfDK5doLZH-9ERb458Q5oeLNW72M`}
+          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=${process.env.REACT_APP_API_KEY}`}
           alt="pic"
         />
         <MyMap lat={numLat} lon={numLon}></MyMap>
