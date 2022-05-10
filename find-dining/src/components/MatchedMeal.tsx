@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MyMap from "./MyMap";
+import styled from "styled-components";
+
+
+const Container = styled.div`
+  padding: 50px;
+  marginLeft: 30px;
+`;
 
 interface matchProps {
   token: string;
@@ -42,10 +49,9 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
       });
   }, [token, mealPk]);
   return (
-    <div>
-      <h2>You've matched on a restaurant!</h2>
-      <div className="name">
-        <h2>{match?.name}</h2>
+    <Container >
+      <div className="name text-center">
+        <h3>{match?.name}</h3>
       </div>
       <div className="photo_reference">
         <img
@@ -61,7 +67,7 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
       <div className="Details">
         <h2>Details:{match?.formatted_address}</h2>
       </div>
-    </div>
+    </Container>
   );
 };
 

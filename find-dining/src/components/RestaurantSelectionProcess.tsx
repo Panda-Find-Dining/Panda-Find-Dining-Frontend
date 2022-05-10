@@ -96,6 +96,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             pk: restaurant.id,
           });
         }, setRestDB(theDB));
+        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -135,6 +136,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         axios
           .request(yesOptions)
           .then(function (response) {
+            console.log(response.data);
             setAnswer("Previous Answer: Yes!");
             setTimeout(() => {
               setAnswer("");
@@ -149,6 +151,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       axios
         .request(noOptions)
         .then(function (response) {
+          console.log(response.data);
           setAnswer("Previous Answer: No!");
           setTimeout(() => {
             setAnswer("");
@@ -208,12 +211,32 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       return axios
         .request(options)
         .then(function (response) {
+          console.log(response.data);
           navigate("/meals");
         })
         .catch(function (error) {
           console.error(error);
         });
   };
+  console.log(lastDirection);
+  console.log(count);
+  console.log(restPk);
+  // useEffect(() => {
+  //     const options = {
+  //       method: 'GET',
+  //       url: `../.netlify/functions/pictures`,
+  //     };
+  //     axios.request(options).then(function (response) {
+  //       console.log(response.data);
+  //     }).catch(function (error) {
+  //       console.error(error);
+  //     })
+  // }, []);
+  useEffect(() => {
+    fetch(`/.netlify/functions/pictures`).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   const undo = (restaurantPK: string) => {
     const undoNoOptions = {
@@ -237,7 +260,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         console.log(restPk),
         axios
           .request(undoYesOptions)
-          .then(function (response) {})
+          .then(function (response) {
+            console.log(response.data);
+          })
           .catch(function (error) {
             console.error(error);
           })
@@ -246,7 +271,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       console.log(restPk),
       axios
         .request(undoNoOptions)
-        .then(function (response) {})
+        .then(function (response) {
+          console.log(response.data);
+        })
         .catch(function (error) {
           console.error(error);
         })
@@ -288,12 +315,14 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
               setRestPk(restaurant.pk);
             }}
           >
+
             {currentIndex === -1 ? (
               <h2>Please Swipe to Start!</h2>
+
             ) : (
-              <h2 className="cardCount">
-                Restaurant Count: {count}/{restDB.length}
-              </h2>
+              <h3 className="cardCount">
+                Choice {count} of {restDB.length}
+              </h3>
             )}
             <div
               style={{
@@ -312,11 +341,13 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
       <div
         style={{
           marginBottom: 70,
-          paddingLeft: 40,
+          paddingLeft: 60,
+          paddingRight: 60,
         }}
         className="buttons"
       >
-        <div
+        
+        <div 
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
@@ -326,16 +357,16 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
           }}
           onClick={() => swipe("left")}
         >
-          <img
+          <img 
             style={{
-              width: 100,
+              width: 75,
             }}
             src={angryPanda}
             alt="panda button"
           />
           Heck No!
         </div>
-        <div
+        <div 
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
@@ -344,14 +375,14 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
           }}
           onClick={() => swipe("right")}
         >
-          <img
+          <img 
             style={{
-              width: 100,
+              width: 75,
             }}
             src={hungryPanda}
             alt="panda button"
           />
-          Heck Yeah!
+          HeckYes!
         </div>
       </div>
       <div>
