@@ -51,7 +51,7 @@ interface matchedPendingProps {
 interface restaurant {
   id: number;
   location: string;
-  invitee: string;
+  invitee_names: string;
   num_of_diners: string;
   archive: boolean;
   all_users_have_selected: string;
@@ -89,7 +89,7 @@ const MatchedPendingMeals = ({
           return theDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitee: restaurant.invitee,
+            invitee_names: restaurant.invitee_names,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -121,7 +121,7 @@ const MatchedPendingMeals = ({
           return thePendingDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitee: restaurant.invitee,
+            invitee_names: restaurant.invitee_names,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -198,7 +198,7 @@ const MatchedPendingMeals = ({
           return thePendingDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitee: restaurant.invitee,
+            invitee_names: restaurant.invitee_names,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -230,7 +230,7 @@ const MatchedPendingMeals = ({
           return theDB.push({
             id: restaurant.id,
             location: restaurant.location,
-            invitee: restaurant.invitee,
+            invitee_names: restaurant.invitee_names,
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
@@ -270,7 +270,7 @@ const MatchedPendingMeals = ({
                     >
                       City: {restaurant.location}
                       <br></br>
-                      Invitee(s): {restaurant.invitee}
+                      Attendee(s): {restaurant.invitee_names}
                       <br></br>
                       Date Added: {restaurant.created_date}
                     </p>
@@ -296,9 +296,9 @@ const MatchedPendingMeals = ({
 
                     <p
                       style={{
-                          backgroundColor: "black",
-                          width: "20px",
-                          textAlign: "center",
+                        backgroundColor: "black",
+                        width: "20px",
+                        textAlign: "center",
                       }}
                       className="xButton"
                       onClick={() => {
@@ -341,7 +341,7 @@ const MatchedPendingMeals = ({
                       >
                         City: {restaurant.location}
                         <br></br>
-                        Invitee(s): {restaurant.invitee}
+                        Attendee(s): {restaurant.invitee_names}
                         <br></br>
                         Date Added: {restaurant.created_date}
                       </p>
@@ -354,7 +354,8 @@ const MatchedPendingMeals = ({
                       >
                         See Match
                       </StyledButton>
-                      <p style={{
+                      <p
+                        style={{
                           backgroundColor: "black",
                           width: "20px",
                           textAlign: "center",

@@ -117,6 +117,7 @@ const MealCreation = ({
       await axios
         .request(options)
         .then(function (response) {
+          console.log(response);
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
           setMealPk(theMealPk.toString());
@@ -267,6 +268,7 @@ const MealCreation = ({
       });
   };
   console.log(friendPk);
+  console.log(friendsNames);
   return (
     <div
       style={{
