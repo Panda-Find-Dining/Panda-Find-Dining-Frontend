@@ -4,6 +4,9 @@ import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
+// import Form from "react-bootstrap/Form";
+// import hungryPanda from "../images/hungryPanda.png";
+// import speechBubble2 from "../images/speechBubble2.png";
 
 const StyledButton = styled(Button)`
   background-color: #eb1b67;
@@ -33,6 +36,12 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+// const Blurb = styled.div`
+//   text-align: center;
+//   margin: 10px;
+//   padding: 25px;
+// `;
+
 interface matchedPendingProps {
   token: string;
   mealPk: string;
@@ -43,7 +52,6 @@ interface restaurant {
   id: number;
   location: string;
   invitee: string;
-  invitee_pk: string;
   num_of_diners: string;
   archive: boolean;
   all_users_have_selected: string;
@@ -75,6 +83,7 @@ const MatchedPendingMeals = ({
     axios
       .request(options)
       .then(function (response) {
+        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
@@ -83,9 +92,9 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
-            invitee_pk: restaurant.invitee_pk,
           });
         }, setDB(theDB));
+        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -105,6 +114,7 @@ const MatchedPendingMeals = ({
     axios
       .request(options)
       .then(function (response) {
+        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
@@ -113,9 +123,9 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
-            invitee_pk: restaurant.invitee_pk,
           });
         }, setPendingDB(thePendingDB));
+        console.log(thePendingDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -137,7 +147,9 @@ const MatchedPendingMeals = ({
 
     axios
       .request(options)
-      .then(function (response) {})
+      .then(function (response) {
+        console.log(response.data);
+      })
       .catch(function (error) {
         console.error(error);
       });
@@ -147,6 +159,7 @@ const MatchedPendingMeals = ({
     setMealPk(restaurant);
     navigate("/select");
   };
+  console.log(userPk);
   let pendingFalseCount = 0;
   pendingDb.map((restaurant: restaurant, index: number) =>
     restaurant.archive === false ? (pendingFalseCount += 1) : pendingFalseCount
@@ -161,6 +174,8 @@ const MatchedPendingMeals = ({
   const removeMatchItem = (data: restaurant[], index: number) => {
     setDB(data.filter((o, i) => index !== i));
   };
+  console.log(pendingFalseCount);
+  console.log(matchFalseCount);
   const refreshPendingDb = () => {
     let thePendingDB: restaurant[] = [];
     const pendingOptions = {
@@ -175,6 +190,7 @@ const MatchedPendingMeals = ({
     axios
       .request(pendingOptions)
       .then(function (response) {
+        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
@@ -183,9 +199,9 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
-            invitee_pk: restaurant.invitee_pk,
           });
         }, setPendingDB(thePendingDB));
+        console.log(thePendingDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -205,6 +221,7 @@ const MatchedPendingMeals = ({
     axios
       .request(matchOptions)
       .then(function (response) {
+        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
@@ -213,7 +230,6 @@ const MatchedPendingMeals = ({
             num_of_diners: restaurant.num_of_diners,
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
-            invitee_pk: restaurant.invitee_pk,
           });
         }, setDB(theDB));
         console.log(theDB);
@@ -231,7 +247,7 @@ const MatchedPendingMeals = ({
     <Container>
       <Span>
         <div className="matchedPendingDiv">
-          <h2 className="pendingMealsH2">Upcoming Meals</h2>
+          <h3 className="pendingMealsH2">Upcoming Meals</h3>
           <div className="pendingMealsBig">
             {pendingFalseCount === 0 ? (
               <div>Sorry No Pending Meals</div>
@@ -239,24 +255,22 @@ const MatchedPendingMeals = ({
               pendingDb.map((restaurant: restaurant, index: number) =>
                 restaurant.archive === false ? (
                   <div key={restaurant.id} className="pendingMeals">
-                    <p
+                    <p style={{
+                        color: "black",
+                        marginBottom: 3,
+                      }}
                       className="restaurantLocation"
                       onClick={() => console.log(restaurant)}
                     >
-                      {restaurant.location}
-                      {restaurant.invitee}
+                      City: {restaurant.location}
                     </p>
                     <p>{restaurant.archive}</p>
                     {restaurant.all_users_have_selected.includes(userPk) ? (
-                      <div
-                        style={{
-                          color: "black",
-                        }}
-                      >
-                        Friends Still selecting
-                      </div>
+                      <div style={{
+                        color: "black"
+                      }}>Friends Still selecting</div>
                     ) : (
-                      <StyledButton
+                      <StyledButton 
                         className="pendingButton"
                         onClick={() =>
                           selectRestaurants(restaurant.id.toString())
@@ -269,7 +283,7 @@ const MatchedPendingMeals = ({
                     <StyledButton
                       style={{
                         width: 15,
-                        backgroundColor: "black",
+                        backgroundColor: "black"
                       }}
                       className="xButton"
                       onClick={() => {
@@ -287,7 +301,9 @@ const MatchedPendingMeals = ({
             )}
           </div>
 
-          <h2 className="pendingMealsH2">Matched Meals</h2>
+          <h3 style={{
+            paddingTop: 30,
+          }}className="pendingMealsH2">Matched Meals</h3>
           <div className="pendingMealsMed">
             <div className="matchedMeals">
               {matchFalseCount === 0 ? (
@@ -296,10 +312,11 @@ const MatchedPendingMeals = ({
                 db.map((restaurant: restaurant, index: number) =>
                   restaurant.archive === false ? (
                     <div key={restaurant.id} className="pendingMeals">
-                      <p className="restaurantLocation">
-                        {restaurant.location}
-                        <br></br>
-                        {restaurant.invitee}
+                      <p style={{
+                        color: "black",
+                        marginBottom: 3,
+                      }}className="restaurantLocation">
+                        City: {restaurant.location}
                       </p>
                       <StyledButton
                         className="pendingButton"
@@ -329,17 +346,14 @@ const MatchedPendingMeals = ({
           </div>
         </div>
       </Span>
-      <StyledButton
-        style={{
-          marginTop: 50,
-          width: 150,
-          backgroundColor: "black",
-        }}
-        className="createButton"
-        onClick={() => mealStart()}
-      >
-        Create Meal
-      </StyledButton>
+      <StyledButton className="text-center" style={{
+                marginTop: 50,
+                width: 150,
+                backgroundColor: "black",
+              }}  onClick={() => mealStart()}>
+            Create Meal
+          </StyledButton>
+
     </Container>
   );
 };

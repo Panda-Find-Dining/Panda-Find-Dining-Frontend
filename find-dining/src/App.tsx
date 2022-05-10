@@ -78,15 +78,7 @@ const App = () => {
                       setToken={setToken}
                       setUserPk={setUserPk}
                     />
-                    <MenuHeader
-                      isLoggedIn={isLoggedIn}
-                      token={token}
-                      setToken={setToken}
-                      setUser={setUser}
-                      setUserPk={setUserPk}
-                      setFriendsPks={setFriendsPks}
-                      setFriendsNames={setFriendsNames}
-                    />
+                    
                   </div>
                 )}
               </header>
@@ -101,15 +93,7 @@ const App = () => {
                   setUser={setUser}
                   setUserPk={setUserPk}
                 />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
+                
               </div>
             }
           />
