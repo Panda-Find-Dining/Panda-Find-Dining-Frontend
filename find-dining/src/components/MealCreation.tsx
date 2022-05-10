@@ -296,12 +296,21 @@ const MealCreation = ({
                   transform: "translate(-50%, -50%)",
                   fontSize: "14px",
                   textAlign: "start",
+
+                  padding: "17px",
+                  color: "black",
+                }}
+              >
+                Hey <Span>{user}</Span>, don't eat alone! Find
+                some friends to eat with here!
+
                   padding: "14px",
                   color: "black",
                 }}
               >
                 Hey <Span>{user}</Span>, put that microwave dinner down & find
                 some friends to eat with here...
+
               </div>
               <div
                 className="text-center"
@@ -587,6 +596,7 @@ const MealCreation = ({
                       marginTop: 5,
                       width: 150,
                       backgroundColor: "black",
+                      marginBottom: 40,
                     }}
                     className="changedMind"
                     onClick={() => {

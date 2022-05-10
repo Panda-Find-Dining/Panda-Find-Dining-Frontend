@@ -115,7 +115,9 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
       <Span>
         <Form>
           <Form.Group>
-            <Form.Label>{error}</Form.Label>
+            <Form.Label style={{
+                color: "red",
+              }}>{error}</Form.Label>
             <Form.Label
               style={{
                 color: "#eb1b67",
