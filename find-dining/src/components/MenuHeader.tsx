@@ -1,6 +1,6 @@
 import "./MenuHeader.css";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -27,6 +27,7 @@ const MenuHeader = ({
   setFriendsPks,
 }: props) => {
   const [error, setError] = useState("");
+  const [isHidden, setIsHidden] = useState(true);
   const setLogout = () => {
     const options = {
       method: "POST",
@@ -47,40 +48,29 @@ const MenuHeader = ({
     setUser("");
     setToken("");
     setUserPk("");
-    setFriendsNames([]);
+    setFriendsNames([])
     setFriendsPks([]);
   };
   const navigate = useNavigate();
+  const hideNavbar = () => {
+    const position = window.pageYOffset;
+    console.log(position)
+    position < 90 ? setIsHidden(false) : setIsHidden(true)
+  };
+  useEffect(() =>{window.addEventListener("scroll", hideNavbar,) 
+  return () => {window.removeEventListener("scroll", hideNavbar)}},[]
+  )
+
   return (
     <Nav style={{
       color: "black",
       display: "inline",
-      flexDirection: "row"
+      flexDirection: "row",
+      transition: "top .3s",
+      top: `${isHidden ? "-30px" : null}`,
     }}className="menuHeader" >
-      {/* <img
-        style={{
-          width: "15%",
-        }}
-        className="siteLogo"
-        src={require("../images/FDMenuLogo.png")}
-        alt="This a placeholder"
-        onClick={() => navigate("/")}
-      ></img> */}
-      {/* <Nav>
-        <Nav.Item as="li" className="navLinks">
-          <Link to="/meals">Meals</Link>
-          {isLoggedIn ? (
-            <a href="login" className="logoutLink" onClick={() => setLogout()}>
-              Logout
-            </a>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
-          <Link to="/">Home</Link>
-        </Nav.Item>
-      </Nav> */}
-      <Navbar onScroll={() => 
-      console.log("hello world")}bg="light" variant="dark" >
+      <Navbar hidden={isHidden} fixed="bottom" 
+      bg="light" variant="dark" >
         <div>
           <Navbar.Brand style={{
         color: "black",
