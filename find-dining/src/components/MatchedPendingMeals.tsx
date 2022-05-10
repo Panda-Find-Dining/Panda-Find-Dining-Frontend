@@ -47,11 +47,12 @@ interface matchedPendingProps {
   mealPk: string;
   setMealPk: React.Dispatch<React.SetStateAction<string>>;
   userPk: string;
+  user: string;
 }
 interface restaurant {
   id: number;
   location: string;
-  invitee_names: string;
+  invitee_names: string[];
   num_of_diners: string;
   archive: boolean;
   all_users_have_selected: string;
@@ -63,6 +64,7 @@ const MatchedPendingMeals = ({
   mealPk,
   setMealPk,
   userPk,
+  user,
 }: matchedPendingProps) => {
   const [db, setDB] = useState<restaurant[]>([]);
   const [pendingDb, setPendingDB] = useState<restaurant[]>([]);
@@ -270,7 +272,23 @@ const MatchedPendingMeals = ({
                     >
                       City: {restaurant.location}
                       <br></br>
-                      Attendee(s): {restaurant.invitee_names}
+                      {restaurant.invitee_names.includes(user) ? (
+                        <>
+                          Attendee(s):{" "}
+                          {restaurant.invitee_names.map(
+                            (item: string, i: number, arr: string[]) =>
+                              i !== arr.length - 1 ? item + ", " : "and " + item
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          Attendee(s):{" "}
+                          {restaurant.invitee_names.map(
+                            (item: string, i: number, arr: string[]) =>
+                              i !== arr.length - 1 ? item + ", " : "and " + user
+                          )}
+                        </>
+                      )}
                       <br></br>
                       Date Added: {restaurant.created_date}
                     </p>
