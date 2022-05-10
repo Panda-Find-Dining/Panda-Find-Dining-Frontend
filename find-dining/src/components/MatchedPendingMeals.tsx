@@ -294,10 +294,11 @@ const MatchedPendingMeals = ({
                       </StyledButton>
                     )}
 
-                    <StyledButton
+                    <p
                       style={{
-                        width: 15,
-                        backgroundColor: "black",
+                          backgroundColor: "black",
+                          width: "20px",
+                          textAlign: "center",
                       }}
                       className="xButton"
                       onClick={() => {
@@ -306,7 +307,7 @@ const MatchedPendingMeals = ({
                       }}
                     >
                       X
-                    </StyledButton>
+                    </p>
                   </div>
                 ) : (
                   <></>
@@ -353,7 +354,11 @@ const MatchedPendingMeals = ({
                       >
                         See Match
                       </StyledButton>
-                      <StyledButton
+                      <p style={{
+                          backgroundColor: "black",
+                          width: "20px",
+                          textAlign: "center",
+                        }}
                         className="xButton"
                         onClick={() => {
                           decline(restaurant.id);
@@ -361,7 +366,7 @@ const MatchedPendingMeals = ({
                         }}
                       >
                         X
-                      </StyledButton>
+                      </p>
                     </div>
                   ) : (
                     <></>

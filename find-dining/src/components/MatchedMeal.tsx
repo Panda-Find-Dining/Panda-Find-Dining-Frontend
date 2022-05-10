@@ -51,7 +51,7 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
   return (
     <Container >
       <div className="name text-center">
-        <h3>{match?.name}</h3>
+        <h3 >{match?.name}</h3>
       </div>
       <div className="photo_reference">
         <img

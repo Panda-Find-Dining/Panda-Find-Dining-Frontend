@@ -79,7 +79,8 @@ const MenuHeader = ({
           <Link to="/">Home</Link>
         </Nav.Item>
       </Nav> */}
-      <Navbar fixed="bottom" bg="light" variant="dark" >
+      <Navbar onScroll={() => 
+      console.log("hello world")}bg="light" variant="dark" >
         <div>
           <Navbar.Brand style={{
         color: "black",

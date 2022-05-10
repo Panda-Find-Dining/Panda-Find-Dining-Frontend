@@ -38,9 +38,9 @@ interface selectOpt {
 const StyledButton = styled(Button)`
   background-color: #eb1b67;
   box-shadow: none;
+  margin-top: 10px;
 
   border: none;
-  min-width: 10px;
   &:hover {
     background-color: #eb1b67;
     outline: none;
@@ -266,10 +266,10 @@ const MealCreation = ({
         console.error(error);
       });
   };
-  console.log(friendPk);
   return (
     <div style={{
       padding: "25px 28px 10px 28px",
+      height: "100vh",
     }}
     >
       <Span>
@@ -364,11 +364,17 @@ const MealCreation = ({
                   }}>Sorry they haven't Joined Yet!</div>
                 ) : (
                   results.map((user: user, index: number) => (
-                    <div className="searchList">
-                      <div>{user.username}</div>
-                      <StyledButton
+                    <div style={{
+                      display: "flex",
+                    }}className="searchList">
+                      <p style={{
+                        marginRight: "3px"
+                      }}>{user.username}</p>
+                      <p
                         style={{
                           backgroundColor: "black",
+                          width: "20px",
+                          textAlign: "center",
                         }}
                         onClick={async () => {
                           setFriendPk(user.id);
@@ -376,7 +382,7 @@ const MealCreation = ({
                         }}
                       >
                         +
-                      </StyledButton>
+                      </p>
                     </div>
                   ))
                 )}
@@ -490,7 +496,7 @@ const MealCreation = ({
                       color: "#eb1b67",
                       marginBottom: 2,
                       marginTop: 10,
-                      marginRight: 5,
+                      marginRight: 15,
                     }}
                   >
                     Search Location
@@ -505,27 +511,38 @@ const MealCreation = ({
                     placeholder="enter your city"
                   ></input>
                 </div>
+                <div style={{
+                  display: "flex",
+                  marginTop: "15px",
+                }}>
                 <Form.Label
                   style={{
                     color: "#eb1b67",
                     marginBottom: 2,
                     marginTop: 10,
+                    marginRight: 15,
                   }}
                 >
                   Set Radius{" "}
                 </Form.Label>
-                <Select
+                <div style={{
+                  width: "175px",
+                  marginBottom: "20px"
+                }}>
+                <Select 
                   className="select"
                   options={selectRadiusOptions}
                   onChange={(selection) => setRadius(selection?.value)}
                   placeholder={"select radius"}
                 />
+                </div>
+                </div>
                 <div className="mealButtons text-center">
                   <div className="error">{error}</div>
                   <div className="success">{success}</div>
                   <StyledButton
                     style={{
-                      marginTop: 50,
+                      marginTop: 10,
                       width: 150,
                     }}
                     onClick={() => {
