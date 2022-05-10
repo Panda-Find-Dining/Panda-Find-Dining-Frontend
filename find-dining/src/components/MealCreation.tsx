@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble2 from "../images/speechBubble2.png";
+// import bearBlurb from "../images/bearBlurb.png";
+
 import Form from "react-bootstrap/Form";
 declare module "react" {
   interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
@@ -55,7 +57,7 @@ const Span = styled.span`
 `;
 
 const Container = styled.div`
-  padding: 10px 20px 10px 20px;
+  padding: 20px 20px 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,7 +268,10 @@ const MealCreation = ({
   };
   console.log(friendPk);
   return (
-    <Container>
+    <div style={{
+      padding: "25px 28px 10px 28px",
+    }}
+    >
       <Span>
         <Form>
           <div className="mealFriendSelect">
@@ -279,15 +284,15 @@ const MealCreation = ({
               }}
             >
                 <div
-                  className="centered"
+                  // className="centered"
                   style={{
                     position: "absolute",
-                    top: "57%",
-                    left: "38%",
+                    top: "40%",
+                    left: "35%",
                     transform: "translate(-50%, -50%)",
-                    fontSize: "11.5px",
+                    fontSize: "14px",
                     textAlign: "start",
-                    padding: "10px",
+                    padding: "14px",
                     color: "black"
                   }}
                 >
@@ -304,7 +309,7 @@ const MealCreation = ({
                   src={speechBubble2}
                   alt="speech bubble"
                   style={{
-                    width: 150,
+                    width: 200,
                   }}
                 />
               </div>
@@ -315,7 +320,7 @@ const MealCreation = ({
                   alt="panda pic"
                   style={{
                     justifyContent: "right",
-                    width: 100,
+                    width: 135,
                     textAlign: "right",
                   }}
                 />
@@ -328,10 +333,10 @@ const MealCreation = ({
                   style={{
                     color: "#eb1b67",
                     marginBottom: 2,
-                    marginTop: 30,
+                    marginTop: 100,
                   }}
                 >
-                  Search for friend to invite to a meal:
+                  Search for friend 
                 </Form.Label>
                 <Form.Control
                   type="input"
@@ -388,7 +393,7 @@ const MealCreation = ({
                 marginTop: 10,
               }}
             >
-              Select friend(s) from dropdown:
+              Select friend(s) from dropdown
             </Form.Label>
             <div className="selectFriend">
               <div>
@@ -469,7 +474,7 @@ const MealCreation = ({
                   }}
                   className="mealWith"
                 >
-                  <i>
+                  <h4>
                     Your meal with{" "}
                     {currentMealFriendsNames.length === 1
                       ? currentMealFriendsNames.map((i: string) => i)
@@ -477,7 +482,7 @@ const MealCreation = ({
                           (item: string, i: number, arr: []) =>
                             i !== arr.length - 1 ? item + ", " : "and " + item
                         )}
-                  </i>
+                  </h4>
                 </h2>
                 <div className="search">
                   <Form.Label
@@ -485,6 +490,7 @@ const MealCreation = ({
                       color: "#eb1b67",
                       marginBottom: 2,
                       marginTop: 10,
+                      marginRight: 5,
                     }}
                   >
                     Search Location
@@ -562,7 +568,7 @@ const MealCreation = ({
           </div>
         </Form>
       </Span>
-    </Container>
+    </div>
   );
 };
 
