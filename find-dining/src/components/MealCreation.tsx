@@ -284,22 +284,22 @@ const MealCreation = ({
                 color: "white",
               }}
             >
-                <div
-                  // className="centered"
-                  style={{
-                    position: "absolute",
-                    top: "40%",
-                    left: "35%",
-                    transform: "translate(-50%, -50%)",
-                    fontSize: "14px",
-                    textAlign: "start",
-                    padding: "14px",
-                    color: "black"
-                  }}
-                >
-                  Hey <Span>{user}</Span>, put that microwave dinner down & find some friends
-                  to eat with here...
-                </div>
+              <div
+                // className="centered"
+                style={{
+                  position: "absolute",
+                  top: "40%",
+                  left: "35%",
+                  transform: "translate(-50%, -50%)",
+                  fontSize: "14px",
+                  textAlign: "start",
+                  padding: "17px",
+                  color: "black",
+                }}
+              >
+                Hey <Span>{user}</Span>, don't eat alone! Find
+                some friends to eat with here!
+              </div>
               <div
                 className="text-center"
                 style={{
@@ -565,6 +565,7 @@ const MealCreation = ({
                       marginTop: 5,
                       width: 150,
                       backgroundColor: "black",
+                      marginBottom: 40,
                     }}
                     className="changedMind"
                     onClick={() => {
