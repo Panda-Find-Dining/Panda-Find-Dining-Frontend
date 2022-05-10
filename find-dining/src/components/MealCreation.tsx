@@ -64,7 +64,6 @@ const Span = styled.span`
 //   justify-content: center;
 // `;
 
-
 const MealCreation = ({
   token,
   friendsPks,
@@ -110,6 +109,7 @@ const MealCreation = ({
         location: location,
         radius: radius,
         invitee: friendsPks,
+        invitee_names: friendsNames,
       },
     };
     console.log(error);
@@ -117,6 +117,7 @@ const MealCreation = ({
       await axios
         .request(options)
         .then(function (response) {
+          console.log(response);
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
           setMealPk(theMealPk.toString());
@@ -266,12 +267,14 @@ const MealCreation = ({
         console.error(error);
       });
   };
-  console.log(friendPk)
+  console.log(friendPk);
+  console.log(friendsNames);
   return (
-    <div style={{
-      padding: "25px 28px 10px 28px",
-      height: "100vh",
-    }}
+    <div
+      style={{
+        padding: "25px 28px 10px 28px",
+        height: "100vh",
+      }}
     >
       <Span>
         <Form>
@@ -293,12 +296,21 @@ const MealCreation = ({
                   transform: "translate(-50%, -50%)",
                   fontSize: "14px",
                   textAlign: "start",
+
                   padding: "17px",
                   color: "black",
                 }}
               >
                 Hey <Span>{user}</Span>, don't eat alone! Find
                 some friends to eat with here!
+
+                  padding: "14px",
+                  color: "black",
+                }}
+              >
+                Hey <Span>{user}</Span>, put that microwave dinner down & find
+                some friends to eat with here...
+
               </div>
               <div
                 className="text-center"
@@ -314,18 +326,17 @@ const MealCreation = ({
                   }}
                 />
               </div>
-              
-                <img
-                  align="right"
-                  src={hungryPanda}
-                  alt="panda pic"
-                  style={{
-                    justifyContent: "right",
-                    width: 135,
-                    textAlign: "right",
-                  }}
-                />
-              
+
+              <img
+                align="right"
+                src={hungryPanda}
+                alt="panda pic"
+                style={{
+                  justifyContent: "right",
+                  width: 135,
+                  textAlign: "right",
+                }}
+              />
             </div>
 
             <div className="searchFriends">
@@ -337,7 +348,7 @@ const MealCreation = ({
                     marginTop: 100,
                   }}
                 >
-                  Search for friend 
+                  Search for friend
                 </Form.Label>
                 <Form.Control
                   type="input"
@@ -360,17 +371,28 @@ const MealCreation = ({
                 {results.length === 0 && searched === false ? (
                   <></>
                 ) : results.length === 0 && searched === true ? (
-                  <div style={{
-                    color: "black",
-                  }}>Sorry they haven't Joined Yet!</div>
+                  <div
+                    style={{
+                      color: "black",
+                    }}
+                  >
+                    Sorry they haven't Joined Yet!
+                  </div>
                 ) : (
                   results.map((user: user, index: number) => (
-                    <div style={{
-                      display: "flex",
-                    }}className="searchList">
-                      <p style={{
-                        marginRight: "3px"
-                      }}>{user.username}</p>
+                    <div
+                      style={{
+                        display: "flex",
+                      }}
+                      className="searchList"
+                    >
+                      <p
+                        style={{
+                          marginRight: "3px",
+                        }}
+                      >
+                        {user.username}
+                      </p>
                       <p
                         style={{
                           backgroundColor: "black",
@@ -389,9 +411,14 @@ const MealCreation = ({
                 )}
               </div>
               <div className="error">{addFriendError}</div>
-              <div style={{
-                    color: "black",
-                  }}className="success">{addFriendSuccess}</div>
+              <div
+                style={{
+                  color: "black",
+                }}
+                className="success"
+              >
+                {addFriendSuccess}
+              </div>
             </div>
             <Form.Label
               style={{
@@ -512,31 +539,35 @@ const MealCreation = ({
                     placeholder="enter your city"
                   ></input>
                 </div>
-                <div style={{
-                  display: "flex",
-                  marginTop: "15px",
-                }}>
-                <Form.Label
+                <div
                   style={{
-                    color: "#eb1b67",
-                    marginBottom: 2,
-                    marginTop: 10,
-                    marginRight: 15,
+                    display: "flex",
+                    marginTop: "15px",
                   }}
                 >
-                  Set Radius{" "}
-                </Form.Label>
-                <div style={{
-                  width: "175px",
-                  marginBottom: "20px"
-                }}>
-                <Select 
-                  className="select"
-                  options={selectRadiusOptions}
-                  onChange={(selection) => setRadius(selection?.value)}
-                  placeholder={"select radius"}
-                />
-                </div>
+                  <Form.Label
+                    style={{
+                      color: "#eb1b67",
+                      marginBottom: 2,
+                      marginTop: 10,
+                      marginRight: 15,
+                    }}
+                  >
+                    Set Radius{" "}
+                  </Form.Label>
+                  <div
+                    style={{
+                      width: "175px",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <Select
+                      className="select"
+                      options={selectRadiusOptions}
+                      onChange={(selection) => setRadius(selection?.value)}
+                      placeholder={"select radius"}
+                    />
+                  </div>
                 </div>
                 <div className="mealButtons text-center">
                   <div className="error">{error}</div>
