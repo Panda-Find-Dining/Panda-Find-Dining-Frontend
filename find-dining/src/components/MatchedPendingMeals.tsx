@@ -9,13 +9,13 @@ import styled from "styled-components";
 // import speechBubble2 from "../images/speechBubble2.png";
 
 const StyledButton = styled(Button)`
-  background-color: #da0063;
+  background-color: #eb1b67;
   box-shadow: none;
 
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #da0063;
+    background-color: #eb1b67;
     outline: none;
   }
   &:focus {
@@ -25,7 +25,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Span = styled.span`
-  color: #da0063;
+  color: #eb1b67;
   font: Lato;
   font-weight: bold;
 `;
@@ -263,7 +263,9 @@ const MatchedPendingMeals = ({
                     </p>
                     <p>{restaurant.archive}</p>
                     {restaurant.all_users_have_selected.includes(userPk) ? (
-                      <div>Friends Still selecting</div>
+                      <div style={{
+                        color: "black"
+                      }}>Friends Still selecting</div>
                     ) : (
                       <StyledButton
                         className="pendingButton"
@@ -277,7 +279,8 @@ const MatchedPendingMeals = ({
 
                     <StyledButton
                       style={{
-                        width: 20,
+                        width: 15,
+                        backgroundColor: "black"
                       }}
                       className="xButton"
                       onClick={() => {
@@ -333,11 +336,16 @@ const MatchedPendingMeals = ({
               )}
             </div>
           </div>
-          <StyledButton className="createButton" onClick={() => mealStart()}>
-            Create Meal
-          </StyledButton>
         </div>
       </Span>
+      <StyledButton style={{
+                marginTop: 50,
+                width: 150,
+                backgroundColor: "black",
+              }} className="createButton" onClick={() => mealStart()}>
+            Create Meal
+          </StyledButton>
+
     </Container>
   );
 };

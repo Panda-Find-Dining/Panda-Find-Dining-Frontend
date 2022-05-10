@@ -12,12 +12,12 @@ interface loginProps {
   setUserPk: React.Dispatch<string>;
 }
 const StyledButton = styled(Button)`
-  background-color: #da0063;
+  background-color: #eb1b67;
   box-shadow: none;
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #da0063;
+    background-color: #eb1b67;
     outline: none;
   }
   &:focus {
@@ -107,20 +107,23 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
   console.log(email);
   return (
     <Container>
-      <img
+     <div className="text-center">
+      <img 
         style={{
           marginBottom: 10,
+          width: 240,
         }}
         src={FDLogo}
         alt="logo"
       />
+      </div>
       <Span>
         <Form>
           <Form.Group>
             <Form.Label>{error}</Form.Label>
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 2,
               }}
             >
@@ -141,7 +144,7 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
             />
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginTop: 20,
                 marginBottom: 2,
               }}
@@ -189,7 +192,7 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
                 </StyledButton>
                 <Form.Label
                   style={{
-                    color: "#da0063",
+                    color: "#eb1b67",
                     marginTop: 20,
                     marginBottom: 2,
                   }}

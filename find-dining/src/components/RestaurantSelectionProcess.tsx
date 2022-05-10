@@ -16,7 +16,7 @@ import angryPanda from "../images/angryPanda.png";
 import hungryPanda from "../images/hungryPanda.png";
 
 const StyledButton = styled(Button)`
-  background-color: #da0063;
+  background-color: #eb1b67;
   box-shadow: none;
   border: none;
   min-width: 10px;
@@ -295,7 +295,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         <button
           className="homeButton"
           style={{
-            backgroundColor: (!canGoBack as CSSProperties) && "#da0063",
+            backgroundColor: (!canGoBack as CSSProperties) && "#eb1b67",
           }}
           onClick={() => navigate("/meals")}
         >
@@ -347,6 +347,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
+            display: "flex",
+            flexDirection: "column",
+            marginBottom: "20",
           }}
           onClick={() => swipe("left")}
         >
@@ -357,12 +360,14 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             src={angryPanda}
             alt="panda button"
           />
-          {/* Heck No! */}
+          Heck No!
         </div>
         <div
           style={{
             backgroundColor: (!canSwipe as CSSProperties) && "white",
             color: "black",
+            display: "flex",
+            flexDirection: "column",
           }}
           onClick={() => swipe("right")}
         >
@@ -373,14 +378,14 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             src={hungryPanda}
             alt="panda button"
           />
-          {/* Heck Yeah! */}
+          Heck Yeah!
         </div>
       </div>
       <div>
         <StyledButton
           className="undoButton"
           style={{
-            backgroundColor: (!canGoBack as CSSProperties) && "#da0063",
+            backgroundColor: (!canGoBack as CSSProperties) && "#eb1b67",
           }}
           onClick={() => {
             goBack();

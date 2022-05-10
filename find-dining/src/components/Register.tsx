@@ -103,19 +103,22 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
   console.log(password);
   return (
     <Container>
-      <img
+      <div className="text-center">
+      <img 
         style={{
           marginBottom: 10,
+          width: 240,
         }}
         src={FDLogo}
         alt="logo"
       />
+      </div>
       <Span>
         <Form>
           <Form.Group>
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 2,
               }}
             >
@@ -136,7 +139,7 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
             />
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -157,7 +160,7 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
             />
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -179,7 +182,7 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
             />
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 1,
                 marginTop: 10,
               }}
