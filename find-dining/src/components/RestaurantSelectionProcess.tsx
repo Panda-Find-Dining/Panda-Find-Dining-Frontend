@@ -289,7 +289,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             }}
           >
             {currentIndex === -1 ? (
-              <div></div>
+              <h2>Please Swipe to Start!</h2>
             ) : (
               <h2 className="cardCount">
                 Restaurant Count: {count}/{restDB.length}
