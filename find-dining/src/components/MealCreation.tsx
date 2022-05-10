@@ -266,6 +266,7 @@ const MealCreation = ({
         console.error(error);
       });
   };
+  console.log(friendPk)
   return (
     <div style={{
       padding: "25px 28px 10px 28px",
