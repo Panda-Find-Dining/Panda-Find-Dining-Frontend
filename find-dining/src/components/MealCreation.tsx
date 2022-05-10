@@ -56,13 +56,13 @@ const Span = styled.span`
   font-weight: bold;
 `;
 
-const Container = styled.div`
-  padding: 20px 20px 10px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+// const Container = styled.div`
+//   padding: 20px 20px 10px 20px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 
 const MealCreation = ({
