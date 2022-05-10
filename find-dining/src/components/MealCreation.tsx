@@ -301,16 +301,8 @@ const MealCreation = ({
                   color: "black",
                 }}
               >
-                Hey <Span>{user}</Span>, don't eat alone! Find
-                some friends to eat with here!
-
-                  padding: "14px",
-                  color: "black",
-                }}
-              >
                 Hey <Span>{user}</Span>, put that microwave dinner down & find
                 some friends to eat with here...
-
               </div>
               <div
                 className="text-center"
