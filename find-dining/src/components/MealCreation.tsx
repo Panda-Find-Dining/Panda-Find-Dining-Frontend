@@ -34,13 +34,13 @@ interface selectOpt {
 }
 
 const StyledButton = styled(Button)`
-  background-color: #da0063;
+  background-color: #eb1b67;
   box-shadow: none;
 
   border: none;
   min-width: 10px;
   &:hover {
-    background-color: #da0063;
+    background-color: #eb1b67;
     outline: none;
   }
   &:focus {
@@ -49,22 +49,19 @@ const StyledButton = styled(Button)`
   }
 `;
 const Span = styled.span`
-  color: #da0063;
+  color: #eb1b67;
   font: Lato;
   font-weight: bold;
 `;
 
 const Container = styled.div`
-  padding: 50px;
+  padding: 10px 20px 10px 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Blurb = styled.div`
-  text-align: center;
-  margin: 10px;
-  padding: 25px;
-`;
 
 const MealCreation = ({
   token,
@@ -301,11 +298,6 @@ const MealCreation = ({
                 color: "white",
               }}
             >
-              <Blurb
-                style={{
-                  color: "black",
-                }}
-              >
                 <div
                   className="centered"
                   style={{
@@ -313,45 +305,48 @@ const MealCreation = ({
                     top: "57%",
                     left: "38%",
                     transform: "translate(-50%, -50%)",
+                    fontSize: "11.5px",
+                    textAlign: "start",
+                    padding: "10px",
+                    color: "black"
                   }}
                 >
-                  Hey {user}, put that microwave dinner down & find some friends
+                  Hey <Span>{user}</Span>, put that microwave dinner down & find some friends
                   to eat with here...
                 </div>
-              </Blurb>
               <div
                 className="text-center"
                 style={{
-                  width: 200,
+                  width: 100,
                 }}
               >
                 <img
                   src={speechBubble2}
                   alt="speech bubble"
                   style={{
-                    width: 200,
+                    width: 150,
                   }}
                 />
               </div>
-              <div className="right">
+              
                 <img
                   align="right"
                   src={hungryPanda}
                   alt="panda pic"
                   style={{
                     justifyContent: "right",
-                    width: 150,
+                    width: 100,
                     textAlign: "right",
                   }}
                 />
-              </div>
+              
             </div>
 
             <div className="searchFriends">
               <div className="mb-3">
                 <Form.Label
                   style={{
-                    color: "#da0063",
+                    color: "#eb1b67",
                     marginBottom: 2,
                     marginTop: 30,
                   }}
@@ -379,7 +374,9 @@ const MealCreation = ({
                 {results.length === 0 && searched === false ? (
                   <></>
                 ) : results.length === 0 && searched === true ? (
-                  <div>Sorry they haven't Joined Yet!</div>
+                  <div style={{
+                    color: "black",
+                  }}>Sorry they haven't Joined Yet!</div>
                 ) : (
                   results.map((user: user, index: number) => (
                     <div className="searchList">
@@ -400,11 +397,13 @@ const MealCreation = ({
                 )}
               </div>
               <div className="error">{addFriendError}</div>
-              <div className="success">{addFriendSuccess}</div>
+              <div style={{
+                    color: "black",
+                  }}className="success">{addFriendSuccess}</div>
             </div>
             <Form.Label
               style={{
-                color: "#da0063",
+                color: "#eb1b67",
                 marginBottom: 2,
                 marginTop: 10,
               }}
@@ -459,7 +458,7 @@ const MealCreation = ({
                   style={{
                     borderTop: "4px solid #bbb",
                     borderRadius: "5px",
-                    color: "#da0063",
+                    color: "#eb1b67",
                   }}
                 ></hr>
                 <h2
@@ -481,7 +480,7 @@ const MealCreation = ({
                 <div className="search">
                   <Form.Label
                     style={{
-                      color: "#da0063",
+                      color: "#eb1b67",
                       marginBottom: 2,
                       marginTop: 10,
                     }}
@@ -500,7 +499,7 @@ const MealCreation = ({
                 </div>
                 <Form.Label
                   style={{
-                    color: "#da0063",
+                    color: "#eb1b67",
                     marginBottom: 2,
                     marginTop: 10,
                   }}

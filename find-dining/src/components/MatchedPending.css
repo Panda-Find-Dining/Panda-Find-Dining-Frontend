@@ -45,19 +45,19 @@ gap: 30px;
 .searchButton{
     margin-bottom: 10px;
 }
-.pendingButton{
-    position: relative;
-    margin-top: 10px;
-    height:60px;
-    width:150px;
-    justify-content: center;
-}
-.xButton{
-    margin-top: 10px;
-    height:60px;
-    width:80px;
-    justify-content: center;
-}
+/* .pendingButton{ */
+    /* position: relative; */
+    /* margin-top: 10px; */
+    /* height:60px; */
+    /* width:150px; */
+    /* justify-content: center; */
+/* } */
+/* /~ .xButton{ ~/ */
+    /* margin-top: 10px; */
+    /* height:60px; */
+    /* width:80px; */
+    /* justify-content: center; */
+/* } */
 .searchResults{
     display:flex;
     gap:20px;
@@ -72,12 +72,12 @@ gap: 30px;
 .mealTitle{
     color: black;
 }
-.createButton{
-    margin-top: 80px;
-    height:60px;
-    width:80px;
-    margin-left: 140px;
-}
+/* .createButton{ */
+    /* margin-top: 80px; */
+    /* height:60px; */
+    /* width:80px; */
+    /* margin-left: 140px; */
+/* } */
 
 /* .mealFriendSelect{ */
     /* display: grid; */
