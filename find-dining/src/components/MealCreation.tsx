@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import styled from "styled-components";
 import hungryPanda from "../images/hungryPanda.png";
 import speechBubble2 from "../images/speechBubble2.png";
-// import bearBlurb from "../images/bearBlurb.png";
 
 import Form from "react-bootstrap/Form";
 declare module "react" {
@@ -55,14 +54,6 @@ const Span = styled.span`
   font: Lato;
   font-weight: bold;
 `;
-
-// const Container = styled.div`
-//   padding: 20px 20px 10px 20px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `;
 
 const MealCreation = ({
   token,
@@ -289,7 +280,6 @@ const MealCreation = ({
               }}
             >
               <div
-                // className="centered"
                 style={{
                   position: "absolute",
                   top: "40%",
@@ -298,8 +288,10 @@ const MealCreation = ({
                   fontSize: "14px",
                   textAlign: "start",
                   overflowWrap: "break-word",
-
-                  padding: "20px",
+                  paddingRight: "20px",
+                  paddingTop: "20px",
+                  paddingBottom: "20px",
+                  paddingLeft: "13px",
                   color: "black",
                 }}
               >
