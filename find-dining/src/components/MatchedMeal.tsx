@@ -47,8 +47,8 @@ const MatchedMeal = ({ token, mealPk, setIsHidden, isHidden }: matchProps) => {
       .request(options)
       .then(function (response) {
         setMatch(response.data[0]);
-        setNumLat(parseInt(response.data[0].lat));
-        setNumLon(parseInt(response.data[0].lon));
+        setNumLat(parseFloat(response.data[0].lat));
+        setNumLon(parseFloat(response.data[0].lon));
         setIsHidden(false);
       })
       .catch(function (error) {

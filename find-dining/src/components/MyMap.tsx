@@ -33,6 +33,8 @@ function MyMap({ lat, lon }: MyMapProps) {
   const onUnmount = React.useCallback(function callback(map: any) {
     setMap(null);
   }, []);
+  console.log(lat);
+  console.log(lon);
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
