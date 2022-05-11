@@ -92,7 +92,7 @@ const MatchedMeal = ({ token, mealPk, setIsHidden, isHidden }: matchProps) => {
         <div className="hours">
           <h2>{match?.hours}</h2>
         </div>
-        <div className="Details">
+        <div className="Details" style={{ marginBottom: "100px" }}>
           <p>
             Address:{" "}
             <span
