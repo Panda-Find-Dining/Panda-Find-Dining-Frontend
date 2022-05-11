@@ -281,7 +281,7 @@ const MealCreation = ({
                   top: "40%",
                   left: "35%",
                   transform: "translate(-50%, -50%)",
-                  fontSize: "14px",
+                  fontSize: "15px",
                   textAlign: "start",
                   overflowWrap: "break-word",
                   paddingRight: "20px",
@@ -291,8 +291,8 @@ const MealCreation = ({
                   color: "black",
                 }}
               >
-                Hey <Span>{user}</Span>,<br></br> don't eat alone! <br></br>Find
-                some friends to eat with here!
+                Hey <Span>{user}</Span>,<br></br> don't eat alone! Find some
+                friends to eat with here!
               </div>
               <div
                 className="text-center"
