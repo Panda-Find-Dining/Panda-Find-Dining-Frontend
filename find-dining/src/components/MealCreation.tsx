@@ -281,7 +281,7 @@ const MealCreation = ({
                   top: "40%",
                   left: "35%",
                   transform: "translate(-50%, -50%)",
-                  fontSize: "15px",
+                  fontSize: "14px",
                   textAlign: "start",
                   overflowWrap: "break-word",
                   paddingRight: "20px",
