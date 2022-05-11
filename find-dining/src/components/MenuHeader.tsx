@@ -1,6 +1,6 @@
 import "./MenuHeader.css";
 import axios from "axios";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";

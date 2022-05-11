@@ -298,7 +298,7 @@ const MatchedPendingMeals = ({
                           i !== arr.length - 1
                             ? item + ", "
                             : i === arr.length - 1
-                            ? item + ", " + "and " + restaurant.creator_name
+                            ? `${item}, and ${restaurant.creator_name}`
                             : ""
                       )}
                       <br></br>
@@ -395,7 +395,7 @@ const MatchedPendingMeals = ({
                             i !== arr.length - 1
                               ? item + ", "
                               : i === arr.length - 1
-                              ? item + ", " + "and " + restaurant.creator_name
+                              ? `${item}, and ${restaurant.creator_name}`
                               : ""
                         )}
                         <br></br>
