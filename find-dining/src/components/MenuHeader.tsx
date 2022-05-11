@@ -1,4 +1,3 @@
-import "./MenuHeader.css";
 import axios from "axios";
 import { useState, Dispatch, SetStateAction } from "react";
 import { Link, useNavigate } from "react-router-dom";
