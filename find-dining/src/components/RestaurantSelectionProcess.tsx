@@ -242,15 +242,7 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
         className="cardDeck"
       >
         <h2 className="emptyState">Out of Restaurants, you hungry panda!</h2>
-        <button
-          className="homeButton"
-          style={{
-            backgroundColor: (!canGoBack as CSSProperties) && "#eb1b67",
-          }}
-          onClick={() => navigate("/meals")}
-        >
-          Go Home!
-        </button>
+
         {restDB.map((restaurant, index) => (
           <RestaurantCard
             ref={childRefs[index]}
