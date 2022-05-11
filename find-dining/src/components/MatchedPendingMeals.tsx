@@ -4,7 +4,6 @@ import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
-import moment from "moment";
 // import Form from "react-bootstrap/Form";
 // import hungryPanda from "../images/hungryPanda.png";
 // import speechBubble2 from "../images/speechBubble2.png";
