@@ -166,8 +166,6 @@ const MatchedPendingMeals = ({
   const removeMatchItem = (data: restaurant[], index: number) => {
     setDB(data.filter((o, i) => index !== i));
   };
-  console.log(pendingFalseCount);
-  console.log(matchFalseCount);
   const refreshPendingDb = () => {
     let thePendingDB: restaurant[] = [];
     const pendingOptions = {
@@ -182,7 +180,6 @@ const MatchedPendingMeals = ({
     axios
       .request(pendingOptions)
       .then(function (response) {
-        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
@@ -269,7 +266,6 @@ const MatchedPendingMeals = ({
                         marginBottom: 3,
                       }}
                       className="restaurantLocation"
-                      onClick={() => console.log(restaurant)}
                     >
                       <Span>City:</Span> {restaurant.location}
                       <br></br>
@@ -283,7 +279,6 @@ const MatchedPendingMeals = ({
                             : ""
                       )}
                       <br></br>
-                      {/* <Span>Date Added:</Span> {moment(restaurant.created_date)} */}
                     </p>
                     <p>{restaurant.archive}</p>
                     {restaurant.all_users_have_selected.includes(userPk) ? (
@@ -380,7 +375,6 @@ const MatchedPendingMeals = ({
                               : ""
                         )}
                         <br></br>
-                        {/* <Span>Date Added:</Span> {restaurant.created_date} */}
                       </p>
                       <StyledButton
                         style={{

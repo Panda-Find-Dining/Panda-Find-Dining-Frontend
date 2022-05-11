@@ -43,7 +43,7 @@ function MyMap({ lat, lon }: MyMapProps) {
       <>
         <Marker
           position={center}
-          icon={require("../images/FDMenuLogocopy.png")}
+          icon={require("../images/FDPin.png")}
         ></Marker>
       </>
     </GoogleMap>
