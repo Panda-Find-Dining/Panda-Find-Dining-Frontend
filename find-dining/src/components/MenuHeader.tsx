@@ -55,17 +55,6 @@ const MenuHeader = ({
     setFriendsPks([]);
   };
   const navigate = useNavigate();
-  // const hideNavbar = () => {
-  //   const position = window.pageYOffset;
-  //   console.log(position);
-  //   position < 90 ? setIsHidden(false) : setIsHidden(true);
-  // };
-  // useEffect(() => {
-  //   window.addEventListener("scroll", hideNavbar);
-  //   return () => {
-  //     window.removeEventListener("scroll", hideNavbar);
-  //   };
-  // }, []);
 
   return (
     <Nav

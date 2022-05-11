@@ -1,7 +1,8 @@
 const SuccessIcon = () => (
-  <img style={{
-    height: "35px"
-  }}
+  <img
+    style={{
+      height: "35px",
+    }}
     className="siteLogo"
     src={require("../images/enamored-panda.png")}
     alt="This a placeholder"

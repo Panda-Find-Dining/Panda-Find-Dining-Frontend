@@ -4,9 +4,6 @@ import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
-// import Form from "react-bootstrap/Form";
-// import hungryPanda from "../images/hungryPanda.png";
-// import speechBubble2 from "../images/speechBubble2.png";
 
 const StyledButton = styled(Button)`
   background-color: #eb1b67;
@@ -35,12 +32,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-// const Blurb = styled.div`
-//   text-align: center;
-//   margin: 10px;
-//   padding: 25px;
-// `;
 
 interface matchedPendingProps {
   token: string;
@@ -87,7 +78,6 @@ const MatchedPendingMeals = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
@@ -100,7 +90,6 @@ const MatchedPendingMeals = ({
             creator_name: restaurant.creator_name,
           });
         }, setDB(theDB));
-        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -120,7 +109,6 @@ const MatchedPendingMeals = ({
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return thePendingDB.push({
             id: restaurant.id,
@@ -133,7 +121,6 @@ const MatchedPendingMeals = ({
             creator_name: restaurant.creator_name,
           });
         }, setPendingDB(thePendingDB));
-        console.log(thePendingDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -155,9 +142,7 @@ const MatchedPendingMeals = ({
 
     axios
       .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
+      .then(function (response) {})
       .catch(function (error) {
         console.error(error);
       });
@@ -167,7 +152,6 @@ const MatchedPendingMeals = ({
     setMealPk(restaurant);
     navigate("/select");
   };
-  console.log(userPk);
   let pendingFalseCount = 0;
   pendingDb.map((restaurant: restaurant, index: number) =>
     restaurant.archive === false ? (pendingFalseCount += 1) : pendingFalseCount
@@ -211,7 +195,6 @@ const MatchedPendingMeals = ({
             creator_name: restaurant.creator_name,
           });
         }, setPendingDB(thePendingDB));
-        console.log(thePendingDB);
       })
       .catch(function (error) {
         console.error(error);
@@ -231,7 +214,6 @@ const MatchedPendingMeals = ({
     axios
       .request(matchOptions)
       .then(function (response) {
-        console.log(response.data);
         response.data.map((restaurant: restaurant, index: number) => {
           return theDB.push({
             id: restaurant.id,
@@ -244,7 +226,6 @@ const MatchedPendingMeals = ({
             creator_name: restaurant.creator_name,
           });
         }, setDB(theDB));
-        console.log(theDB);
       })
       .catch(function (error) {
         console.error(error);

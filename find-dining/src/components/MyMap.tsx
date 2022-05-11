@@ -25,7 +25,6 @@ function MyMap({ lat, lon }: MyMapProps) {
     lng: lon,
   };
   const [map, setMap] = React.useState(null);
-  console.log(map);
   const onLoad = React.useCallback(function callback(map: any) {
     map.setZoom(16);
     setMap(map);
@@ -34,7 +33,6 @@ function MyMap({ lat, lon }: MyMapProps) {
   const onUnmount = React.useCallback(function callback(map: any) {
     setMap(null);
   }, []);
-  console.log(map);
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -42,7 +40,6 @@ function MyMap({ lat, lon }: MyMapProps) {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {/* Child components, such as markers, info windows, etc. */}
       <>
         <Marker
           position={center}
@@ -51,7 +48,7 @@ function MyMap({ lat, lon }: MyMapProps) {
       </>
     </GoogleMap>
   ) : (
-    <></>
+    <div key={map}></div>
   );
 }
 

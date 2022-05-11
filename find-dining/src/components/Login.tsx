@@ -102,22 +102,26 @@ const Login = ({ setToken, setUser, setUserPk }: loginProps) => {
   };
   return (
     <Container>
-     <div className="text-center">
-      <img 
-        style={{
-          marginBottom: 10,
-          width: 240,
-        }}
-        src={FDLogo}
-        alt="logo"
-      />
+      <div className="text-center">
+        <img
+          style={{
+            marginBottom: 10,
+            width: 240,
+          }}
+          src={FDLogo}
+          alt="logo"
+        />
       </div>
       <Span>
         <Form>
           <Form.Group>
-            <Form.Label style={{
+            <Form.Label
+              style={{
                 color: "red",
-              }}>{error}</Form.Label>
+              }}
+            >
+              {error}
+            </Form.Label>
             <Form.Label
               style={{
                 color: "#eb1b67",

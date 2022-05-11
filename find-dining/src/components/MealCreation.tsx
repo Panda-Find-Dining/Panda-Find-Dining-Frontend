@@ -104,12 +104,11 @@ const MealCreation = ({
         invitee_names: friendsNames,
       },
     };
-    console.log(error);
+
     let multiplePromises = async () => {
       await axios
         .request(options)
         .then(function (response) {
-          console.log(response);
           setSuccess("Meal Created!");
           theMealPk = response.data.id;
           setMealPk(theMealPk.toString());
@@ -247,8 +246,6 @@ const MealCreation = ({
           }, setFriendsPks(theFriendsPks)),
           setFriendsNames(theFriendsNames)
         );
-        console.log(theFriendsNames);
-        console.log(theFriendsPks);
         let zipped = theFriendsNames.map((x: string, i: number) => [
           { value: theFriendsPks[i], label: x },
         ]);
@@ -259,10 +256,9 @@ const MealCreation = ({
         console.error(error);
       });
   };
-  console.log(friendPk);
-  console.log(friendsNames);
   return (
     <div
+      key={friendPk}
       style={{
         padding: "25px 28px 10px 28px",
         height: "100vh",
@@ -295,8 +291,8 @@ const MealCreation = ({
                   color: "black",
                 }}
               >
-                Hey <Span>{user}</Span>,<br></br> don't eat alone. Find some
-                friends to eat with here!
+                Hey <Span>{user}</Span>,<br></br> don't eat alone! <br></br>Find
+                some friends to eat with here!
               </div>
               <div
                 className="text-center"

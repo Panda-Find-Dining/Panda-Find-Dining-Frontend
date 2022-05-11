@@ -64,7 +64,6 @@ const MatchedMeal = ({ token, mealPk, setIsHidden, isHidden }: matchProps) => {
         <div
           style={{
             marginBottom: "20px",
-            // marginTop: "20px"
           }}
           className="photo_reference"
         >
