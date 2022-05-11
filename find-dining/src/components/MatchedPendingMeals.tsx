@@ -4,6 +4,7 @@ import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
+import moment from "moment";
 // import Form from "react-bootstrap/Form";
 // import hungryPanda from "../images/hungryPanda.png";
 // import speechBubble2 from "../images/speechBubble2.png";
@@ -254,14 +255,20 @@ const MatchedPendingMeals = ({
     <Container>
       <Span>
         <div className="matchedPendingDiv">
-          <h3 className="pendingMealsH2">Upcoming Meals</h3>
+          <h3 style={{
+            marginBottom: "20px",
+            borderBottom: ".5px solid grey",
+          }}className="pendingMealsH2">Upcoming Meals</h3>
           <div className="pendingMealsBig">
             {pendingFalseCount === 0 ? (
               <div>Sorry No Pending Meals</div>
             ) : (
               pendingDb.map((restaurant: restaurant, index: number) =>
                 restaurant.archive === false ? (
-                  <div key={restaurant.id} className="pendingMeals">
+                  <div style={{
+                    borderBottom: "2.5px solid #eb1b67",
+                    marginBottom: "15px"
+                  }}key={restaurant.id} className="pendingMeals">
                     <p
                       style={{
                         color: "black",
@@ -270,7 +277,7 @@ const MatchedPendingMeals = ({
                       className="restaurantLocation"
                       onClick={() => console.log(restaurant)}
                     >
-                      City: {restaurant.location}
+                      <Span>City:</Span> {restaurant.location}
                       <br></br>
                       {restaurant.invitee_names.includes(user) ? (
                         <>
@@ -282,7 +289,7 @@ const MatchedPendingMeals = ({
                         </>
                       ) : (
                         <>
-                          Attendee(s):{" "}
+                          <Span>Attendee(s):</Span>{" "}
                           {restaurant.invitee_names.map(
                             (item: string, i: number, arr: string[]) =>
                               i !== arr.length - 1 ? item + ", " : "and " + user
@@ -290,7 +297,7 @@ const MatchedPendingMeals = ({
                         </>
                       )}
                       <br></br>
-                      Date Added: {restaurant.created_date}
+                      {/* <Span>Date Added:</Span> {moment(restaurant.created_date)} */}
                     </p>
                     <p>{restaurant.archive}</p>
                     {restaurant.all_users_have_selected.includes(userPk) ? (
@@ -299,10 +306,12 @@ const MatchedPendingMeals = ({
                           color: "black",
                         }}
                       >
-                        Friends Still selecting
+                        Friends still selecting
                       </div>
                     ) : (
-                      <StyledButton
+                      <StyledButton style={{
+                        marginBottom: "10px",
+                      }}
                         className="pendingButton"
                         onClick={() =>
                           selectRestaurants(restaurant.id.toString())
@@ -324,7 +333,9 @@ const MatchedPendingMeals = ({
                         removePendingItem(pendingDb, index);
                       }}
                     >
-                      X
+                      <p style={{
+                        color: "white",
+                      }}>X</p>
                     </p>
                   </div>
                 ) : (
@@ -337,6 +348,8 @@ const MatchedPendingMeals = ({
           <h3
             style={{
               paddingTop: 30,
+              marginBottom: "20px",
+              borderBottom: ".2px solid grey",
             }}
             className="pendingMealsH2"
           >
@@ -349,7 +362,10 @@ const MatchedPendingMeals = ({
               ) : (
                 db.map((restaurant: restaurant, index: number) =>
                   restaurant.archive === false ? (
-                    <div key={restaurant.id} className="pendingMeals">
+                    <div style={{
+                      borderBottom: "2.5px solid #eb1b67",
+                      marginBottom: "15px",
+                    }}key={restaurant.id} className="pendingMeals">
                       <p
                         style={{
                           color: "black",
@@ -357,13 +373,15 @@ const MatchedPendingMeals = ({
                         }}
                         className="restaurantLocation"
                       >
-                        City: {restaurant.location}
+                        <Span>City:</Span> {restaurant.location}
                         <br></br>
-                        Attendee(s): {restaurant.invitee_names}
+                        <Span>Attendee(s):</Span> {restaurant.invitee_names}
                         <br></br>
-                        Date Added: {restaurant.created_date}
+                        {/* <Span>Date Added:</Span> {restaurant.created_date} */}
                       </p>
-                      <StyledButton
+                      <StyledButton style={{
+                        marginBottom: "10px",
+                      }}
                         className="pendingButton"
                         onClick={() => {
                           seeMatch();
@@ -384,7 +402,9 @@ const MatchedPendingMeals = ({
                           removeMatchItem(db, index);
                         }}
                       >
-                        X
+                        <p style={{
+                        color: "white",
+                      }}>X</p>
                       </p>
                     </div>
                   ) : (
@@ -404,8 +424,10 @@ const MatchedPendingMeals = ({
           backgroundColor: "black",
         }}
         onClick={() => mealStart()}
-      >
-        Create Meal
+      ><div style={{
+
+      }}>
+        Create Meal</div>
       </StyledButton>
     </Container>
   );

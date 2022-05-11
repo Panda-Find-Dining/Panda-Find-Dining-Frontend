@@ -9,6 +9,11 @@ const Container = styled.div`
   marginLeft: 30px;
 `;
 
+const Span = styled.span`
+  color: #eb1b67;
+  font: Lato;
+  font-weight: bold;
+`;
 interface matchProps {
   token: string;
   mealPk: string;
@@ -50,23 +55,38 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
   }, [token, mealPk]);
   return (
     <Container >
+      <Span>
       <div className="name text-center">
         <h3 >{match?.name}</h3>
       </div>
-      <div className="photo_reference">
-        <img
+      <div style={{
+        marginBottom: "20px",
+        // marginTop: "20px"
+      }}className="photo_reference">
+        <div style={{
+          marginBottom: "20px",
+          marginRight: "100px",
+          
+        }}><img height="200px"
           src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=${process.env.REACT_APP_API_KEY}`}
           alt="pic"
-        />
-        <MyMap lat={numLat} lon={numLon}></MyMap>
+        /></div>
+        <div style={{
+        marginBottom: "20px",
+      }}>
+        <MyMap lat={numLat} lon={numLon}></MyMap></div>
       </div>
 
       <div className="hours">
         <h2>{match?.hours}</h2>
       </div>
       <div className="Details">
-        <h2>Details:{match?.formatted_address}</h2>
+        <p>Address: <span style={{
+          color: "black",
+          fontWeight: "normal",
+        }}>{match?.formatted_address}</span></p>
       </div>
+      </Span>
     </Container>
   );
 };

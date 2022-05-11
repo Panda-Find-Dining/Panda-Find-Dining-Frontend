@@ -382,7 +382,9 @@ function RestaurantSelectionProcess({ token, mealPk }: restaurantSelectProps) {
             src={hungryPanda}
             alt="panda button"
           />
-          HeckYes!
+          <div style={{
+              width: 75,
+            }}>Heck Yes!</div>
         </div>
       </div>
       <div>

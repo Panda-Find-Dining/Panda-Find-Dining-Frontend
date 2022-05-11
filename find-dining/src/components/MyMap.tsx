@@ -16,7 +16,7 @@ function MyMap({ lat, lon }: MyMapProps) {
     googleMapsApiKey: process.env.REACT_APP_API_KEY as any,
   });
   const containerStyle = {
-    width: "400px",
+    width: "300px",
     height: "300px",
   };
 
