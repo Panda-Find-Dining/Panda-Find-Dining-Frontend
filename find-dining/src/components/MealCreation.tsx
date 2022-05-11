@@ -297,13 +297,14 @@ const MealCreation = ({
                   transform: "translate(-50%, -50%)",
                   fontSize: "14px",
                   textAlign: "start",
+                  overflowWrap: "break-word",
 
-                  padding: "14px",
+                  padding: "20px",
                   color: "black",
                 }}
               >
-                Hey <Span>{user}</Span>, don't eat alone. Find some friends to
-                eat with here!
+                Hey <Span>{user}</Span>,<br></br> don't eat alone. Find some
+                friends to eat with here!
               </div>
               <div
                 className="text-center"

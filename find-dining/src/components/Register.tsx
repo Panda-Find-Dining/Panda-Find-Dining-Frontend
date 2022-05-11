@@ -204,7 +204,7 @@ const Register = ({ setToken, setUser, setUserPk }: registerProps) => {
             options={{
               match: {
                 nomatch: "Oof! Passwords don't match!",
-                gotmatch: "Horray! Passwords match!",
+                gotmatch: "Hooray! Passwords match!",
               },
             }}
           />
