@@ -298,7 +298,7 @@ const MealCreation = ({
                   fontSize: "14px",
                   textAlign: "start",
 
-                  padding: "20px",
+                  padding: "14px",
                   color: "black",
                 }}
               >
