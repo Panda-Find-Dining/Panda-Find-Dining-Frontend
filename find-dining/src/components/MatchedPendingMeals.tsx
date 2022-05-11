@@ -1,6 +1,5 @@
 import { SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
-import "./MatchedPending.css";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import styled from "styled-components";
