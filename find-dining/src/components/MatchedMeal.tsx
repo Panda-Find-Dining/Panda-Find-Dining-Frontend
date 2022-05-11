@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 import MyMap from "./MyMap";
 import styled from "styled-components";
 
-
 const Container = styled.div`
   padding: 50px;
-  marginLeft: 30px;
+  marginleft: 30px;
 `;
 
 const Span = styled.span`
@@ -17,6 +16,8 @@ const Span = styled.span`
 interface matchProps {
   token: string;
   mealPk: string;
+  isHidden: boolean;
+  setIsHidden: Dispatch<SetStateAction<boolean>>;
 }
 interface matched {
   name: string;
@@ -27,7 +28,7 @@ interface matched {
   lon: string | undefined;
 }
 
-const MatchedMeal = ({ token, mealPk }: matchProps) => {
+const MatchedMeal = ({ token, mealPk, setIsHidden, isHidden }: matchProps) => {
   const [match, setMatch] = useState<matched>();
   const [numLat, setNumLat] = useState(0);
   const [numLon, setNumLon] = useState(0);
@@ -48,44 +49,63 @@ const MatchedMeal = ({ token, mealPk }: matchProps) => {
         setMatch(response.data[0]);
         setNumLat(parseInt(response.data[0].lat));
         setNumLon(parseInt(response.data[0].lon));
+        setIsHidden(false);
       })
       .catch(function (error) {
         console.error(error);
       });
-  }, [token, mealPk]);
+  }, [token, mealPk, setIsHidden]);
   return (
-    <Container >
+    <Container>
       <Span>
-      <div className="name text-center">
-        <h3 >{match?.name}</h3>
-      </div>
-      <div style={{
-        marginBottom: "20px",
-        // marginTop: "20px"
-      }}className="photo_reference">
-        <div style={{
-          marginBottom: "20px",
-          marginRight: "100px",
-          
-        }}><img height="200px"
-          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=${process.env.REACT_APP_API_KEY}`}
-          alt="pic"
-        /></div>
-        <div style={{
-        marginBottom: "20px",
-      }}>
-        <MyMap lat={numLat} lon={numLon}></MyMap></div>
-      </div>
+        <div className="name text-center">
+          <h3>{match?.name}</h3>
+        </div>
+        <div
+          style={{
+            marginBottom: "20px",
+            // marginTop: "20px"
+          }}
+          className="photo_reference"
+        >
+          <div
+            style={{
+              marginBottom: "20px",
+              marginRight: "100px",
+            }}
+          >
+            <img
+              height="300"
+              width="158%"
+              src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${match?.photo_reference}&key=${process.env.REACT_APP_API_KEY}`}
+              alt="pic"
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: "20px",
+            }}
+          >
+            <MyMap lat={numLat} lon={numLon}></MyMap>
+          </div>
+        </div>
 
-      <div className="hours">
-        <h2>{match?.hours}</h2>
-      </div>
-      <div className="Details">
-        <p>Address: <span style={{
-          color: "black",
-          fontWeight: "normal",
-        }}>{match?.formatted_address}</span></p>
-      </div>
+        <div className="hours">
+          <h2>{match?.hours}</h2>
+        </div>
+        <div className="Details">
+          <p>
+            Address:{" "}
+            <span
+              style={{
+                color: "black",
+                fontWeight: "normal",
+              }}
+            >
+              {match?.formatted_address}
+            </span>
+          </p>
+        </div>
       </Span>
     </Container>
   );

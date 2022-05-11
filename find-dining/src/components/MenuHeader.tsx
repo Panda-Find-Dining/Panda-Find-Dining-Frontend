@@ -1,11 +1,11 @@
 import "./MenuHeader.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import FDMenuLogo from "../images/FDMenuLogo.png";
-import Stack from 'react-bootstrap/Stack'
+import Stack from "react-bootstrap/Stack";
 
 interface props {
   token: string;
@@ -15,6 +15,8 @@ interface props {
   setUserPk: React.Dispatch<string>;
   setFriendsNames: React.Dispatch<[]>;
   setFriendsPks: React.Dispatch<[]>;
+  isHidden: boolean;
+  setIsHidden: Dispatch<SetStateAction<boolean>>;
 }
 
 const MenuHeader = ({
@@ -25,9 +27,10 @@ const MenuHeader = ({
   setUserPk,
   setFriendsNames,
   setFriendsPks,
+  isHidden,
+  setIsHidden,
 }: props) => {
   const [error, setError] = useState("");
-  const [isHidden, setIsHidden] = useState(true);
   const setLogout = () => {
     const options = {
       method: "POST",
@@ -48,36 +51,44 @@ const MenuHeader = ({
     setUser("");
     setToken("");
     setUserPk("");
-    setFriendsNames([])
+    setFriendsNames([]);
     setFriendsPks([]);
   };
   const navigate = useNavigate();
-  const hideNavbar = () => {
-    const position = window.pageYOffset;
-    console.log(position)
-    position < 90 ? setIsHidden(false) : setIsHidden(true)
-  };
-  useEffect(() =>{window.addEventListener("scroll", hideNavbar,) 
-  return () => {window.removeEventListener("scroll", hideNavbar)}},[]
-  )
+  // const hideNavbar = () => {
+  //   const position = window.pageYOffset;
+  //   console.log(position);
+  //   position < 90 ? setIsHidden(false) : setIsHidden(true);
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("scroll", hideNavbar);
+  //   return () => {
+  //     window.removeEventListener("scroll", hideNavbar);
+  //   };
+  // }, []);
 
   return (
-    <Nav style={{
-      color: "black",
-      display: "inline",
-      flexDirection: "row",
-      transition: "top .3s",
-      top: `${isHidden ? "-30px" : null}`,
-    }}className="menuHeader" >
-      <Navbar hidden={isHidden} fixed="bottom" 
-      bg="light" variant="dark" >
-        <div>
-          <Navbar.Brand style={{
+    <Nav
+      style={{
         color: "black",
         display: "inline",
         flexDirection: "row",
-        marginRight: 180,
-      }}href="#home">
+        transition: "top .3s",
+        top: ` "-30px" : null}`,
+      }}
+      className="menuHeader"
+    >
+      <Navbar fixed="bottom" bg="light" variant="dark">
+        <div>
+          <Navbar.Brand
+            style={{
+              color: "black",
+              display: "inline",
+              flexDirection: "row",
+              marginRight: 180,
+            }}
+            href="#home"
+          >
             <img
               alt=""
               src={FDMenuLogo}
@@ -89,23 +100,32 @@ const MenuHeader = ({
             FindDining
           </Navbar.Brand>
         </div>
-     <Stack direction="horizontal" gap={3}>
-      <Nav.Item as="li" className="navLinks">
-        <div>
-          <Link to="/meals">Meals</Link></div>
-          {isLoggedIn ? (
-            <a href="login" className="logoutLink" onClick={() => setLogout()}>
-              Logout
-            </a>
-          ) : (
-            <div><Link to="/login">Login</Link></div>
-          )}
-          <div><Link to="/">Home</Link></div>
-        </Nav.Item>
+        <Stack direction="horizontal" gap={3}>
+          <Nav.Item as="li" className="navLinks">
+            <div onClick={() => setIsHidden(true)}>
+              <Link to="/meals">Meals</Link>
+            </div>
+            {isLoggedIn ? (
+              <a
+                href="login"
+                className="logoutLink"
+                onClick={() => setLogout()}
+              >
+                Logout
+              </a>
+            ) : (
+              <div>
+                <Link to="/login">Login</Link>
+              </div>
+            )}
+            <div>
+              <Link to="/">Home</Link>
+            </div>
+          </Nav.Item>
         </Stack>
-      <div className="logoutProfile">
-        <div className="error">{error}</div>
-      </div>
+        <div className="logoutProfile">
+          <div className="error">{error}</div>
+        </div>
       </Navbar>
     </Nav>
   );

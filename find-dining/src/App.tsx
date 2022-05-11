@@ -8,7 +8,7 @@ import MatchedMeal from "./components/MatchedMeal";
 import RestaurantSelectionProcess from "./components/RestaurantSelectionProcess";
 import MatchedPendingMeals from "./components/MatchedPendingMeals";
 import { useState } from "react";
-
+import "./App.css";
 const App = () => {
   const [token, setToken] = useLocalStorageState("token", {
     defaultValue: "",
@@ -21,6 +21,7 @@ const App = () => {
   });
   const [friendsPks, setFriendsPks] = useState<string[] | undefined>();
   const [friendsNames, setFriendsNames] = useState<string[] | undefined>();
+  const [isHidden, setIsHidden] = useState<boolean>(true);
   const [mealPk, setMealPk] = useLocalStorageState("mealPk", {
     defaultValue: "",
   });
@@ -55,6 +56,8 @@ const App = () => {
                       setUserPk={setUserPk}
                       setFriendsPks={setFriendsPks}
                       setFriendsNames={setFriendsNames}
+                      isHidden={isHidden}
+                      setIsHidden={setIsHidden}
                     />
                   </>
                 ) : (
@@ -97,7 +100,12 @@ const App = () => {
             path="match"
             element={
               <>
-                <MatchedMeal mealPk={mealPk} token={token} />
+                <MatchedMeal
+                  mealPk={mealPk}
+                  token={token}
+                  isHidden={isHidden}
+                  setIsHidden={setIsHidden}
+                />
                 <MenuHeader
                   isLoggedIn={isLoggedIn}
                   token={token}
@@ -106,6 +114,8 @@ const App = () => {
                   setUserPk={setUserPk}
                   setFriendsPks={setFriendsPks}
                   setFriendsNames={setFriendsNames}
+                  isHidden={isHidden}
+                  setIsHidden={setIsHidden}
                 />{" "}
               </>
             }
@@ -130,15 +140,19 @@ const App = () => {
                   userPk={userPk}
                   user={user}
                 />
-                <MenuHeader
-                  isLoggedIn={isLoggedIn}
-                  token={token}
-                  setToken={setToken}
-                  setUser={setUser}
-                  setUserPk={setUserPk}
-                  setFriendsPks={setFriendsPks}
-                  setFriendsNames={setFriendsNames}
-                />
+                <div className="menuHeader">
+                  <MenuHeader
+                    isLoggedIn={isLoggedIn}
+                    token={token}
+                    setToken={setToken}
+                    setUser={setUser}
+                    setUserPk={setUserPk}
+                    setFriendsPks={setFriendsPks}
+                    setFriendsNames={setFriendsNames}
+                    isHidden={isHidden}
+                    setIsHidden={setIsHidden}
+                  />
+                </div>
               </>
             }
           />

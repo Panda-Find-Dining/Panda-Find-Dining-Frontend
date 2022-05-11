@@ -57,6 +57,7 @@ interface restaurant {
   archive: boolean;
   all_users_have_selected: string;
   created_date: string;
+  creator_name: string;
 }
 
 const MatchedPendingMeals = ({
@@ -96,6 +97,7 @@ const MatchedPendingMeals = ({
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
             created_date: restaurant.created_date,
+            creator_name: restaurant.creator_name,
           });
         }, setDB(theDB));
         console.log(theDB);
@@ -128,6 +130,7 @@ const MatchedPendingMeals = ({
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
             created_date: restaurant.created_date,
+            creator_name: restaurant.creator_name,
           });
         }, setPendingDB(thePendingDB));
         console.log(thePendingDB);
@@ -205,6 +208,7 @@ const MatchedPendingMeals = ({
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
             created_date: restaurant.created_date,
+            creator_name: restaurant.creator_name,
           });
         }, setPendingDB(thePendingDB));
         console.log(thePendingDB);
@@ -237,6 +241,7 @@ const MatchedPendingMeals = ({
             archive: restaurant.archive,
             all_users_have_selected: restaurant.all_users_have_selected,
             created_date: restaurant.created_date,
+            creator_name: restaurant.creator_name,
           });
         }, setDB(theDB));
         console.log(theDB);
@@ -254,20 +259,29 @@ const MatchedPendingMeals = ({
     <Container>
       <Span>
         <div className="matchedPendingDiv">
-          <h3 style={{
-            marginBottom: "20px",
-            borderBottom: ".5px solid grey",
-          }}className="pendingMealsH2">Upcoming Meals</h3>
+          <h3
+            style={{
+              marginBottom: "20px",
+              borderBottom: ".5px solid grey",
+            }}
+            className="pendingMealsH2"
+          >
+            Upcoming Meals
+          </h3>
           <div className="pendingMealsBig">
             {pendingFalseCount === 0 ? (
               <div>Sorry No Pending Meals</div>
             ) : (
               pendingDb.map((restaurant: restaurant, index: number) =>
                 restaurant.archive === false ? (
-                  <div style={{
-                    borderBottom: "2.5px solid #eb1b67",
-                    marginBottom: "15px"
-                  }}key={restaurant.id} className="pendingMeals">
+                  <div
+                    style={{
+                      borderBottom: "2.5px solid #eb1b67",
+                      marginBottom: "15px",
+                    }}
+                    key={restaurant.id}
+                    className="pendingMeals"
+                  >
                     <p
                       style={{
                         color: "black",
@@ -278,22 +292,14 @@ const MatchedPendingMeals = ({
                     >
                       <Span>City:</Span> {restaurant.location}
                       <br></br>
-                      {restaurant.invitee_names.includes(user) ? (
-                        <>
-                          Attendee(s):{" "}
-                          {restaurant.invitee_names.map(
-                            (item: string, i: number, arr: string[]) =>
-                              i !== arr.length - 1 ? item + ", " : "and " + item
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <Span>Attendee(s):</Span>{" "}
-                          {restaurant.invitee_names.map(
-                            (item: string, i: number, arr: string[]) =>
-                              i !== arr.length - 1 ? item + ", " : "and " + user
-                          )}
-                        </>
+                      <Span>Attendee(s):</Span>{" "}
+                      {restaurant.invitee_names.map(
+                        (item: string, i: number, arr: string[]) =>
+                          i !== arr.length - 1
+                            ? item + ", "
+                            : i === arr.length - 1
+                            ? item + ", " + "and " + restaurant.creator_name
+                            : ""
                       )}
                       <br></br>
                       {/* <Span>Date Added:</Span> {moment(restaurant.created_date)} */}
@@ -308,9 +314,10 @@ const MatchedPendingMeals = ({
                         Friends still selecting
                       </div>
                     ) : (
-                      <StyledButton style={{
-                        marginBottom: "10px",
-                      }}
+                      <StyledButton
+                        style={{
+                          marginBottom: "10px",
+                        }}
                         className="pendingButton"
                         onClick={() =>
                           selectRestaurants(restaurant.id.toString())
@@ -332,9 +339,13 @@ const MatchedPendingMeals = ({
                         removePendingItem(pendingDb, index);
                       }}
                     >
-                      <p style={{
-                        color: "white",
-                      }}>X</p>
+                      <p
+                        style={{
+                          color: "white",
+                        }}
+                      >
+                        X
+                      </p>
                     </p>
                   </div>
                 ) : (
@@ -361,10 +372,14 @@ const MatchedPendingMeals = ({
               ) : (
                 db.map((restaurant: restaurant, index: number) =>
                   restaurant.archive === false ? (
-                    <div style={{
-                      borderBottom: "2.5px solid #eb1b67",
-                      marginBottom: "15px",
-                    }}key={restaurant.id} className="pendingMeals">
+                    <div
+                      style={{
+                        borderBottom: "2.5px solid #eb1b67",
+                        marginBottom: "15px",
+                      }}
+                      key={restaurant.id}
+                      className="pendingMeals"
+                    >
                       <p
                         style={{
                           color: "black",
@@ -374,13 +389,22 @@ const MatchedPendingMeals = ({
                       >
                         <Span>City:</Span> {restaurant.location}
                         <br></br>
-                        <Span>Attendee(s):</Span> {restaurant.invitee_names}
+                        <Span>Attendee(s):</Span>{" "}
+                        {restaurant.invitee_names.map(
+                          (item: string, i: number, arr: string[]) =>
+                            i !== arr.length - 1
+                              ? item + ", "
+                              : i === arr.length - 1
+                              ? item + ", " + "and " + restaurant.creator_name
+                              : ""
+                        )}
                         <br></br>
                         {/* <Span>Date Added:</Span> {restaurant.created_date} */}
                       </p>
-                      <StyledButton style={{
-                        marginBottom: "10px",
-                      }}
+                      <StyledButton
+                        style={{
+                          marginBottom: "10px",
+                        }}
                         className="pendingButton"
                         onClick={() => {
                           seeMatch();
@@ -401,9 +425,13 @@ const MatchedPendingMeals = ({
                           removeMatchItem(db, index);
                         }}
                       >
-                        <p style={{
-                        color: "white",
-                      }}>X</p>
+                        <p
+                          style={{
+                            color: "white",
+                          }}
+                        >
+                          X
+                        </p>
                       </p>
                     </div>
                   ) : (
@@ -414,20 +442,20 @@ const MatchedPendingMeals = ({
             </div>
           </div>
         </div>
+        <div className="text-center">
+          <StyledButton
+            style={{
+              backgroundColor: "black",
+              marginTop: "50px",
+              width: "150px",
+              marginBottom: "150px",
+            }}
+            onClick={() => mealStart()}
+          >
+            Create Meal
+          </StyledButton>
+        </div>
       </Span>
-      <StyledButton
-        className="text-center"
-        style={{
-          marginTop: 50,
-          width: 150,
-          backgroundColor: "black",
-        }}
-        onClick={() => mealStart()}
-      ><div style={{
-
-      }}>
-        Create Meal</div>
-      </StyledButton>
     </Container>
   );
 };
